@@ -1,0 +1,9 @@
+1.) Configure game
+2.) Configure player
+3.) Acquire land - Harry
+4.) Manage land - Jay
+5.) Harvest resources
+6.) Auction resources - Kyle / Vig
+7.) Interact with store - Ryan
+8.) Gamble
+9.) Trigger random event - Kyle / Vig
