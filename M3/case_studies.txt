@@ -3,7 +3,8 @@
 3.) Acquire land - Harry
 4.) Manage land - Jay
 5.) Harvest resources
-6.) Auction resources - Kyle / Vig
-7.) Interact with store - Ryan
-8.) Gamble
-9.) Trigger random event - Kyle / Vig
+6.) Auction (buying) resources - Kyle / Vig
+7.) Auction (selling) resources
+8.) Interact with store - Ryan
+9.) Gamble
+10.) Trigger random event - Kyle / Vig
