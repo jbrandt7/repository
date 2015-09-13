@@ -11,7 +11,8 @@ import javafx.fxml.FXMLLoader;
 public class M3 extends Application {
 
     private Stage stage;
-    private StackPane rootLayout;
+    private StackPane startingLayout, configLayout;
+    private Scene startingScene, configScene;
 
     @Override
     public void start(Stage stage) {
@@ -25,11 +26,16 @@ public class M3 extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(M3.class.getResource("view/StartingScreen.fxml"));
+            startingLayout = (StackPane) loader.load();
 
-            rootLayout = (StackPane) loader.load();
+            loader = new FXMLLoader();
+            loader.setLocation(M3.class.getResource("view/GameConfigurationScreen.fxml"));
+            configLayout = (StackPane) loader.load();
 
-            Scene scene = new Scene(rootLayout);
-            stage.setScene(scene);
+            startingScene = new Scene(startingLayout);
+            configScene = new Scene(configLayout);
+
+            stage.setScene(startingScene);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -38,6 +44,10 @@ public class M3 extends Application {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public void loadConfigScreen() {
+        stage.setScene(configScene);
     }
 
     public static void main(String[] args) {
