@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="m3.M3Controller">
    <children>
       <Label alignment="CENTER" prefHeight="55.0" prefWidth="278.0" text="Team Live Badass M3" StackPane.alignment="TOP_CENTER">
          <font>
@@ -21,7 +21,7 @@
             <Insets top="50.0" />
          </StackPane.margin>
       </Label>
-      <Button fx:id="toConfigButton" mnemonicParsing="false" text="New Game">
+      <Button fx:id="toConfigButton" mnemonicParsing="false" onAction="#toConfigScreen" text="New Game">
          <font>
             <Font size="20.0" />
          </font>

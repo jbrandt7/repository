@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:controller="m3.M3Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Slider blockIncrement="1.0" max="4.0" min="1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="16.0" prefWidth="434.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
          <StackPane.margin>

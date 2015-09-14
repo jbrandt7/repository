@@ -10,7 +10,7 @@ import javafx.fxml.FXMLLoader;
 
 public class M3 extends Application {
 
-    private Stage stage;
+    private static Stage stage;
     private StackPane startingLayout, configLayout;
     private Scene startingScene, configScene;
 
@@ -42,7 +42,7 @@ public class M3 extends Application {
         }
     }
 
-    public Stage getStage() {
+    public static Stage getStage() {
         return stage;
     }
 
