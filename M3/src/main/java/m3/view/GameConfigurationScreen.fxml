@@ -47,7 +47,7 @@
             <Insets right="100.0" top="50.0" />
          </StackPane.margin>
       </ComboBox>
-      <Button mnemonicParsing="false" text="Continue" StackPane.alignment="BOTTOM_CENTER">
+      <Button fx:id="toPlayerSetUpButton" onAction="#toPlayerSetUp" mnemonicParsing="false" text="Continue" StackPane.alignment="BOTTOM_CENTER">
          <StackPane.margin>
             <Insets bottom="75.0" />
          </StackPane.margin>

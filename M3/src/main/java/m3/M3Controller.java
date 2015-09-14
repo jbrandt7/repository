@@ -27,6 +27,19 @@ public class M3Controller implements Initializable {
         primaryStage.show();
     }
 
+    @FXML
+    private Button toPlayerSetUpButton;
+
+    @FXML
+    public void toPlayerSetUp(ActionEvent event) throws Exception {
+        Parent parent = FXMLLoader.load(getClass().getResource("/m3/view/PlayerSelection.fxml"));
+        Stage stage = M3.getStage();
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.setTitle("Player Configuration");
+        stage.show();
+    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {}
 
