@@ -3,6 +3,7 @@ package m3;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.layout.StackPane;
@@ -11,8 +12,7 @@ import javafx.fxml.FXMLLoader;
 public class M3 extends Application {
 
     private static Stage stage;
-    private StackPane startingLayout, configLayout;
-    private Scene startingScene, configScene;
+    private int players;
 
     @Override
     public void start(Stage stage) {
@@ -25,17 +25,8 @@ public class M3 extends Application {
     public void initRootLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(M3.class.getResource("view/StartingScreen.fxml"));
-            startingLayout = (StackPane) loader.load();
-
-            loader = new FXMLLoader();
-            loader.setLocation(M3.class.getResource("view/GameConfigurationScreen.fxml"));
-            configLayout = (StackPane) loader.load();
-
-            startingScene = new Scene(startingLayout);
-            configScene = new Scene(configLayout);
-
-            stage.setScene(startingScene);
+            Parent parent = FXMLLoader.load(getClass().getResource("view/StartingScreen.fxml"));
+            stage.setScene(new Scene(parent));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,8 +37,10 @@ public class M3 extends Application {
         return stage;
     }
 
-    public void loadConfigScreen() {
-        stage.setScene(configScene);
+    public static void changeScene(Scene scene, String title) {
+        stage.setScene(scene);
+        stage.setTitle(title);
+        stage.show();
     }
 
     public static void main(String[] args) {

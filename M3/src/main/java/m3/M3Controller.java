@@ -20,11 +20,7 @@ public class M3Controller implements Initializable {
     @FXML
     public void toConfigScreen(ActionEvent event) throws Exception {
         Parent parent = FXMLLoader.load(getClass().getResource("/m3/view/GameConfigurationScreen.fxml"));
-        Stage primaryStage = M3.getStage();
-        Scene scene = new Scene(parent);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Game Configuration");
-        primaryStage.show();
+        M3.changeScene(new Scene(parent), "Game Configuration");
     }
 
     @FXML
@@ -33,11 +29,16 @@ public class M3Controller implements Initializable {
     @FXML
     public void toPlayerSetUp(ActionEvent event) throws Exception {
         Parent parent = FXMLLoader.load(getClass().getResource("/m3/view/PlayerSelection.fxml"));
-        Stage stage = M3.getStage();
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.setTitle("Player Configuration");
-        stage.show();
+        M3.changeScene(new Scene(parent), "Player Configuration");
+    }
+
+    @FXML
+    private Button toPlaceholderButton;
+
+    @FXML
+    public void toPlaceholder(ActionEvent event) throws Exception {
+        Parent parent = FXMLLoader.load(getClass().getResource("/m3/view/PlaceholderScreen.fxml"));
+        M3.changeScene(new Scene(parent), "Placeholder");
     }
 
     @Override
