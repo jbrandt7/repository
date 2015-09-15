@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="m3.M3Controller">
    <children>
-      <ChoiceBox layoutX="225.0" layoutY="97.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="p1RaceChoiceBox" layoutX="225.0" layoutY="97.0" prefWidth="150.0" />
       <ColorPicker layoutX="440.0" layoutY="97.0" />
       <TextField layoutX="29.0" layoutY="97.0" promptText="Name" />
       <TextField layoutX="29.0" layoutY="138.0" promptText="Name" />

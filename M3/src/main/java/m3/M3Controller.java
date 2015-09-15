@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.collections.FXCollections;
 
 public class M3Controller implements Initializable {
 
@@ -27,8 +29,12 @@ public class M3Controller implements Initializable {
     private Button toPlayerSetUpButton;
 
     @FXML
+    private ChoiceBox p1RaceChoiceBox;
+
+    @FXML
     public void toPlayerSetUp(ActionEvent event) throws Exception {
         Parent parent = FXMLLoader.load(getClass().getResource("/m3/view/PlayerSelection.fxml"));
+
         M3.changeScene(new Scene(parent), "Player Configuration");
     }
 
@@ -42,6 +48,12 @@ public class M3Controller implements Initializable {
     }
 
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {}
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        assert p1RaceChoiceBox != null : "choicebox not injected";
+        if (p1RaceChoiceBox != null) {
+            p1RaceChoiceBox.setItems(FXCollections.observableArrayList(
+                    "hello", "world"));
+        }
+    }
 
 }
