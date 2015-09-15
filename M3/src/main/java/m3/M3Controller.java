@@ -34,16 +34,8 @@ public class M3Controller implements Initializable {
     private Button toPlayerSetUpButton;
 
     @FXML
-    private ChoiceBox p1RaceChoiceBox;
-
-    @FXML
-    private ChoiceBox p2RaceChoiceBox;
-
-    @FXML
-    private ChoiceBox p3RaceChoiceBox;
-
-    @FXML
-    private ChoiceBox p4RaceChoiceBox;
+    private ChoiceBox p1RaceChoiceBox, p2RaceChoiceBox,
+            p3RaceChoiceBox, p4RaceChoiceBox;
 
     @FXML
     public void toPlayerSetUp(ActionEvent event) throws Exception {
