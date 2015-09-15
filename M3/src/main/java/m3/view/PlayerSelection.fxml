@@ -13,9 +13,9 @@
       <TextField layoutX="29.0" layoutY="138.0" promptText="Name" />
       <TextField layoutX="29.0" layoutY="177.0" promptText="Name" />
       <TextField layoutX="29.0" layoutY="214.0" promptText="Name" />
-      <ChoiceBox fx:id="p1Race" layoutX="225.0" layoutY="138.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="p2Race" layoutX="225.0" layoutY="177.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="p3Race" layoutX="225.0" layoutY="214.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="p2RaceChoiceBox" layoutX="225.0" layoutY="138.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="p3RaceChoiceBox" layoutX="225.0" layoutY="177.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="p4RaceChoiceBox" layoutX="225.0" layoutY="214.0" prefWidth="150.0" />
       <ColorPicker layoutX="440.0" layoutY="138.0" />
       <ColorPicker layoutX="440.0" layoutY="177.0" />
       <ColorPicker layoutX="440.0" layoutY="214.0" />

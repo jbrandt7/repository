@@ -32,9 +32,17 @@ public class M3Controller implements Initializable {
     private ChoiceBox p1RaceChoiceBox;
 
     @FXML
+    private ChoiceBox p2RaceChoiceBox;
+
+    @FXML
+    private ChoiceBox p3RaceChoiceBox;
+
+    @FXML
+    private ChoiceBox p4RaceChoiceBox;
+
+    @FXML
     public void toPlayerSetUp(ActionEvent event) throws Exception {
         Parent parent = FXMLLoader.load(getClass().getResource("/m3/view/PlayerSelection.fxml"));
-
         M3.changeScene(new Scene(parent), "Player Configuration");
     }
 
@@ -50,9 +58,24 @@ public class M3Controller implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         assert p1RaceChoiceBox != null : "choicebox not injected";
-        if (p1RaceChoiceBox != null) {
+        if (p1RaceChoiceBox!= null) {
             p1RaceChoiceBox.setItems(FXCollections.observableArrayList(
-                    "hello", "world"));
+                    "Human", "Protoss", "Zerg"));
+        }
+        assert p2RaceChoiceBox != null : "choicebox not injected";
+        if (p2RaceChoiceBox!= null) {
+            p2RaceChoiceBox.setItems(FXCollections.observableArrayList(
+                    "Human", "Protoss", "Zerg"));
+        }
+        assert p3RaceChoiceBox != null : "choicebox not injected";
+        if (p3RaceChoiceBox!= null) {
+            p3RaceChoiceBox.setItems(FXCollections.observableArrayList(
+                    "Human", "Protoss", "Zerg"));
+        }
+        assert p4RaceChoiceBox != null : "choicebox not injected";
+        if (p4RaceChoiceBox!= null) {
+            p4RaceChoiceBox.setItems(FXCollections.observableArrayList(
+                    "Human", "Protoss", "Zerg"));
         }
     }
 
