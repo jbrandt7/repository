@@ -1,0 +1,11 @@
+apply plugin: 'java'
+
+version = '1.0'
+
+defaultTasks 'jar'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'CS 2340 MULE M3', 'Implementation-Version': version
+    }
+}

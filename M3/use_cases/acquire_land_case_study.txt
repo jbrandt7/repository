@@ -1,0 +1,25 @@
+Harry Lane
+Use Case : Acquire Land
+
+Primary Actor: Player
+
+Stakeholders and Interests:
+- Player: Wants to gain additional land for development
+
+Preconditions:
+- Previous auctioning has ended, or game has started from the beginning
+
+Success Guarantee:
+- Player gains additional land. Moves to another player, if there is one
+  to acquire land or if not, moves on to develop land for the first player.
+
+Main Success Scenario:
+- 1) Player selects a plot of land
+- 2) Land is added to players inventory
+
+Extensions:
+- 1) A random plot of land is auctioned off for all players to try
+     and buy. If bought, a player would acquire two plots of land
+     in one turn.
+
+Frequency of Occurance: Happens once per player per turn
