@@ -1,3 +1,5 @@
+package mule.model
+
 /***************************/
 /**Player Class*************/
 /**Last updated: 9/15/2015**/
