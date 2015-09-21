@@ -10,8 +10,8 @@ public abstract class Plot {
     Mule mule;
     Rectangle rep;
 
-    public Plot() {
-        rep = new Rectangle(1,1);
+    public Plot(Rectangle rep) {
+        this.rep = rep;
     }
 
     public void assignOwner(Player player) {
@@ -24,5 +24,9 @@ public abstract class Plot {
 
     public int bonus() {
         return 0;
+    }
+
+    public Rectangle getRep() {
+        return rep;
     }
 }
