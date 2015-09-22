@@ -1,4 +1,4 @@
-package mule.model
+package mule.model;
 
 /***************************/
 /**Player Class*************/
@@ -44,7 +44,7 @@ public class Player {
 		this.mule = null;
 		this.score = money;
 		for (Resource r : bag.getResources()) {
-			score += r.get value;
+			score += r.getValue();
 		}
 	}
 	
@@ -75,7 +75,7 @@ public class Player {
 		this.mule = null;
 	}
 	public void setLoc(int x, int y) {
-		setLocation(x, y)	
+		location.setLocation(x, y);
 	}
 	public void addPlot(Plot plot) {
 		land.add(plot);
@@ -90,10 +90,10 @@ public class Player {
 	 	score = 0;
 		score += money;
 		for (Resource r : bag.getResources()) {
-			score += r.get value;
+			score += r.getValue();
 		}
 		for (Plot p : land) {
-			score += plot.getValue();
+			score += p.getValue();
 		}
 		return score;
 
