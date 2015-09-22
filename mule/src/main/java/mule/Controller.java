@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.scene.control.*;
 import javafx.scene.Group;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.collections.FXCollections;
 
@@ -45,8 +46,7 @@ public class Controller implements Initializable {
     private Button toPlayerSetUpButton;
 
     @FXML
-    private ChoiceBox p1RaceChoiceBox, p2RaceChoiceBox,
-            p3RaceChoiceBox, p4RaceChoiceBox;
+    private HBox p1Box, p2Box, p3Box, p4Box;
 
     @FXML
     public void toPlayerSetUp(ActionEvent event) throws Exception {
@@ -80,21 +80,9 @@ public class Controller implements Initializable {
             difficultyChoiceBox.setItems(FXCollections.observableArrayList(
                         "Easy", "Medium", "Hard"));
         }
-        if (p1RaceChoiceBox!= null) {
-            p1RaceChoiceBox.setItems(FXCollections.observableArrayList(
-                    "Human", "Protoss", "Zerg"));
-        }
-        if (p2RaceChoiceBox!= null) {
-            p2RaceChoiceBox.setItems(FXCollections.observableArrayList(
-                    "Human", "Protoss", "Zerg"));
-        }
-        if (p3RaceChoiceBox!= null) {
-            p3RaceChoiceBox.setItems(FXCollections.observableArrayList(
-                    "Human", "Protoss", "Zerg"));
-        }
-        if (p4RaceChoiceBox!= null) {
-            p4RaceChoiceBox.setItems(FXCollections.observableArrayList(
-                    "Human", "Protoss", "Zerg"));
+        if (p1Box != null) {
+            Player p = new Player();
+            p.setName(p1Box.getChildren().get(0).getValue());
         }
         if (mapParent != null) {
             setupMap();
