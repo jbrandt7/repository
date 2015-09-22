@@ -29,4 +29,8 @@ public abstract class Plot {
     public Rectangle getRep() {
         return rep;
     }
+
+    public int getValue() {
+        return 1;
+    }
 }

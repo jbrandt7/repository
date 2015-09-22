@@ -15,6 +15,7 @@ public class Main extends Application {
 
     private static Stage stage;
     private static Player[] players;
+    private static int playerCount;
     private static Map map;
 
     @Override
@@ -22,13 +23,15 @@ public class Main extends Application {
         this.stage = stage;
         this.stage.setTitle("M4");
 
+        this.players = new Player[4];
+
         initRootLayout();
     }
 
     public void initRootLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            Parent parent = FXMLLoader.load(getClass().getResource("/mule/view/MapScreen.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("/mule/view/StartingScreen.fxml"));
             stage.setScene(new Scene(parent));
             stage.show();
         } catch (IOException e) {
@@ -44,9 +47,12 @@ public class Main extends Application {
         map = m;
     }
 
-    public static void setPlayerCount(int num) {
-        players = num;
-        System.out.println(players);
+    public static void setPlayerCount(int number) {
+        playerCount = number;
+    }
+
+    public static void addPlayer(Player p) {
+        players[playerCount] = p;
     }
 
     public static void changeScene(Scene scene, String title) {
