@@ -23,6 +23,7 @@ public class Main extends Application {
         this.stage = stage;
         this.stage.setTitle("M4");
 
+        this.playerCount = 0;
         this.players = new Player[4];
 
         initRootLayout();
@@ -47,12 +48,16 @@ public class Main extends Application {
         map = m;
     }
 
-    public static void setPlayerCount(int number) {
-        playerCount = number;
+    public static int getPlayerCount() {
+        return playerCount;
     }
 
-    public static void addPlayer(Player p) {
-        players[playerCount] = p;
+    public static void setPlayer(int i, Player p) {
+        players[i] = p;
+    }
+
+    public static void setPlayerCount(int number) {
+        playerCount = number;
     }
 
     public static void changeScene(Scene scene, String title) {
