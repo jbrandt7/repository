@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -8,38 +7,39 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.Controller">
    <children>
-      <HBox fx:id="p1Box" alignment="CENTER" layoutX="27.0" layoutY="98.0" prefHeight="42.0" prefWidth="556.0" spacing="40.0">
+      <VBox fx:id="playersBox" layoutX="5.0" layoutY="100.0" prefHeight="300.0" prefWidth="600.0">
          <children>
-            <TextField promptText="Name" />
-            <ChoiceBox fx:id="p1RaceChoiceBox" prefWidth="150.0" />
-            <ColorPicker />
+            <HBox fx:id="p1Box" alignment="CENTER" prefHeight="50.0" prefWidth="550.0" spacing="40.0">
+               <children>
+                  <TextField promptText="Name" />
+                  <ChoiceBox fx:id="p1RaceChoiceBox" prefWidth="150.0" />
+                  <ColorPicker />
+               </children>
+            </HBox>
+            <HBox fx:id="p2Box" alignment="CENTER" prefHeight="50.0" prefWidth="550.0" spacing="40.0">
+               <children>
+                  <TextField promptText="Name" />
+                  <ChoiceBox fx:id="p2RaceChoiceBox" prefWidth="150.0" />
+                  <ColorPicker />
+               </children>
+            </HBox>
+            <HBox fx:id="p3Box" alignment="CENTER" prefHeight="50.0" prefWidth="550.0" spacing="40.0">
+               <children>
+                  <TextField promptText="Name" />
+                  <ChoiceBox fx:id="p3RaceChoiceBox" prefWidth="150.0" />
+                  <ColorPicker />
+               </children>
+            </HBox>
+            <HBox fx:id="p4Box" alignment="CENTER" prefHeight="50.0" prefWidth="550.0" spacing="40.0">
+               <children>
+                  <TextField promptText="Name" />
+                  <ChoiceBox fx:id="p4RaceChoiceBox" prefWidth="150.0" />
+                  <ColorPicker />
+               </children>
+            </HBox>
          </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </HBox>
-      <HBox alignment="CENTER" layoutX="27.0" layoutY="140.0" prefHeight="42.0" prefWidth="556.0" spacing="40.0">
-         <children>
-            <TextField promptText="Name" />
-            <ChoiceBox fx:id="p2RaceChoiceBox" prefWidth="150.0" />
-            <ColorPicker fx:id="p2Box" />
-         </children>
-      </HBox>
-      <HBox fx:id="p3Box" alignment="CENTER" layoutX="27.0" layoutY="180.0" prefHeight="42.0" prefWidth="556.0" spacing="40.0">
-         <children>
-            <TextField promptText="Name" />
-            <ChoiceBox fx:id="p3RaceChoiceBox" prefWidth="150.0" />
-            <ColorPicker />
-         </children>
-      </HBox>
-      <HBox fx:id="p4Box" alignment="CENTER" layoutX="27.0" layoutY="222.0" prefHeight="42.0" prefWidth="556.0" spacing="40.0">
-         <children>
-            <TextField promptText="Name" />
-            <ChoiceBox fx:id="p4RaceChoiceBox" prefWidth="150.0" />
-            <ColorPicker />
-         </children>
-      </HBox>
-      <Button fx:id="toMapButton" alignment="CENTER" cancelButton="true" layoutX="264.0" layoutY="321.0" mnemonicParsing="false" onAction="#toMap" text="Continue" AnchorPane.bottomAnchor="75.0" />
+      </VBox>
+      <Button fx:id="toMapButton" alignment="CENTER" cancelButton="true" layoutX="264.0" layoutY="321.0" mnemonicParsing="false" onAction="#toMap" text="Continue" />
       <Label layoutX="209.0" layoutY="32.0" text="Player Selection Screen">
          <font>
             <Font size="17.0" />

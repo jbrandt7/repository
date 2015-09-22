@@ -23,7 +23,6 @@ public class Main extends Application {
         this.stage = stage;
         this.stage.setTitle("M4");
 
-        this.playerCount = 0;
         this.players = new Player[4];
 
         initRootLayout();

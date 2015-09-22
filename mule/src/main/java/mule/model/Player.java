@@ -42,6 +42,7 @@ public class Player {
 		this.race = race;
 		this.money = 100;
 		this.mule = null;
+        this.bag = new ResourceBag(new ArrayList<Resource>());
 		this.score = money;
 		for (Resource r : bag.getResources()) {
 			score += r.getValue();
