@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 public class Player {
-	private String name, race;
+	private String name, race, color;
 	private int money, score;
 	private ResourceBag bag;
 	private Mule mule;
@@ -36,7 +36,8 @@ public class Player {
 	}
 
 
-	public Player(String name, String race) {
+	public Player(String name, String race, String color) {
+		this.color = color;
 		this.name = name;
 		this.race = race;
 		this.money = 100;
