@@ -7,7 +7,29 @@ import javafx.scene.shape.Rectangle;
  */
 public class Plot {
     private Player owner;
+    private Mule mule;
+    private Rectangle rep;
     private static int VALUE = 100;
+
+    public Plot(Rectangle rep) {
+        this.rep = rep;
+    }
+
+    public void assignOwner(Player p) {
+        owner = p;
+    }
+
+    public void outfit(Mule m) {
+        mule = m;
+    }
+
+    public int bonus() {
+        return 0;
+    }
+
+    public Rectangle getRep() {
+        return rep;
+    }
 
     public int getValue() {
         return VALUE;
