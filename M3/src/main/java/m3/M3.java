@@ -12,7 +12,7 @@ import javafx.fxml.FXMLLoader;
 public class M3 extends Application {
 
     private static Stage stage;
-    private int players;
+    private static int players;
 
     @Override
     public void start(Stage stage) {
@@ -35,6 +35,11 @@ public class M3 extends Application {
 
     public static Stage getStage() {
         return stage;
+    }
+
+    public static void setPlayerCount(int num) {
+        players = num;
+        System.out.println(players);
     }
 
     public static void changeScene(Scene scene, String title) {
