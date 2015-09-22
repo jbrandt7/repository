@@ -52,8 +52,8 @@ public class Controller implements Initializable {
 
     @FXML
     public void toPlayerSetUp(ActionEvent event) throws Exception {
-        Parent parent = FXMLLoader.load(getClass().getResource("/mule/view/PlayerSelection.fxml"));
         Main.setPlayerCount((int) playersSlider.getValue());
+        Parent parent = FXMLLoader.load(getClass().getResource("/mule/view/PlayerSelection.fxml"));
         Main.changeScene(new Scene(parent), "Player Configuration");
     }
 
@@ -84,9 +84,14 @@ public class Controller implements Initializable {
                         "Easy", "Medium", "Hard"));
         }
         if (playersBox != null) {
-            for (int i = 0; i < 4; i++) {
+            System.out.println(Main.getPlayerCount());
+            for (int i = 0; i < Main.getPlayerCount(); i++) {
                 ((ChoiceBox)((HBox) playersBox.getChildren().get(i)).getChildren().get(1))
                         .setItems(FXCollections.observableArrayList("Human", "Protus", "Zerg"));
+            }
+
+            for (int i = Main.getPlayerCount(); i < 4; i++) {
+                ((HBox) playersBox.getChildren().get(i)).setOpacity(0.0);
             }
         }
 
