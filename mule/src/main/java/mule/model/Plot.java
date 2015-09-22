@@ -10,8 +10,9 @@ public class Plot {
     private Mule mule;
     private Rectangle rep;
     private static int VALUE = 100;
+    private int id;
 
-    public Plot(Rectangle rep) {
+    public Plot(Rectangle rep, int id) {
         this.rep = rep;
     }
 
