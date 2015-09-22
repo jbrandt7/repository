@@ -20,7 +20,7 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.collections.FXCollections;
 
-import mule.model.Map;
+import mule.model.*;
 
 public class Controller implements Initializable {
 
@@ -81,8 +81,11 @@ public class Controller implements Initializable {
                         "Easy", "Medium", "Hard"));
         }
         if (p1Box != null) {
-            Player p = new Player();
-            p.setName(p1Box.getChildren().get(0).getValue());
+            ((ChoiceBox) p1Box.getChildren().get(1)).setItems(FXCollections.observableArrayList(
+                    "Human", "Protus", "Zerg"));
+            String name = ((TextField) p1Box.getChildren().get(0)).getCharacters().toString();
+            String race = (String) ((ChoiceBox) p1Box.getChildren().get(1)).getValue(); 
+            Player p = new Player(name, race, "Blue");
         }
         if (mapParent != null) {
             setupMap();
