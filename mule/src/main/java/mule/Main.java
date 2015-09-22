@@ -9,10 +9,13 @@ import javafx.stage.Stage;
 import javafx.scene.layout.StackPane;
 import javafx.fxml.FXMLLoader;
 
+import mule.model.Map;
+
 public class Main extends Application {
 
     private static Stage stage;
     private static int players;
+    private static Map map;
 
     @Override
     public void start(Stage stage) {
@@ -25,7 +28,7 @@ public class Main extends Application {
     public void initRootLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            Parent parent = FXMLLoader.load(getClass().getResource("view/StartingScreen.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("/mule/view/MapScreen.fxml"));
             stage.setScene(new Scene(parent));
             stage.show();
         } catch (IOException e) {
@@ -35,6 +38,10 @@ public class Main extends Application {
 
     public static Stage getStage() {
         return stage;
+    }
+
+    public static void setMap(Map m) {
+        map = m;
     }
 
     public static void setPlayerCount(int num) {
