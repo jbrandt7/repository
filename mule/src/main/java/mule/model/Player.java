@@ -36,11 +36,10 @@ public class Player {
 	}
 
 
-	public Player(String name, String race, int money, ResourceBag bag) {
+	public Player(String name, String race) {
 		this.name = name;
 		this.race = race;
-		this.money = money;
-		this.bag = bag;
+		this.money = 100;
 		this.mule = null;
 		this.score = money;
 		for (Resource r : bag.getResources()) {
@@ -75,7 +74,11 @@ public class Player {
 		this.mule = null;
 	}
 	public void setLoc(int x, int y) {
+<<<<<<< HEAD
 		location.setLocation(x, y);
+=======
+		setLocation(x, y);
+>>>>>>> 8cc12c386949dff423e3843e2e8b546bf26bb492
 	}
 	public void addPlot(Plot plot) {
 		land.add(plot);

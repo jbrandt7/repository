@@ -39,5 +39,12 @@ public abstract class Plot {
     public Rectangle getRep() {
         return rep;
     }
+<<<<<<< HEAD
 >>>>>>> 0ae40ed172f4077d16299c681ad06e0beb25a4ca
+=======
+
+    public int getValue() {
+        return 1;
+    }
+>>>>>>> 8cc12c386949dff423e3843e2e8b546bf26bb492
 }
