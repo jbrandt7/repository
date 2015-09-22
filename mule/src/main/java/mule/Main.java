@@ -9,12 +9,12 @@ import javafx.stage.Stage;
 import javafx.scene.layout.StackPane;
 import javafx.fxml.FXMLLoader;
 
-import mule.model.Map;
+import mule.model.*;
 
 public class Main extends Application {
 
     private static Stage stage;
-    private static int players;
+    private static Player[] players;
     private static Map map;
 
     @Override
