@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Title: M.U.L.E
-Implementation-Version: 1.0
-
