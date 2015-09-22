@@ -74,11 +74,7 @@ public class Player {
 		this.mule = null;
 	}
 	public void setLoc(int x, int y) {
-<<<<<<< HEAD
 		location.setLocation(x, y);
-=======
-		setLocation(x, y);
->>>>>>> 8cc12c386949dff423e3843e2e8b546bf26bb492
 	}
 	public void addPlot(Plot plot) {
 		land.add(plot);
