@@ -47,12 +47,16 @@ public class Main extends Application {
         map = m;
     }
 
-    public static void setPlayerCount(int number) {
-        playerCount = number;
+    public static int getPlayerCount() {
+        return playerCount;
     }
 
-    public static void addPlayer(Player p) {
-        players[playerCount] = p;
+    public static void setPlayer(int i, Player p) {
+        players[i] = p;
+    }
+
+    public static void setPlayerCount(int number) {
+        playerCount = number;
     }
 
     public static void changeScene(Scene scene, String title) {
@@ -61,27 +65,4 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
-
-        public void run () {
-
-        }
-
-        void initialize() {
-
-        }
-
-        void update() {
-
-        }
-
-        void draw() {
-
-        }
-
-        while (isRunning) {
-            update();
-            draw();
-        }
-    }
 }
