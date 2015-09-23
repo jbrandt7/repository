@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.Controller">
+   <children>
+      <Group fx:id="mapParent">
+         <StackPane.margin>
+            <Insets bottom="100.0" />
+         </StackPane.margin></Group>
+      <TextArea fx:id="commandField" maxHeight="100.0" maxWidth="525.0" prefHeight="100.0" prefWidth="525.0" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </TextArea>
+   </children>
+</StackPane>

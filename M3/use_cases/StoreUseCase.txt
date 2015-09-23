@@ -1,0 +1,31 @@
+Store Interaction phase:
+
+Author: Ryan Chiang
+
+Player and system are main actors in this phase.  This phase will be triggered after the land aquistion phase is completed.  Each player is 
+a stakeholder in the store interaction process as this step can add or subtract to the total score of the game.  
+Precondition- Game is configured, Land aquisition phase is completed, Player has at least one piece of land.
+Postcondition- M.U.L.E bought from store can be placed on land.
+
+Main Success Scenario: 
+1. Player enters store interface. 
+2. Player buys an assayer (if needed) and store gives assayer to Player.
+3. Player uses the assayer on land.  System will tell player that assayer was succesful and to return to store.  
+4. Player returns assayer to store and store tells if crystallite is present in land.  
+4. Player buys M.U.L.E and store gives M.U.L.E to player.  
+5. Player buys the needed resource harvester (Food, energy, etc.) and store gives harvester to player.    
+6. Player then exits the store to place the M.U.L.E on land and satisfy the postcondition.
+  
+
+Extensions or alternate flows:
+(Note: In all flows involving buying something, money will be taken from the player unless an error occurs.)
+1.If the players buys an assayer and then tries to buy a M.U.L.E. or harvester (Step 2 and 4).  Then the store will display an error message like "Use your assayer first!".
+2. If the player tries to buy an assayer after already having one assayer.  Then the store will display an error message like "You already have an assayer!". (Step 2)  The store will not sell any items until the assayer used. 
+3. If the player uses the assayer on the land and comes back to the store and tries to buy a M.U.L.E. or harvester.  Then the store will display and error message like "Return your assayer first!".  The store will not sell any items until the assayer is returned.  
+3. If the player tries to buy M.U.L.E, harvester or, assayer  with insufficient money (Steps 2 and 3).  Then the store will not give the M.U.L.E or harvester to player and display an error messsage like "You need more money to buy that!".
+4. If the player tries to buy a harvester without buying a M.U.L.E first (Steps 4 and 5).  Then the store will not give the harvester and display an error message like "You need to buy a M.U.L.E first!"
+5. If the player already has a harvester and a M.U.L.E. and tries to buy another harvester. (Step 5)  Then the store will display a confirmation message like "Are you sure this will switch the harvester?". If the player selects yes then the new harvester will be switched out with the old one. If the player selects no then the harvester will not change.  
+6. If the player already has a M.U.L.E (Step 4) and tries to buy another one.  The store will not give the M.U.L.E and display an error message like "You already have a M.U.L.E!".
+7. There shouldn't be enough game time for the player to be able to buy two M.U.L.E. per turn.   
+
+
