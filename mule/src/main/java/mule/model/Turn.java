@@ -24,9 +24,8 @@ public class Turn {
 
     public void nextPlayer() {
         if (hasNextPlayer()) {
-            currentPlayer = 0;
+            currentPlayer++;
         }
-        currentPlayer++;
     }
 
     public boolean hasNextStage() {
@@ -35,9 +34,11 @@ public class Turn {
 
     public void nextStage() {
         if (hasNextStage()) {
+            currentStage++;
+        } else {
             currentStage = 0;
         }
-        currentStage++;
+        currentPlayer = 0;
     }
 
     public boolean hasNextTurn() {
@@ -46,9 +47,11 @@ public class Turn {
 
     public void nextTurn() {
         if (hasNextTurn()) {
-            return;
+            currentTurn++;
         }
-        currentTurn++;
+
+        currentPlayer = 0;
+        currentStage = 0;
     }
 
     public int getCurrentPlayer() {

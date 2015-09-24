@@ -5,9 +5,9 @@ import javafx.scene.shape.Rectangle;
 /**
  * Created by harrylane on 9/16/15.
  */
-public class Store {
+public abstract class Store {
 
-    Rectangle rep;
+    protected Rectangle rep;
 
     public Store(Rectangle rep) {
         this.rep = rep;
@@ -16,4 +16,5 @@ public class Store {
     public Rectangle getRep() {
         return rep;
     }
+
 }

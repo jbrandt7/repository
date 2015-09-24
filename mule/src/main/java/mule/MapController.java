@@ -22,8 +22,7 @@ public class MapController implements Initializable, ControlledScreen {
 
         mapParent.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
+                    @Override public void handle(MouseEvent event) {
                         int x = (int) (event.getSceneX() / 75);
                         int y = (int) (event.getSceneY() / 75);
                         if (x == Map.MAP_WIDTH / 2 && y == Map.MAP_HEIGHT /2) {
