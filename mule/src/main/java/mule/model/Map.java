@@ -14,8 +14,8 @@ public class Map {
 
     private Group parent;
     private Plot[][] plots;
-    private static final int MAP_WIDTH = 9;
-    private static final int MAP_HEIGHT = 5;
+    public static final int MAP_WIDTH = 9;
+    public static final int MAP_HEIGHT = 5;
 
     public Map(Group parent) {
         this.parent = parent;
