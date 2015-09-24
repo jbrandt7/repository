@@ -6,16 +6,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.Controller">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.MapController">
    <children>
-      <Group fx:id="mapParent">
-         <StackPane.margin>
-            <Insets bottom="100.0" />
-         </StackPane.margin></Group>
-      <TextArea fx:id="commandField" maxHeight="100.0" maxWidth="525.0" prefHeight="100.0" prefWidth="525.0" StackPane.alignment="BOTTOM_CENTER">
+      <Group fx:id="mapParent" StackPane.alignment="CENTER">
          <StackPane.margin>
             <Insets />
-         </StackPane.margin>
-      </TextArea>
+         </StackPane.margin></Group>
    </children>
 </StackPane>

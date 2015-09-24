@@ -4,17 +4,19 @@ package mule.model;
 /**Player Class*************/
 /**Last updated: 9/15/2015**/
 import java.util.ArrayList;
+import javafx.scene.paint.Color;
 
 
 public class Player {
 	private String name, race;
+	private Color color;
 	private int money, score;
 	private ResourceBag bag;
 	private Mule mule;
 	private ArrayList<Plot> land;
 	private Location location;
 
-	
+
 	private class Location {
 		private int x, y;
 
@@ -36,22 +38,29 @@ public class Player {
 	}
 
 
-	public Player(String name, String race) {
+	public Player(String name, String race, Color color) {
+		this.color = color;
 		this.name = name;
 		this.race = race;
+		this.color = color;
 		this.money = 100;
 		this.mule = null;
+		this.land = new ArrayList<Plot>();
+        this.bag = new ResourceBag(new ArrayList<Resource>());
 		this.score = money;
 		for (Resource r : bag.getResources()) {
 			score += r.getValue();
 		}
 	}
-	
+
 	public String getName() {
 		return name;
 	}
 	public String getRace() {
 		return race;
+	}
+	public Color getColor() {
+		return color;
 	}
 	public int getMoney() {
 		return money;
@@ -74,10 +83,11 @@ public class Player {
 		this.mule = null;
 	}
 	public void setLoc(int x, int y) {
-		setLocation(x, y);
+		location.setLocation(x, y);
 	}
 	public void addPlot(Plot plot) {
 		land.add(plot);
+		plot.assignOwner(this);
 	}
 	public void addResource(Resource resource) {
 		bag.add(resource);
@@ -92,11 +102,11 @@ public class Player {
 			score += r.getValue();
 		}
 		for (Plot p : land) {
-			score += plot.getValue();
+			score += p.getValue();
 		}
 		return score;
 
 	}
-	
+
 
 }//end class
