@@ -98,26 +98,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-
-        public void run () {
-
-        }
-
-        void initialize() {
-
-        }
-
-        void update() {
-
-        }
-
-        void draw() {
-
-        }
-
-        while (isRunning) {
-            update();
-            draw();
-        }
+        launch(args);
     }
 }
