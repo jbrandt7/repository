@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.PlayersController">
    <children>
       <VBox fx:id="playersBox" layoutX="5.0" layoutY="100.0" prefHeight="300.0" prefWidth="600.0">
          <children>
@@ -39,7 +39,7 @@
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="toMapButton" alignment="CENTER" cancelButton="true" layoutX="264.0" layoutY="321.0" mnemonicParsing="false" onAction="#toMap" text="Continue" />
+      <Button fx:id="toMapButton" alignment="CENTER" cancelButton="true" layoutX="264.0" layoutY="321.0" mnemonicParsing="false" onAction="#goToMapScreen" text="Continue" />
       <Label layoutX="209.0" layoutY="32.0" text="Player Selection Screen">
          <font>
             <Font size="17.0" />

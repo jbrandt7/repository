@@ -14,28 +14,26 @@ public class Map {
 
     private Group parent;
     private Plot[][] plots;
-    private static final int MAP_SIZE = 7;
+    private static final int MAP_WIDTH = 9;
+    private static final int MAP_HEIGHT = 5;
 
     public Map(Group parent) {
         this.parent = parent;
-        plots = new Plot[MAP_SIZE][MAP_SIZE];
+        plots = new Plot[MAP_WIDTH][MAP_HEIGHT];
 
         for (int i = 0; i < plots.length; i++) {
             for (int j = 0; j < plots[0].length; j++) {
+                Rectangle temp = new Rectangle(75 * i, 75 * j, 75, 75);
                 if (isCenter(i, j)) {
-                    plots[i][j] = new TownPlot(new Rectangle(75 * i,
-                                75 * j, 75, 75));
+                    plots[i][j] = new TownPlot(temp);
                 } else if (isMiddle(i, j)) {
-                    plots[i][j] = new RiverPlot(new Rectangle(75 * i,
-                                75 * j, 75, 75));
+                    plots[i][j] = new RiverPlot(temp);
                     plots[i][j].getRep().setFill(Color.BLUE);
                 } else if (isCorner(i, j)) {
-                    plots[i][j] = new MountainPlot(new Rectangle(75 * i,
-                                75 * j, 75, 75));
+                    plots[i][j] = new MountainPlot(temp);
                     plots[i][j].getRep().setFill(Color.GREY);
                 } else {
-                    plots[i][j] = new PlainPlot(new Rectangle(75 * i,
-                                75 * j, 75, 75));
+                    plots[i][j] = new PlainPlot(temp);
                     plots[i][j].getRep().setFill(Color.GREEN);
                 }
                 parent.getChildren().addAll(plots[i][j].getRep());
@@ -44,22 +42,22 @@ public class Map {
 
     }
 
-    public Plot getPlot(Point p) {
-        return plots[(int) p.getX()][(int) p.getY()];
+    public Plot getPlot(int x, int y) {
+        return plots[x][y];
     }
 
     private boolean isCorner(int x, int y) {
-        return ((x % MAP_SIZE == MAP_SIZE / 4 && y % MAP_SIZE == MAP_SIZE / 4)
-                || (x % MAP_SIZE == MAP_SIZE * 3 / 4 && y % MAP_SIZE == MAP_SIZE / 4)
-                || (x % MAP_SIZE == MAP_SIZE / 4 && y % MAP_SIZE == MAP_SIZE * 3 / 4)
-                || (x % MAP_SIZE == MAP_SIZE * 3 / 4 && y % MAP_SIZE == MAP_SIZE * 3 / 4));
+        return ((x % MAP_WIDTH == MAP_WIDTH / 4 && y % MAP_HEIGHT == MAP_HEIGHT / 4)
+                || (x % MAP_WIDTH == MAP_WIDTH * 3 / 4 && y % MAP_HEIGHT == MAP_HEIGHT / 4)
+                || (x % MAP_WIDTH == MAP_WIDTH / 4 && y % MAP_HEIGHT == MAP_HEIGHT * 3 / 4)
+                || (x % MAP_WIDTH == MAP_WIDTH * 3 / 4 && y % MAP_HEIGHT == MAP_HEIGHT * 3 / 4));
     }
 
     private boolean isCenter(int x, int y) {
-        return (x == MAP_SIZE / 2) && (y == MAP_SIZE / 2);
+        return (x == MAP_WIDTH / 2) && (y == MAP_HEIGHT / 2);
     }
 
     private boolean isMiddle(int x, int y) {
-        return x % MAP_SIZE == MAP_SIZE / 2;
+        return x % MAP_WIDTH == MAP_WIDTH / 2;
     }
 }

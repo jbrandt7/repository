@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.Controller">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.ConfigurationController">
    <children>
       <Label text="Players">
          <StackPane.margin>
@@ -36,7 +36,7 @@
             <Insets left="50.0" top="50.0" />
          </StackPane.margin>
       </ChoiceBox>
-      <Button fx:id="toPlayerSetUpButton" mnemonicParsing="false" onAction="#toPlayerSetUp" text="Continue" StackPane.alignment="BOTTOM_CENTER">
+      <Button fx:id="toPlayerSetUpButton" mnemonicParsing="false" onAction="#goToPlayerScreen" text="Continue" StackPane.alignment="BOTTOM_CENTER">
          <StackPane.margin>
             <Insets bottom="75.0" />
          </StackPane.margin>

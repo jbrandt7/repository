@@ -19,6 +19,10 @@ public class Plot {
         owner = p;
     }
 
+    public boolean hasOwner() {
+        return owner != null;
+    }
+
     public void outfit(Mule m) {
         mule = m;
     }
