@@ -4,17 +4,20 @@ package mule.model;
 /**Player Class*************/
 /**Last updated: 9/15/2015**/
 import java.util.ArrayList;
+import javafx.scene.paint.Color;
 
+import mule.model.map.*;
 
 public class Player {
-	private String name, race, color;
+	private String name, race;
+	private Color color;
 	private int money, score;
 	private ResourceBag bag;
 	private Mule mule;
 	private ArrayList<Plot> land;
 	private Location location;
 
-	
+
 	private class Location {
 		private int x, y;
 
@@ -36,24 +39,29 @@ public class Player {
 	}
 
 
-	public Player(String name, String race, String color) {
+	public Player(String name, String race, Color color) {
 		this.color = color;
 		this.name = name;
 		this.race = race;
+		this.color = color;
 		this.money = 100;
 		this.mule = null;
+		this.land = new ArrayList<Plot>();
         this.bag = new ResourceBag(new ArrayList<Resource>());
 		this.score = money;
 		for (Resource r : bag.getResources()) {
-			score += r.getValue();
+			score += r.getCost();
 		}
 	}
-	
+
 	public String getName() {
 		return name;
 	}
 	public String getRace() {
 		return race;
+	}
+	public Color getColor() {
+		return color;
 	}
 	public int getMoney() {
 		return money;
@@ -80,6 +88,9 @@ public class Player {
 	}
 	public void addPlot(Plot plot) {
 		land.add(plot);
+		plot.assignOwner(this);
+		plot.getRep().setStroke(plot.getRep().getFill());
+		plot.getRep().setFill(getColor());
 	}
 	public void addResource(Resource resource) {
 		bag.add(resource);
@@ -91,14 +102,14 @@ public class Player {
 	 	score = 0;
 		score += money;
 		for (Resource r : bag.getResources()) {
-			score += r.getValue();
+			score += r.getCost();
 		}
 		for (Plot p : land) {
-			score += p.getValue();
+			score += p.getCost();
 		}
 		return score;
 
 	}
-	
+
 
 }//end class
