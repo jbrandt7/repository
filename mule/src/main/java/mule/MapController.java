@@ -26,17 +26,18 @@ public class MapController implements Initializable, ControlledScreen {
                     public void handle(MouseEvent event) {
                         int x = (int) (event.getSceneX() / 75);
                         int y = (int) (event.getSceneY() / 75);
-                        if (x == 5 && y == 5) {
-                            System.out.println("Selected town");
+                        if (x == Map.MAP_WIDTH / 2 && y == Map.MAP_HEIGHT /2) {
+                            System.out.println("Can't buy the town!");
                             return;
-                        }
-                        Plot selected = Main.getMap().getPlot(x, y);
-                        if (selected.hasOwner()) {
-                            System.out.println("Can't buy, already bought!");
                         } else {
-                            Main.getCurrentPlayer().addPlot(selected);
-                            selected.getRep().setFill(Main.getCurrentPlayer().getColor());
-                            Main.nextPlayer();
+                            Plot selected = Main.getMap().getPlot(x, y);
+                            if (selected.hasOwner()) {
+                                System.out.println("Can't buy, already bought!");
+                            } else {
+                                Main.getCurrentPlayer().addPlot(selected);
+                                selected.getRep().setFill(Main.getCurrentPlayer().getColor());
+                                Main.nextPlayer();
+                            }
                         }
                     }
                 });
