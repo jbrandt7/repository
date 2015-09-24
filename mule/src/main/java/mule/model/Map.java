@@ -23,19 +23,23 @@ public class Map {
 
         for (int i = 0; i < plots.length; i++) {
             for (int j = 0; j < plots[0].length; j++) {
-                Rectangle temp = new Rectangle(75 * i, 75 * j, 75, 75);
+                Rectangle temp = new Rectangle(75 * i, 75 * j, 70, 70);
                 if (isCenter(i, j)) {
                     plots[i][j] = new TownPlot(temp);
                 } else if (isMiddle(i, j)) {
                     plots[i][j] = new RiverPlot(temp);
                     plots[i][j].getRep().setFill(Color.BLUE);
+                    plots[i][j].getRep().setStroke(Color.BLUE);
                 } else if (isCorner(i, j)) {
                     plots[i][j] = new MountainPlot(temp);
                     plots[i][j].getRep().setFill(Color.GREY);
+                    plots[i][j].getRep().setStroke(Color.GREY);
                 } else {
                     plots[i][j] = new PlainPlot(temp);
                     plots[i][j].getRep().setFill(Color.GREEN);
+                    plots[i][j].getRep().setStroke(Color.GREEN);
                 }
+                plots[i][j].getRep().setStrokeWidth(5.0);
                 parent.getChildren().addAll(plots[i][j].getRep());
             }
         }

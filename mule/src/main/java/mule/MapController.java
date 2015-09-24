@@ -35,6 +35,7 @@ public class MapController implements Initializable, ControlledScreen {
                                 System.out.println("Can't buy, already bought!");
                             } else {
                                 Main.getCurrentPlayer().addPlot(selected);
+                                selected.getRep().setStroke(selected.getRep().getFill());
                                 selected.getRep().setFill(Main.getCurrentPlayer().getColor());
                                 Main.nextPlayer();
                             }
