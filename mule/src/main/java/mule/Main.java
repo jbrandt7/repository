@@ -17,9 +17,13 @@ public class Main extends Application {
 
     private static Player[] players = new Player[4];
 
-    private static int playerCount, currentPlayer, turn;
+    private static int playerCount, currentPlayer;
+
+    private static Turn turn;
 
     private static Map map;
+
+    private static Town town;
 
     private static ScreensController mainContainer;
 
@@ -29,12 +33,15 @@ public class Main extends Application {
     public static String playerConFile = "view/PlayerConfigurationScreen.fxml";
     public static String mapID = "map";
     public static String mapFile = "view/MapScreen.fxml";
+    public static String storeID = "store";
+    public static String storeFile = "view/TownScreen.fxml";
 
     @Override
     public void start(Stage stage) {
         mainContainer = new ScreensController();
         mainContainer.loadScreen(Main.configureID, Main.configureFile);
         mainContainer.loadScreen(Main.mapID, Main.mapFile);
+        mainContainer.loadScreen(Main.storeID, Main.storeFile);
         mainContainer.setScreen(Main.configureID);
 
         Group root = new Group();
@@ -50,6 +57,10 @@ public class Main extends Application {
 
     public static void setMap(Map m) {
         map = m;
+    }
+
+    public static void setTown(Town t) {
+        town = t;
     }
 
     public static Map getMap() {
@@ -69,11 +80,15 @@ public class Main extends Application {
     }
 
     public static Player getCurrentPlayer() {
-        return players[currentPlayer];
+        return players[turn.getCurrentPlayer()];
     }
 
-    public static void nextPlayer() {
-        currentPlayer = (currentPlayer == playerCount - 1) ? 0 : currentPlayer + 1;
+    public static void setTurn(Turn t) {
+        turn = t;
+    }
+
+    public static Turn getTurn() {
+        return turn;
     }
 
     public static void loadScene(String name, String resource) {

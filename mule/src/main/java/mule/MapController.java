@@ -37,11 +37,23 @@ public class MapController implements Initializable, ControlledScreen {
                                 Main.getCurrentPlayer().addPlot(selected);
                                 selected.getRep().setStroke(selected.getRep().getFill());
                                 selected.getRep().setFill(Main.getCurrentPlayer().getColor());
-                                Main.nextPlayer();
+
+                                if (Main.getTurn().hasNextPlayer()) {
+                                    Main.getTurn().nextPlayer();
+                                } else if (Main.getTurn().hasNextStage()){
+                                    Main.getTurn().nextStage();
+                                    goToStoreScreen();
+                                } else {
+                                    Main.getTurn().nextTurn();
+                                }
                             }
                         }
                     }
                 });
+    }
+
+    public void goToStoreScreen() {
+        controller.setScreen(Main.storeID);
     }
 
     public void setScreenParent(ScreensController screenParent) {
