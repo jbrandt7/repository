@@ -9,7 +9,10 @@ import javafx.scene.Group;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+
 import mule.model.*;
+import mule.model.map.*;
+import mule.model.town.*;
 
 public class TownController implements Initializable, ControlledScreen {
 

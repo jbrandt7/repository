@@ -9,7 +9,10 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.collections.FXCollections;
+
 import mule.model.*;
+import mule.model.map.*;
+import mule.model.town.*;
 
 public class PlayersController implements Initializable, ControlledScreen {
 

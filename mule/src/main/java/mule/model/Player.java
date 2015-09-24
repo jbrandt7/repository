@@ -6,6 +6,7 @@ package mule.model;
 import java.util.ArrayList;
 import javafx.scene.paint.Color;
 
+import mule.model.map.*;
 
 public class Player {
 	private String name, race;
@@ -49,7 +50,7 @@ public class Player {
         this.bag = new ResourceBag(new ArrayList<Resource>());
 		this.score = money;
 		for (Resource r : bag.getResources()) {
-			score += r.getValue();
+			score += r.getCost();
 		}
 	}
 
@@ -88,6 +89,8 @@ public class Player {
 	public void addPlot(Plot plot) {
 		land.add(plot);
 		plot.assignOwner(this);
+		plot.getRep().setStroke(plot.getRep().getFill());
+		plot.getRep().setFill(getColor());
 	}
 	public void addResource(Resource resource) {
 		bag.add(resource);
@@ -99,10 +102,10 @@ public class Player {
 	 	score = 0;
 		score += money;
 		for (Resource r : bag.getResources()) {
-			score += r.getValue();
+			score += r.getCost();
 		}
 		for (Plot p : land) {
-			score += p.getValue();
+			score += p.getCost();
 		}
 		return score;
 

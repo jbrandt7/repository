@@ -10,6 +10,8 @@ import javafx.scene.layout.StackPane;
 import javafx.fxml.FXMLLoader;
 
 import mule.model.*;
+import mule.model.map.*;
+import mule.model.town.*;
 
 public class Main extends Application {
 

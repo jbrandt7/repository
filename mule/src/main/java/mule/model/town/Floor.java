@@ -1,4 +1,4 @@
-package mule.model;
+package mule.model.town;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
