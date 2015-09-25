@@ -6,11 +6,19 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.MapController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.MapController">
    <children>
       <Group fx:id="mapParent">
          <StackPane.margin>
             <Insets />
          </StackPane.margin></Group>
+      <Label prefHeight="15.0" text="Player 1" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets bottom="10.0" />
+         </StackPane.margin>
+      </Label>
    </children>
+   <opaqueInsets>
+      <Insets bottom="25.0" />
+   </opaqueInsets>
 </StackPane>
