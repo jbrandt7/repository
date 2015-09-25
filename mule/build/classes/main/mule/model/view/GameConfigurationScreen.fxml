@@ -36,7 +36,7 @@
             <Insets left="50.0" top="50.0" />
          </StackPane.margin>
       </ChoiceBox>
-      <Button fx:id="toPlayerSetUpButton" mnemonicParsing="false" onAction="#goToPlayerScreen" text="Continue" StackPane.alignment="BOTTOM_CENTER">
+      <Button fx:id="toPlayerSetUpButton" mnemonicParsing="false" onAction="#gotToPlayerScreen" text="Continue" StackPane.alignment="BOTTOM_CENTER">
          <StackPane.margin>
             <Insets bottom="75.0" />
          </StackPane.margin>

@@ -10,7 +10,12 @@
    <children>
       <Group fx:id="mapParent">
          <StackPane.margin>
-            <Insets />
+            <Insets bottom="100.0" />
          </StackPane.margin></Group>
+      <TextArea fx:id="commandField" maxHeight="100.0" maxWidth="525.0" prefHeight="100.0" prefWidth="525.0" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </TextArea>
    </children>
 </StackPane>
