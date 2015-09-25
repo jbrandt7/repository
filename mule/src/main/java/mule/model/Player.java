@@ -57,47 +57,60 @@ public class Player {
 	public String getName() {
 		return name;
 	}
+	
 	public String getRace() {
 		return race;
 	}
+
 	public Color getColor() {
 		return color;
 	}
+
 	public int getMoney() {
 		return money;
 	}
+
 	public ResourceBag getBag() {
 		return bag;
 	}
+
 	public int addMoney(int m) {
 		money += m;
 		return money;
 	}
+
 	public int removeMoney(int m) {
 		money -= m;
 		return money;
 	}
+
 	public void addMule(Mule mule) {
 		this.mule = mule;
 	}
+
 	public void removeMule() {
 		this.mule = null;
 	}
+
 	public void setLoc(int x, int y) {
 		location.setLocation(x, y);
 	}
+
 	public void addPlot(Plot plot) {
 		land.add(plot);
 		plot.assignOwner(this);
 		plot.getRep().setStroke(plot.getRep().getFill());
 		plot.getRep().setFill(getColor());
 	}
+
 	public void addResource(Resource resource) {
 		bag.add(resource);
 	}
+
 	public int getScore() {
 		return score;
 	}
+
 	public int updateScore() {
 	 	score = 0;
 		score += money;
@@ -108,7 +121,10 @@ public class Player {
 			score += p.getCost();
 		}
 		return score;
+	}
 
+	public String toString() {
+		return name;
 	}
 
 

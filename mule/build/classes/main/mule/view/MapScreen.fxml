@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
@@ -12,7 +13,7 @@
          <StackPane.margin>
             <Insets bottom="25.0" />
          </StackPane.margin></Group>
-      <Label prefHeight="15.0" text="Player 1" StackPane.alignment="BOTTOM_CENTER">
+      <Label fx:id="mapText" prefHeight="15.0" text="New Turn" StackPane.alignment="BOTTOM_CENTER">
          <StackPane.margin>
             <Insets bottom="10.0" />
          </StackPane.margin>

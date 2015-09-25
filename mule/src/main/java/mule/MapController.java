@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -19,6 +20,8 @@ public class MapController implements Initializable, ControlledScreen {
     ScreensController controller;
 
     @FXML Group mapParent;
+
+    @FXML Label mapText;
 
     @Override public void initialize(URL url, ResourceBundle rb) {
         Main.setMap(new Map(mapParent));
@@ -37,17 +40,26 @@ public class MapController implements Initializable, ControlledScreen {
                                 System.out.println("Can't buy, already bought!");
                             } else {
                                 if (Main.getTurn().getCurrentTurn() > 1) {
-                                    selected.buy(Main.getCurrentPlayer());
+                                    if (selected.buy(Main.getCurrentPlayer())) {
+                                        mapText.setText(Main.getTurn().getCurrentPlayer()
+                                                + " bought land");
+                                    } else {
+                                        mapText.setText("Could not buy land");
+                                    }
                                 } else {
                                     Main.getCurrentPlayer().addPlot(selected);
+                                    mapText.setText("Player "
+                                            + Main.getTurn().getCurrentPlayer()
+                                            + " granted land");
                                 }
                             }
                         }
-                        
+
                         if (Main.getTurn().hasNextPlayer()) {
                             Main.getTurn().nextPlayer();
                         } else if (Main.getTurn().hasNextStage()){
                             Main.getTurn().nextStage();
+                            mapText.setText("New Turn");
                             goToStoreScreen();
                         } else {
                             Main.getTurn().nextTurn();

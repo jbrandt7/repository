@@ -19,11 +19,9 @@ public class Plot implements Tradeable {
 
     public boolean buy(Player p) {
         if (p.getMoney() > getCost()) {
-            System.out.println("Land bought for : " + getCost());
             p.addPlot(this);
             return true;
         }
-        System.out.println("Can't buy, not enough money!");
         return false;
     }
 
