@@ -42,7 +42,6 @@ public class Main extends Application {
     public void start(Stage stage) {
         mainContainer = new ScreensController();
         mainContainer.loadScreen(Main.configureID, Main.configureFile);
-        mainContainer.loadScreen(Main.mapID, Main.mapFile);
         mainContainer.loadScreen(Main.storeID, Main.storeFile);
         mainContainer.setScreen(Main.configureID);
 
@@ -71,6 +70,10 @@ public class Main extends Application {
 
     public static int getPlayerCount() {
         return playerCount;
+    }
+
+    public static Player getPlayer(int i) {
+        return players[i];
     }
 
     public static void setPlayer(int i, Player p) {

@@ -13,11 +13,16 @@
          <StackPane.margin>
             <Insets bottom="25.0" />
          </StackPane.margin></Group>
-      <Label fx:id="mapText" prefHeight="15.0" text="New Turn" StackPane.alignment="BOTTOM_CENTER">
-         <StackPane.margin>
-            <Insets bottom="10.0" />
-         </StackPane.margin>
-      </Label>
+      <ToolBar fx:id="infoBar" prefHeight="40.0" prefWidth="200.0" StackPane.alignment="BOTTOM_CENTER">
+        <items>
+            <Label prefWidth="75.0" text="Player 1:" />
+            <Label prefWidth="75.0" text="Player 2:" />
+            <Label prefWidth="75.0" text="Player 3:" />
+            <Label prefWidth="75.0" text="Player 4:" />
+            <Separator orientation="VERTICAL" prefHeight="25.0" />
+            <Label fx:id="mapText" prefHeight="15.0" text="New Turn" />
+        </items>
+      </ToolBar>
    </children>
    <opaqueInsets>
       <Insets bottom="25.0" />

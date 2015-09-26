@@ -20,6 +20,7 @@ public class Plot implements Tradeable {
     public boolean buy(Player p) {
         if (p.getMoney() > getCost()) {
             p.addPlot(this);
+            p.removeMoney(VALUE);
             return true;
         }
         return false;

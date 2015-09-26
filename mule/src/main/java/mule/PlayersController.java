@@ -39,6 +39,7 @@ public class PlayersController implements Initializable, ControlledScreen {
     @FXML private void goToMapScreen(ActionEvent event) {
         processPlayers();
         initializeTurn();
+        Main.loadScene(Main.mapID, Main.mapFile);
         controller.setScreen(Main.mapID);
     }
 

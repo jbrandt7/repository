@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -23,8 +23,11 @@ public class MapController implements Initializable, ControlledScreen {
 
     @FXML Label mapText;
 
+    @FXML ToolBar infoBar;
+
     @Override public void initialize(URL url, ResourceBundle rb) {
         Main.setMap(new Map(mapParent));
+        setupInfoBar();
 
         mapParent.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 new EventHandler<MouseEvent>() {
@@ -33,36 +36,32 @@ public class MapController implements Initializable, ControlledScreen {
                         int y = (int) (event.getSceneY() / 75);
 
                         if (x == Map.MAP_WIDTH / 2 && y == Map.MAP_HEIGHT /2) {
-                            System.out.println("No land bought, player passed");
+                            mapText.setText(Main.getCurrentPlayer() + "passes, "
+                                    + "no land bought");
                         } else {
                             Plot selected = Main.getMap().getPlot(x, y);
                             if (selected.hasOwner()) {
-                                System.out.println("Can't buy, already bought!");
+                                mapText.setText("Can't buy, already bought!");
                             } else {
                                 if (Main.getTurn().getCurrentTurn() > 1) {
                                     if (selected.buy(Main.getCurrentPlayer())) {
                                         mapText.setText(Main.getTurn().getCurrentPlayer()
                                                 + " bought land");
+                                        ((Label) infoBar.getItems().get(Main.getTurn()
+                                                .getCurrentPlayer())).setText(Main.getCurrentPlayer()
+                                                + ": " + Main.getCurrentPlayer().getMoney());
+                                        incrementTurn();
                                     } else {
                                         mapText.setText("Could not buy land");
                                     }
                                 } else {
                                     Main.getCurrentPlayer().addPlot(selected);
-                                    mapText.setText("Player "
-                                            + Main.getTurn().getCurrentPlayer()
+                                    mapText.setText(Main.getCurrentPlayer()
                                             + " granted land");
+                                    incrementTurn();
                                 }
-                            }
-                        }
 
-                        if (Main.getTurn().hasNextPlayer()) {
-                            Main.getTurn().nextPlayer();
-                        } else if (Main.getTurn().hasNextStage()){
-                            Main.getTurn().nextStage();
-                            mapText.setText("New Turn");
-                            goToStoreScreen();
-                        } else {
-                            Main.getTurn().nextTurn();
+                            }
                         }
                     }
                 });
@@ -76,4 +75,23 @@ public class MapController implements Initializable, ControlledScreen {
         controller = screenParent;
     }
 
+    private void incrementTurn() {
+        if (Main.getTurn().hasNextPlayer()) {
+            Main.getTurn().nextPlayer();
+        } else {
+            Main.getTurn().nextStage();
+            mapText.setText("New Turn");
+            goToStoreScreen();
+        }
+    }
+
+    private void setupInfoBar() {
+        for (int i = 0; i < Main.getPlayerCount(); i++) {
+            ((Label) infoBar.getItems().get(i)).setText(Main.getPlayer(i) + ": "
+                    + Main.getPlayer(i).getMoney());
+        }
+        for (int i = Main.getPlayerCount(); i < 4; i++) {
+            ((Label) infoBar.getItems().get(i)).setOpacity(0.0);
+        }
+    }
 }
