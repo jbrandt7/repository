@@ -35,7 +35,7 @@ public class MapController implements Initializable, ControlledScreen {
                         int x = (int) (event.getSceneX() / 75);
                         int y = (int) (event.getSceneY() / 75);
 
-                        if (x == Map.MAP_WIDTH / 2 && y == Map.MAP_HEIGHT /2) {
+                        if (x == Map.MAP_WIDTH / 2 && y == Map.MAP_HEIGHT / 2) {
                             mapText.setText(Main.getCurrentPlayer() + "passes, "
                                     + "no land bought");
                         } else {
