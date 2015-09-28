@@ -55,6 +55,7 @@ public class MapController implements Initializable, ControlledScreen {
                                         ((Label) infoBar.getItems().get(Main.getTurn()
                                                 .getCurrentPlayer())).setText(Main.getCurrentPlayer()
                                                 + ": " + Main.getCurrentPlayer().getMoney());
+                                        Main.getTimer().reset();
                                         incrementTurn();
                                     } else {
                                         mapText.setText("Could not buy land");
@@ -63,6 +64,7 @@ public class MapController implements Initializable, ControlledScreen {
                                     Main.getCurrentPlayer().addPlot(selected);
                                     mapText.setText(Main.getCurrentPlayer()
                                             + " granted land");
+                                    Main.getTimer().reset();
                                     incrementTurn();
                                 }
                             }
@@ -102,12 +104,14 @@ public class MapController implements Initializable, ControlledScreen {
     private void startTimer() {
         EventHandler onFinished = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                if (Main.outOfTime()) {
-                    timerLabel.setText("out of time");
-                    Main.resetTime();
+                if (Main.getTimer().outOfTime()) {
+                    Main.getTimer().reset();
+                    mapText.setText(Main.getCurrentPlayer() + " ran out of time, "
+                            + "skipping to next player");
+                    incrementTurn();
                 } else {
-                    timerLabel.setText("Time: " + Main.getTime());
-                    Main.tick();
+                    timerLabel.setText("Time: " + Main.getTimer().getTime());
+                    Main.getTimer().tick();
                 }
             }
         };

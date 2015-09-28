@@ -32,7 +32,7 @@ public class Main extends Application {
 
     private static Timeline timeline;
 
-    private static AnimationTimer timer;
+    private static Timer timer;
 
     public static String configureID = "configure";
     public static String configureFile = "view/GameConfigurationScreen.fxml";
@@ -53,6 +53,8 @@ public class Main extends Application {
         timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
 
+        timer = new Timer();
+
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
         stage.setScene(new Scene(root));
@@ -69,13 +71,7 @@ public class Main extends Application {
 
     public static Timeline getTimeline() { return timeline; }
 
-    public static void tick() { time++; }
-
-    public static void resetTime() { time = 0; }
-
-    public static int getTime() { return time; }
-
-    public static boolean outOfTime() { return time >= 30; }
+    public static Timer getTimer() { return timer; }
 
     public static Map getMap() { return map; }
 
