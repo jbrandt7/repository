@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
@@ -10,13 +11,20 @@
    <children>
       <Group fx:id="mapParent">
          <StackPane.margin>
-            <Insets />
+            <Insets bottom="25.0" />
          </StackPane.margin></Group>
-      <Label prefHeight="15.0" text="Player 1" StackPane.alignment="BOTTOM_CENTER">
-         <StackPane.margin>
-            <Insets bottom="10.0" />
-         </StackPane.margin>
-      </Label>
+      <ToolBar fx:id="infoBar" prefHeight="40.0" prefWidth="200.0" StackPane.alignment="BOTTOM_CENTER">
+        <items>
+            <Label prefWidth="75.0" text="Player 1:" />
+            <Label prefWidth="75.0" text="Player 2:" />
+            <Label prefWidth="75.0" text="Player 3:" />
+            <Label prefWidth="75.0" text="Player 4:" />
+            <Separator orientation="VERTICAL" prefHeight="25.0" />
+            <Label fx:id="mapText" prefHeight="15.0" prefWidth="175.0" text="New Turn" />
+            <Separator orientation="VERTICAL" prefHeight="25.0" />
+            <Label fx:id="timerLabel" prefWidth="75.0" text="Time Left: " />
+        </items>
+      </ToolBar>
    </children>
    <opaqueInsets>
       <Insets bottom="25.0" />

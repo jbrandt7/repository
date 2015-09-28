@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.*;
-import javafx.event.ActionEvent;
+import javafx.animation.*;
+import javafx.event.*;
+import javafx.util.Duration;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -23,11 +25,14 @@ public class MapController implements Initializable, ControlledScreen {
 
     @FXML Label mapText;
 
+    @FXML Label timerLabel;
+
     @FXML ToolBar infoBar;
 
     @Override public void initialize(URL url, ResourceBundle rb) {
         Main.setMap(new Map(mapParent));
         setupInfoBar();
+        startTimer();
 
         mapParent.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 new EventHandler<MouseEvent>() {
@@ -60,7 +65,6 @@ public class MapController implements Initializable, ControlledScreen {
                                             + " granted land");
                                     incrementTurn();
                                 }
-
                             }
                         }
                     }
@@ -80,7 +84,7 @@ public class MapController implements Initializable, ControlledScreen {
             Main.getTurn().nextPlayer();
         } else {
             Main.getTurn().nextStage();
-            mapText.setText("New Turn");
+            mapText.setText("Select a plot of land");
             goToStoreScreen();
         }
     }
@@ -93,5 +97,22 @@ public class MapController implements Initializable, ControlledScreen {
         for (int i = Main.getPlayerCount(); i < 4; i++) {
             ((Label) infoBar.getItems().get(i)).setOpacity(0.0);
         }
+    }
+
+    private void startTimer() {
+        EventHandler onFinished = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+                if (Main.outOfTime()) {
+                    timerLabel.setText("out of time");
+                    Main.resetTime();
+                } else {
+                    timerLabel.setText("Time: " + Main.getTime());
+                    Main.tick();
+                }
+            }
+        };
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(1000), onFinished);
+        Main.getTimeline().getKeyFrames().addAll(keyFrame);
+        Main.getTimeline().play();
     }
 }

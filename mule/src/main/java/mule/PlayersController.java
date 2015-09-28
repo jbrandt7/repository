@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
+import javafx.animation.*;
+import javafx.event.*;
+import javafx.util.Duration;
 import javafx.scene.paint.Color;
 import javafx.collections.FXCollections;
 
@@ -65,6 +68,7 @@ public class PlayersController implements Initializable, ControlledScreen {
 
     private void initializeTurn() {
         Main.setTurn(new Turn(Main.getPlayerCount()));
+        Main.resetTime();
     }
 
 }

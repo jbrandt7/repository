@@ -20,7 +20,9 @@
             <Label prefWidth="75.0" text="Player 3:" />
             <Label prefWidth="75.0" text="Player 4:" />
             <Separator orientation="VERTICAL" prefHeight="25.0" />
-            <Label fx:id="mapText" prefHeight="15.0" text="New Turn" />
+            <Label fx:id="mapText" prefHeight="15.0" prefWidth="175.0" text="New Turn" />
+            <Separator orientation="VERTICAL" prefHeight="25.0" />
+            <Label fx:id="timerLabel" prefWidth="75.0" text="Time Left: " />
         </items>
       </ToolBar>
    </children>

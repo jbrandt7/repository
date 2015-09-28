@@ -2,12 +2,13 @@ package mule;
 
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.Group;
+import javafx.scene.*;
+import javafx.animation.*;
+import javafx.event.*;
 import javafx.stage.Stage;
 import javafx.scene.layout.StackPane;
 import javafx.fxml.FXMLLoader;
+import javafx.util.Duration;
 
 import mule.model.*;
 import mule.model.map.*;
@@ -19,7 +20,7 @@ public class Main extends Application {
 
     private static Player[] players = new Player[4];
 
-    private static int playerCount, currentPlayer;
+    private static int playerCount, currentPlayer, time;
 
     private static Turn turn;
 
@@ -28,6 +29,10 @@ public class Main extends Application {
     private static Town town;
 
     private static ScreensController mainContainer;
+
+    private static Timeline timeline;
+
+    private static AnimationTimer timer;
 
     public static String configureID = "configure";
     public static String configureFile = "view/GameConfigurationScreen.fxml";
@@ -45,56 +50,48 @@ public class Main extends Application {
         mainContainer.loadScreen(Main.storeID, Main.storeFile);
         mainContainer.setScreen(Main.configureID);
 
+        timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+        stage.setScene(new Scene(root));
         stage.show();
+
+        timeline.play();
     }
 
-    public static Stage getStage() {
-        return stage;
-    }
+    public static Stage getStage() { return stage; }
 
-    public static void setMap(Map m) {
-        map = m;
-    }
+    public static void setMap(Map m) { map = m; }
 
-    public static void setTown(Town t) {
-        town = t;
-    }
+    public static void setTown(Town t) { town = t; }
 
-    public static Map getMap() {
-        return map;
-    }
+    public static Timeline getTimeline() { return timeline; }
 
-    public static int getPlayerCount() {
-        return playerCount;
-    }
+    public static void tick() { time++; }
 
-    public static Player getPlayer(int i) {
-        return players[i];
-    }
+    public static void resetTime() { time = 0; }
 
-    public static void setPlayer(int i, Player p) {
-        players[i] = p;
-    }
+    public static int getTime() { return time; }
 
-    public static void setPlayerCount(int number) {
-        playerCount = number;
-    }
+    public static boolean outOfTime() { return time >= 30; }
 
-    public static Player getCurrentPlayer() {
-        return players[turn.getCurrentPlayer()];
-    }
+    public static Map getMap() { return map; }
 
-    public static void setTurn(Turn t) {
-        turn = t;
-    }
+    public static int getPlayerCount() { return playerCount; }
 
-    public static Turn getTurn() {
-        return turn;
-    }
+    public static Player getPlayer(int i) { return players[i]; }
+
+    public static void setPlayer(int i, Player p) { players[i] = p; }
+
+    public static void setPlayerCount(int number) { playerCount = number; }
+
+    public static Player getCurrentPlayer() { return players[turn.getCurrentPlayer()]; }
+
+    public static void setTurn(Turn t) { turn = t; }
+
+    public static Turn getTurn() { return turn; }
 
     public static void loadScene(String name, String resource) {
         mainContainer.loadScreen(name, resource);
