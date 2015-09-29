@@ -23,9 +23,8 @@ public class MapController implements Initializable, ControlledScreen {
 
     @FXML Group mapParent;
 
-    @FXML Label mapText;
-
-    @FXML Label timerLabel;
+    @FXML Label mapText, timerLabel;
+    static Label _mapText, _timerLabel;
 
     @FXML ToolBar infoBar;
 
@@ -74,7 +73,10 @@ public class MapController implements Initializable, ControlledScreen {
     }
 
     public void goToStoreScreen() {
+        Main.loadScene(Main.storeID, Main.storeFile);
         controller.setScreen(Main.storeID);
+        Main.setHelperLabel(TownController.getHelperLabel());
+        Main.setTimerLabel(TownController.getTimerLabel());
     }
 
     public void setScreenParent(ScreensController screenParent) {
@@ -99,19 +101,26 @@ public class MapController implements Initializable, ControlledScreen {
         for (int i = Main.getPlayerCount(); i < 4; i++) {
             ((Label) infoBar.getItems().get(i)).setOpacity(0.0);
         }
+        Main.setInfoBar(infoBar);
+        Main.setHelperLabel(mapText);
+        _mapText = mapText;
+        Main.setTimerLabel(timerLabel);
+        _timerLabel = timerLabel;
     }
 
     private void startTimer() {
         EventHandler onFinished = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                if (Main.getTimer().outOfTime()) {
-                    Main.getTimer().reset();
-                    mapText.setText(Main.getCurrentPlayer() + " ran out of time, "
+                System.out.println("new frame");
+                if (Main.getCurrentPlayer().getTimer().outOfTime()) {
+                    Main.getCurrentPlayer().getTimer().reset();
+                    Main.getHelperLabel().setText(Main.getCurrentPlayer() + " ran out of time, "
                             + "skipping to next player");
                     incrementTurn();
                 } else {
-                    timerLabel.setText("Time: " + Main.getTimer().getTime());
-                    Main.getTimer().tick();
+                    Main.getTimerLabel().setText("Time: " + Main.getCurrentPlayer()
+                            .getTimer().getTime());
+                    Main.getCurrentPlayer().getTimer().tick();
                 }
             }
         };
@@ -119,4 +128,8 @@ public class MapController implements Initializable, ControlledScreen {
         Main.getTimeline().getKeyFrames().addAll(keyFrame);
         Main.getTimeline().play();
     }
+
+    public static Label getHelperLabel() { return _mapText; }
+
+    public static Label getTimerLabel() { return _timerLabel; }
 }

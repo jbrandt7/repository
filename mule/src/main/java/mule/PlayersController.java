@@ -68,7 +68,6 @@ public class PlayersController implements Initializable, ControlledScreen {
 
     private void initializeTurn() {
         Main.setTurn(new Turn(Main.getPlayerCount()));
-        Main.getTimer().reset();
     }
 
 }
