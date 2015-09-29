@@ -47,7 +47,6 @@ public class Main extends Application {
     public void start(Stage stage) {
         mainContainer = new ScreensController();
         mainContainer.loadScreen(Main.configureID, Main.configureFile);
-        mainContainer.loadScreen(Main.storeID, Main.storeFile);
         mainContainer.setScreen(Main.configureID);
 
         timeline = new Timeline();
