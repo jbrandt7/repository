@@ -27,6 +27,7 @@ public class MapController implements Initializable, ControlledScreen {
     static Label _mapText, _timerLabel;
 
     @FXML ToolBar infoBar;
+    static ToolBar _infoBar;
 
     @Override public void initialize(URL url, ResourceBundle rb) {
         Main.setMap(new Map(mapParent));
@@ -34,42 +35,8 @@ public class MapController implements Initializable, ControlledScreen {
         startTimer();
 
         mapParent.addEventHandler(MouseEvent.MOUSE_CLICKED,
-                new EventHandler<MouseEvent>() {
-                    @Override public void handle(MouseEvent event) {
-                        int x = (int) (event.getSceneX() / 75);
-                        int y = (int) (event.getSceneY() / 75);
+            createLandSelectionHandler());
 
-                        if (x == Map.MAP_WIDTH / 2 && y == Map.MAP_HEIGHT / 2) {
-                            mapText.setText(Main.getCurrentPlayer() + "passes, "
-                                    + "no land bought");
-                        } else {
-                            Plot selected = Main.getMap().getPlot(x, y);
-                            if (selected.hasOwner()) {
-                                mapText.setText("Can't buy, already bought!");
-                            } else {
-                                if (Main.getTurn().getCurrentTurn() > 1) {
-                                    if (selected.buy(Main.getCurrentPlayer())) {
-                                        mapText.setText(Main.getTurn().getCurrentPlayer()
-                                                + " bought land");
-                                        ((Label) infoBar.getItems().get(Main.getTurn()
-                                                .getCurrentPlayer())).setText(Main.getCurrentPlayer()
-                                                + ": " + Main.getCurrentPlayer().getMoney());
-                                        Main.getTimer().reset();
-                                        incrementTurn();
-                                    } else {
-                                        mapText.setText("Could not buy land");
-                                    }
-                                } else {
-                                    Main.getCurrentPlayer().addPlot(selected);
-                                    mapText.setText(Main.getCurrentPlayer()
-                                            + " granted land");
-                                    Main.getTimer().reset();
-                                    incrementTurn();
-                                }
-                            }
-                        }
-                    }
-                });
     }
 
     public void goToStoreScreen() {
@@ -106,12 +73,12 @@ public class MapController implements Initializable, ControlledScreen {
         _mapText = mapText;
         Main.setTimerLabel(timerLabel);
         _timerLabel = timerLabel;
+        _infoBar = infoBar;
     }
 
     private void startTimer() {
         EventHandler onFinished = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                System.out.println("new frame");
                 if (Main.getCurrentPlayer().getTimer().outOfTime()) {
                     Main.getCurrentPlayer().getTimer().reset();
                     Main.getHelperLabel().setText(Main.getCurrentPlayer() + " ran out of time, "
@@ -129,7 +96,48 @@ public class MapController implements Initializable, ControlledScreen {
         Main.getTimeline().play();
     }
 
+    private EventHandler<MouseEvent> createLandSelectionHandler() {
+        return new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent event) {
+                int x = (int) (event.getSceneX() / 75);
+                int y = (int) (event.getSceneY() / 75);
+
+                if (x == Map.MAP_WIDTH / 2 && y == Map.MAP_HEIGHT / 2) {
+                    mapText.setText(Main.getCurrentPlayer() + "passes, "
+                            + "no land bought");
+                } else {
+                    Plot selected = Main.getMap().getPlot(x, y);
+                    if (selected.hasOwner()) {
+                        mapText.setText("Can't buy, already bought!");
+                    } else {
+                        if (Main.getTurn().getCurrentTurn() > 1) {
+                            if (selected.buy(Main.getCurrentPlayer())) {
+                                mapText.setText(Main.getTurn().getCurrentPlayer()
+                                        + " bought land");
+                                ((Label) infoBar.getItems().get(Main.getTurn()
+                                        .getCurrentPlayer())).setText(Main.getCurrentPlayer()
+                                        + ": " + Main.getCurrentPlayer().getMoney());
+                                Main.getTimer().reset();
+                                incrementTurn();
+                            } else {
+                                mapText.setText("Could not buy land");
+                            }
+                        } else {
+                            Main.getCurrentPlayer().addPlot(selected);
+                            mapText.setText(Main.getCurrentPlayer()
+                                    + " granted land");
+                            Main.getTimer().reset();
+                            incrementTurn();
+                        }
+                    }
+                }
+            }
+        };
+    }
+
     public static Label getHelperLabel() { return _mapText; }
 
     public static Label getTimerLabel() { return _timerLabel; }
+
+    public static ToolBar getInfoBar() { return _infoBar; }
 }

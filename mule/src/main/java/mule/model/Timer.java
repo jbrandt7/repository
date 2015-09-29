@@ -3,22 +3,22 @@ package mule.model;
 public class Timer {
 
     private int time;
-    private static final int TOTAL_TIME = 30;
+    private static final int TOTAL_TIME = 60;
 
     public Timer() {
-        time = 0;
+        time = TOTAL_TIME;
     }
 
     public void tick() {
-        time++;
+        time--;
     }
 
     public void reset() {
-        time = 0;
+        time = TOTAL_TIME;
     }
 
     public boolean outOfTime() {
-        return time >= TOTAL_TIME;
+        return time == 0;
     }
 
     public int getTime() {
