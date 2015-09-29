@@ -12,6 +12,7 @@ public class Player {
 	private String name, race;
 	private Color color;
 	private int money, score;
+	private Timer timer;
 	private ResourceBag bag;
 	private Mule mule;
 	private ArrayList<Plot> land;
@@ -49,6 +50,7 @@ public class Player {
 		this.land = new ArrayList<Plot>();
         this.bag = new ResourceBag(new ArrayList<Resource>());
 		this.score = money;
+		this.timer = new Timer();
 		for (Resource r : bag.getResources()) {
 			score += r.getCost();
 		}
@@ -57,7 +59,7 @@ public class Player {
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getRace() {
 		return race;
 	}
@@ -121,6 +123,10 @@ public class Player {
 			score += p.getCost();
 		}
 		return score;
+	}
+
+	public Timer getTimer() {
+		return timer;
 	}
 
 	public String toString() {

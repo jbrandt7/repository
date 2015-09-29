@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.*;
-import javafx.event.ActionEvent;
+import javafx.animation.*;
+import javafx.event.*;
+import javafx.util.Duration;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -21,13 +23,15 @@ public class MapController implements Initializable, ControlledScreen {
 
     @FXML Group mapParent;
 
-    @FXML Label mapText;
+    @FXML Label mapText, timerLabel;
+    static Label _mapText, _timerLabel;
 
     @FXML ToolBar infoBar;
 
     @Override public void initialize(URL url, ResourceBundle rb) {
         Main.setMap(new Map(mapParent));
         setupInfoBar();
+        startTimer();
 
         mapParent.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 new EventHandler<MouseEvent>() {
@@ -35,7 +39,7 @@ public class MapController implements Initializable, ControlledScreen {
                         int x = (int) (event.getSceneX() / 75);
                         int y = (int) (event.getSceneY() / 75);
 
-                        if (x == Map.MAP_WIDTH / 2 && y == Map.MAP_HEIGHT /2) {
+                        if (x == Map.MAP_WIDTH / 2 && y == Map.MAP_HEIGHT / 2) {
                             mapText.setText(Main.getCurrentPlayer() + "passes, "
                                     + "no land bought");
                         } else {
@@ -50,6 +54,7 @@ public class MapController implements Initializable, ControlledScreen {
                                         ((Label) infoBar.getItems().get(Main.getTurn()
                                                 .getCurrentPlayer())).setText(Main.getCurrentPlayer()
                                                 + ": " + Main.getCurrentPlayer().getMoney());
+                                        Main.getTimer().reset();
                                         incrementTurn();
                                     } else {
                                         mapText.setText("Could not buy land");
@@ -58,9 +63,9 @@ public class MapController implements Initializable, ControlledScreen {
                                     Main.getCurrentPlayer().addPlot(selected);
                                     mapText.setText(Main.getCurrentPlayer()
                                             + " granted land");
+                                    Main.getTimer().reset();
                                     incrementTurn();
                                 }
-
                             }
                         }
                     }
@@ -68,7 +73,10 @@ public class MapController implements Initializable, ControlledScreen {
     }
 
     public void goToStoreScreen() {
+        Main.loadScene(Main.storeID, Main.storeFile);
         controller.setScreen(Main.storeID);
+        Main.setHelperLabel(TownController.getHelperLabel());
+        Main.setTimerLabel(TownController.getTimerLabel());
     }
 
     public void setScreenParent(ScreensController screenParent) {
@@ -80,7 +88,7 @@ public class MapController implements Initializable, ControlledScreen {
             Main.getTurn().nextPlayer();
         } else {
             Main.getTurn().nextStage();
-            mapText.setText("New Turn");
+            mapText.setText("Select a plot of land");
             goToStoreScreen();
         }
     }
@@ -93,5 +101,35 @@ public class MapController implements Initializable, ControlledScreen {
         for (int i = Main.getPlayerCount(); i < 4; i++) {
             ((Label) infoBar.getItems().get(i)).setOpacity(0.0);
         }
+        Main.setInfoBar(infoBar);
+        Main.setHelperLabel(mapText);
+        _mapText = mapText;
+        Main.setTimerLabel(timerLabel);
+        _timerLabel = timerLabel;
     }
+
+    private void startTimer() {
+        EventHandler onFinished = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+                System.out.println("new frame");
+                if (Main.getCurrentPlayer().getTimer().outOfTime()) {
+                    Main.getCurrentPlayer().getTimer().reset();
+                    Main.getHelperLabel().setText(Main.getCurrentPlayer() + " ran out of time, "
+                            + "skipping to next player");
+                    incrementTurn();
+                } else {
+                    Main.getTimerLabel().setText("Time: " + Main.getCurrentPlayer()
+                            .getTimer().getTime());
+                    Main.getCurrentPlayer().getTimer().tick();
+                }
+            }
+        };
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(1000), onFinished);
+        Main.getTimeline().getKeyFrames().addAll(keyFrame);
+        Main.getTimeline().play();
+    }
+
+    public static Label getHelperLabel() { return _mapText; }
+
+    public static Label getTimerLabel() { return _timerLabel; }
 }

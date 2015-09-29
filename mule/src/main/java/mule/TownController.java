@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -20,8 +21,15 @@ public class TownController implements Initializable, ControlledScreen {
 
     @FXML Group townParent;
 
+    @FXML ToolBar infoBar;
+    static ToolBar _infoBar;
+
+    @FXML Label timerLabel, mapText;
+    static Label _timerLabel, _mapText;
+
     @Override public void initialize(URL url, ResourceBundle rb) {
         Main.setTown(new Town(townParent));
+        setupInfoBar();
 
         townParent.addEventHandler(MouseEvent.MOUSE_CLICKED,
             new EventHandler<MouseEvent>() {
@@ -40,10 +48,28 @@ public class TownController implements Initializable, ControlledScreen {
 
     public void goToMapScreen() {
         controller.setScreen(Main.mapID);
+        Main.setHelperLabel(MapController.getHelperLabel());
+        Main.setTimerLabel(MapController.getTimerLabel());
     }
 
     public void setScreenParent(ScreensController screenParent) {
         controller = screenParent;
     }
+
+    private void setupInfoBar() {
+        for (int i = 0; i < Main.getPlayerCount(); i++) {
+            ((Label) infoBar.getItems().get(i)).setText(Main.getPlayer(i) + ": "
+                    + Main.getPlayer(i).getMoney());
+        }
+        for (int i = Main.getPlayerCount(); i < 4; i++) {
+            ((Label) infoBar.getItems().get(i)).setOpacity(0.0);
+        }
+        _mapText = mapText;
+        _timerLabel = timerLabel;
+    }
+
+    public static Label getHelperLabel() { return _mapText; }
+
+    public static Label getTimerLabel() { return _timerLabel; }
 
 }
