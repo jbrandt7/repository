@@ -15,7 +15,7 @@ public class Resource {
         return type;
     }
 
-    public int getValue() {
+    public int getCost() {
         return value;
     }
 }

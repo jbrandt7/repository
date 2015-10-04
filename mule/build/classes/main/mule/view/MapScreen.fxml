@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.MapController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.MapController">
    <children>
-      <Group fx:id="mapParent" StackPane.alignment="CENTER">
+      <Group fx:id="mapParent">
          <StackPane.margin>
-            <Insets />
+            <Insets bottom="25.0" />
          </StackPane.margin></Group>
+      <ToolBar fx:id="infoBar" prefHeight="40.0" prefWidth="200.0" StackPane.alignment="BOTTOM_CENTER">
+        <items>
+            <Label prefWidth="75.0" text="Player 1:" />
+            <Label prefWidth="75.0" text="Player 2:" />
+            <Label prefWidth="75.0" text="Player 3:" />
+            <Label prefWidth="75.0" text="Player 4:" />
+            <Separator orientation="VERTICAL" prefHeight="25.0" />
+            <Label fx:id="mapText" prefHeight="15.0" text="New Turn" />
+        </items>
+      </ToolBar>
    </children>
+   <opaqueInsets>
+      <Insets bottom="25.0" />
+   </opaqueInsets>
 </StackPane>

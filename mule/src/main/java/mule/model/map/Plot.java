@@ -1,18 +1,29 @@
-package mule.model;
+package mule.model.map;
 
 import javafx.scene.shape.Rectangle;
+
+import mule.model.*;
 
 /**
  * Created by harrylane on 9/16/15.
  */
-public class Plot {
+public class Plot implements Tradeable {
     private Player owner;
     private Mule mule;
     private Rectangle rep;
-    private static int VALUE = 100;
+    private static int VALUE = 1;
 
     public Plot(Rectangle rep) {
         this.rep = rep;
+    }
+
+    public boolean buy(Player p) {
+        if (p.getMoney() > getCost()) {
+            p.addPlot(this);
+            p.removeMoney(VALUE);
+            return true;
+        }
+        return false;
     }
 
     public void assignOwner(Player p) {
@@ -35,7 +46,7 @@ public class Plot {
         return rep;
     }
 
-    public int getValue() {
+    public int getCost() {
         return VALUE;
     }
 

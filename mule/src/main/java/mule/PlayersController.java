@@ -9,7 +9,10 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.collections.FXCollections;
-import mule.model.Player;
+
+import mule.model.*;
+import mule.model.map.*;
+import mule.model.town.*;
 
 public class PlayersController implements Initializable, ControlledScreen {
 
@@ -18,7 +21,6 @@ public class PlayersController implements Initializable, ControlledScreen {
     @FXML private VBox playersBox;
 
     @Override public void initialize(URL url, ResourceBundle rb) {
-        System.out.println(Main.getPlayerCount());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             ((ChoiceBox)((HBox) playersBox.getChildren().get(i)).getChildren().get(1))
                     .setItems(FXCollections.observableArrayList("Human", "Flapper",
@@ -36,6 +38,8 @@ public class PlayersController implements Initializable, ControlledScreen {
 
     @FXML private void goToMapScreen(ActionEvent event) {
         processPlayers();
+        initializeTurn();
+        Main.loadScene(Main.mapID, Main.mapFile);
         controller.setScreen(Main.mapID);
     }
 
@@ -49,8 +53,11 @@ public class PlayersController implements Initializable, ControlledScreen {
                     .getValue();
             Player p = new Player(name, race, color);
             Main.setPlayer(i, p);
-            System.out.println(p.getName() + ", " + p.getRace());
         }
+    }
+
+    private void initializeTurn() {
+        Main.setTurn(new Turn(Main.getPlayerCount()));
     }
 
 }
