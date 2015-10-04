@@ -24,7 +24,7 @@ public class Town {
 
         stores[0][1] = new Floor(new Rectangle(0, 125, 337.5, 125));
 
-        stores[0][2] = new MuleStore(new Rectangle(0, 250, 337.5, 125));
+        stores[0][2] = new MuleStore(new Rectangle(0, 250, 337.5, 125), 15);
         stores[0][2].getRep().setFill(Color.GREEN);
 
         stores[1][0] = new HarvestStore(new Rectangle(337.5, 0, 337.5, 125));

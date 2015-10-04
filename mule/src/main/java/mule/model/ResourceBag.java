@@ -17,4 +17,8 @@ public class ResourceBag {
     public void add(Resource r) {
         list.add(r);
     }
+    public Resource removeResource(Resource r) {
+	list.remove(r);
+	return r;
+    }
 }

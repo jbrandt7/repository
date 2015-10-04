@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javafx.scene.paint.Color;
 
 import mule.model.map.*;
-
+import mule.model.*;
 public class Player implements Comparable {
 	private String name, race;
 	private Color color;
@@ -138,6 +138,28 @@ public class Player implements Comparable {
 
 	public int compareTo(Object o) {
 		return this.score - ((Player) o).score;
+	}
+	public boolean hasMule() {
+		return (this.mule == null);
+	}
+	public boolean hasResource(Resource r) {
+
+		for (Resource resource : bag.getResources()) {
+			if (r == resource) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public void buyResource(Player p, Resource r) {
+		if (p.hasResource(r) && money >= r.getCost()) {
+			p.getBag().removeResource(r);
+			p.addMoney(r.getCost());
+			money -= r.getCost();
+			bag.add(r);
+		} else {
+			//Display error message that player does not resource
+		}
 	}
 
 
