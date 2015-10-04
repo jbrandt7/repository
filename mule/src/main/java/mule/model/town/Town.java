@@ -3,6 +3,7 @@ package mule.model.town;
 import javafx.scene.Group;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import javafx.scene.control.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 
@@ -39,6 +40,11 @@ public class Town {
                 parent.getChildren().addAll(stores[i][j].getRep());
             }
         }
+
+        Label pub = new Label("Pub");
+        pub.setLayoutX(505);
+        pub.setLayoutY(325);
+        parent.getChildren().addAll(pub);
     }
 
     public Store getStore(int x, int y) {

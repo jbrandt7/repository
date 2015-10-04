@@ -34,13 +34,32 @@ public class TownController implements Initializable, ControlledScreen {
         townParent.addEventHandler(MouseEvent.MOUSE_CLICKED,
             new EventHandler<MouseEvent>() {
                 @Override public void handle(MouseEvent event) {
-                    if (Main.getTurn().hasNextPlayer()) {
-                        Main.getTurn().nextPlayer();
-                    } else if (Main.getTurn().hasNextStage()) {
-                        //go to next stage eventually
-                    } else if (Main.getTurn().hasNextTurn()) {
-                        Main.getTurn().nextTurn();
-                        goToMapScreen();
+                    int x = (int) (event.getSceneX());
+                    int y = (int) (event.getSceneY());
+
+                    if (x >= 337.5 && y >= 250) {
+                        if (Main.getTurn().hasNextPlayer()) {
+                            Main.getCurrentPlayer().addMoney(Main.getCurrentPlayer().getTimer().getTime());
+                            Main.getCurrentPlayer().updateScore();
+                            ((Label) infoBar.getItems().get(Main.getTurn()
+                                    .getCurrentPlayer())).setText(Main.getCurrentPlayer()
+                                    + ": " + Main.getCurrentPlayer().getMoney());
+                            Main.getTurn().nextPlayer();
+                        } else if (Main.getTurn().hasNextStage()) {
+                            //go to next stage eventually
+                        } else if (Main.getTurn().hasNextTurn()) {
+                            Main.getCurrentPlayer().addMoney(Main.getCurrentPlayer().getTimer().getTime());
+                            Main.getCurrentPlayer().updateScore();
+                            ((Label) infoBar.getItems().get(Main.getTurn()
+                                    .getCurrentPlayer())).setText(Main.getCurrentPlayer()
+                                    + ": " + Main.getCurrentPlayer().getMoney());
+                            Main.getTurn().nextTurn();
+                            for (int i = 0; i < Main.getPlayerCount(); i++) {
+                                Main.getPlayer(i).getTimer().reset();
+                            }
+                            Main.sortPlayers();
+                            goToMapScreen();
+                        }
                     }
                 }
             });
@@ -50,6 +69,10 @@ public class TownController implements Initializable, ControlledScreen {
         controller.setScreen(Main.mapID);
         Main.setHelperLabel(MapController.getHelperLabel());
         Main.setTimerLabel(MapController.getTimerLabel());
+        for (int i = 0; i < Main.getPlayerCount(); i++) {
+            ((Label) MapController.getInfoBar().getItems().get(i)).setText(Main
+                    .getPlayer(i) + ": " + Main.getPlayer(i).getMoney());
+        }
     }
 
     public void setScreenParent(ScreensController screenParent) {

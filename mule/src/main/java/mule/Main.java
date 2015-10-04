@@ -1,5 +1,7 @@
 package mule;
 
+import java.util.ArrayList;
+
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.*;
@@ -69,6 +71,23 @@ public class Main extends Application {
         timeline.play();
     }
 
+    public static void sortPlayers() {
+        int j;
+        boolean flag = true;
+        Player temp;
+        while (flag) {
+            flag = false;
+            for (j = 0; j < playerCount - 1; j++) {
+                if (players[j].hashCode() < players[j + 1].hashCode()) {
+                    temp = players[j];
+                    players[j] = players[j + 1];
+                    players[j + 1] = temp;
+                    flag = true;
+                }
+            }
+        }
+    }
+
     public static Stage getStage() { return stage; }
 
     public static void setMap(Map m) { map = m; }
@@ -80,6 +99,8 @@ public class Main extends Application {
     public static Timer getTimer() { return timer; }
 
     public static Map getMap() { return map; }
+
+    public static Town getTown() { return town; }
 
     public static int getPlayerCount() { return playerCount; }
 
