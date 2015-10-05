@@ -23,8 +23,13 @@ public abstract class Store {
         return rep;
     }
 
-    public void buyResource(Player p) {
-   	
+    public boolean buyResource(Player p, Resource r) {
+   	if (p.getMoney < r.getCost()) {
+		return false;
+	}
+	p.getBag().add(r);
+	p.removeMoney(r.getCost());
+	return true;
     }		
 
 }
