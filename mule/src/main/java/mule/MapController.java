@@ -39,9 +39,9 @@ public class MapController implements Initializable, ControlledScreen {
 
     }
 
-    public void goToStoreScreen() {
-        Main.loadScene(Main.storeID, Main.storeFile);
-        controller.setScreen(Main.storeID);
+    public void goToTownScreen() {
+        Main.loadScene(Main.townID, Main.townFile);
+        controller.setScreen(Main.townID);
         Main.setHelperLabel(TownController.getHelperLabel());
         Main.setTimerLabel(TownController.getTimerLabel());
     }
@@ -56,7 +56,7 @@ public class MapController implements Initializable, ControlledScreen {
         } else {
             Main.getTurn().nextStage();
             mapText.setText("Select a plot of land");
-            goToStoreScreen();
+            goToTownScreen();
         }
     }
 
@@ -124,14 +124,14 @@ public class MapController implements Initializable, ControlledScreen {
                                 selected.outfit(temp);
                                 System.out.println(temp.getRep());
                                 mapParent.getChildren().addAll(temp.getRep());
-                                goToStoreScreen();
+                                goToTownScreen();
                             } else {
                                 mapText.setText("Mule lost, silly");
-                                goToStoreScreen();
+                                goToTownScreen();
                             }
                         } else {
                             mapText.setText("Can't buy, already bought!");
-                            goToStoreScreen();
+                            goToTownScreen();
                         }
 
                     } else {
@@ -139,7 +139,7 @@ public class MapController implements Initializable, ControlledScreen {
                         if (Main.getTurn().getCurrentStage() == Turn.TOWN) {
 
                             mapText.setText("Mule lost, you idiot");
-                            goToStoreScreen();
+                            goToTownScreen();
 
                         } else if (Main.getTurn().getCurrentTurn() > 1) {
 

@@ -61,9 +61,8 @@ public class TownController implements Initializable, ControlledScreen {
                             goToMapScreen();
                         }
                     } else if (x < 337.5 && y < 250) {
-                        Main.getCurrentPlayer().addMule(new Mule(new Resource(1, 1)));
-                        System.out.println(Main.getCurrentPlayer().getMule());
-                        goToMapScreen();
+                        //Main.getCurrentPlayer().addMule(new Mule(new Resource(1, 1)));
+                        goToStoreScreen();
                     }
 
                 }
@@ -79,6 +78,18 @@ public class TownController implements Initializable, ControlledScreen {
                     .getPlayer(i) + ": " + Main.getPlayer(i).getMoney());
         }
     }
+
+    public void goToStoreScreen() {
+        Main.loadScene(Main.storeID, Main.storeFile);
+        controller.setScreen(Main.storeID);
+        Main.setHelperLabel(StoreController.getHelperLabel());
+        Main.setTimerLabel(StoreController.getTimerLabel());
+        for (int i = 0; i < Main.getPlayerCount(); i++) {
+            ((Label) StoreController.getInfoBar().getItems().get(i)).setText(Main
+                    .getPlayer(i) + ": " + Main.getPlayer(i).getMoney());
+        }
+    }
+
 
     public void setScreenParent(ScreensController screenParent) {
         controller = screenParent;
@@ -99,5 +110,7 @@ public class TownController implements Initializable, ControlledScreen {
     public static Label getHelperLabel() { return _mapText; }
 
     public static Label getTimerLabel() { return _timerLabel; }
+
+    public static ToolBar getInfoBar() { return _infoBar; }
 
 }

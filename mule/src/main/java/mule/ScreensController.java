@@ -25,7 +25,7 @@ public class ScreensController extends StackPane {
         screens.put(name, screen);
     }
 
-    public Node getScrene(String name) {
+    public Node getScreen(String name) {
         return screens.get(name);
     }
 
