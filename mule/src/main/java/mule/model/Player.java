@@ -8,10 +8,11 @@ import javafx.scene.paint.Color;
 
 import mule.model.map.*;
 
-public class Player {
+public class Player implements Comparable {
 	private String name, race;
 	private Color color;
 	private int money, score;
+	private Timer timer;
 	private ResourceBag bag;
 	private Mule mule;
 	private ArrayList<Plot> land;
@@ -49,6 +50,7 @@ public class Player {
 		this.land = new ArrayList<Plot>();
         this.bag = new ResourceBag(new ArrayList<Resource>());
 		this.score = money;
+		this.timer = new Timer();
 		for (Resource r : bag.getResources()) {
 			score += r.getCost();
 		}
@@ -57,7 +59,7 @@ public class Player {
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getRace() {
 		return race;
 	}
@@ -112,8 +114,7 @@ public class Player {
 	}
 
 	public int updateScore() {
-	 	score = 0;
-		score += money;
+	 	score = money;
 		for (Resource r : bag.getResources()) {
 			score += r.getCost();
 		}
@@ -123,8 +124,20 @@ public class Player {
 		return score;
 	}
 
+	public Timer getTimer() {
+		return timer;
+	}
+
 	public String toString() {
 		return name;
+	}
+
+	public int hashCode() {
+		return score;
+	}
+
+	public int compareTo(Object o) {
+		return this.score - ((Player) o).score;
 	}
 
 

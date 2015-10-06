@@ -20,8 +20,10 @@ public class ConfigurationController implements Initializable, ControlledScreen 
     public void initialize(URL url, ResourceBundle rb) {
         mapChoiceBox.setItems(FXCollections.observableArrayList(
                     "Mars", "Venus", "Mercury"));
+        mapChoiceBox.getSelectionModel().select(0);
         difficultyChoiceBox.setItems(FXCollections.observableArrayList(
                     "Easy", "Medium", "Hard"));
+        difficultyChoiceBox.getSelectionModel().select(0);
     }
 
     public void setScreenParent(ScreensController screenParent) {
