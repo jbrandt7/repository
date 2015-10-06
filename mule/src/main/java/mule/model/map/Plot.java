@@ -34,8 +34,17 @@ public class Plot implements Tradeable {
         return owner != null;
     }
 
+    public Player getOwner() {
+        return owner;
+    }
+
     public void outfit(Mule m) {
         mule = m;
+        mule.draw(rep);
+    }
+
+    public boolean notOutfitted() {
+        return mule == null;
     }
 
     public int bonus() {
