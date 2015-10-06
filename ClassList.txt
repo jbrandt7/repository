@@ -1,0 +1,41 @@
+---Presneter---
+
+ConfigurationController
+ControllerScreen
+Main
+MapController
+PlayerController
+ScreensController
+StoreController
+TownController
+
+--Model--
+
+Direction
+Energy
+Food
+[map]
+	Map
+	MountainPlot
+	PlainPlot
+	Plot
+	RiverPlot
+	TownPlot
+Mule
+Player
+Resource
+ResourceBag
+Selector
+Smithore
+Timer
+Tradeable
+Turn
+[Town]
+	AssayStore
+	Floor
+	HarvestStore
+	MuleStore
+	Pub
+	Store
+	Town
+	
