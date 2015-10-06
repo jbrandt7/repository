@@ -60,7 +60,12 @@ public class TownController implements Initializable, ControlledScreen {
                             Main.sortPlayers();
                             goToMapScreen();
                         }
+                    } else if (x < 337.5 && y < 250) {
+                        Main.getCurrentPlayer().addMule(new Mule(new Resource(1, 1)));
+                        System.out.println(Main.getCurrentPlayer().getMule());
+                        goToMapScreen();
                     }
+
                 }
             });
     }

@@ -90,9 +90,15 @@ public class Player implements Comparable {
 		this.mule = mule;
 	}
 
-	public void removeMule() {
+	public Mule removeMule() {
+        Mule result = mule;
 		this.mule = null;
+        return result;
 	}
+
+    public Mule getMule() {
+        return mule;
+    }
 
 	public void setLoc(int x, int y) {
 		location.setLocation(x, y);
@@ -114,7 +120,7 @@ public class Player implements Comparable {
 	}
 
 	public int updateScore() {
-	 	score = money;
+	    score = money;
 		for (Resource r : bag.getResources()) {
 			score += r.getCost();
 		}
@@ -131,6 +137,21 @@ public class Player implements Comparable {
 	public String toString() {
 		return name;
 	}
+
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        } else if (other == this) {
+            return true;
+        } else if (other instanceof Player) {
+            Player that = (Player) other;
+            return that.name.equals(this.name)
+                    && that.race.equals(this.name)
+                    && that.color.equals(this.color);
+        }
+
+        return false;
+    }
 
 	public int hashCode() {
 		return score;

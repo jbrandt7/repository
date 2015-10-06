@@ -103,31 +103,67 @@ public class MapController implements Initializable, ControlledScreen {
                 int y = (int) (event.getSceneY() / 75);
 
                 if (x == Map.MAP_WIDTH / 2 && y == Map.MAP_HEIGHT / 2) {
-                    mapText.setText(Main.getCurrentPlayer() + "passes, "
-                            + "no land bought");
+
+                    if (Main.getTurn().getCurrentStage() == Turn.LAND) {
+
+                        mapText.setText(Main.getCurrentPlayer() + "passes, "
+                                + "no land bought");
+
+                    }
+
                 } else {
+
                     Plot selected = Main.getMap().getPlot(x, y);
+
                     if (selected.hasOwner()) {
-                        mapText.setText("Can't buy, already bought!");
+
+                        if (Main.getTurn().getCurrentStage() == Turn.TOWN) {
+                            if (selected.getOwner().equals(Main.getCurrentPlayer())
+                                    && selected.notOutfitted()) {
+                                Mule temp = Main.getCurrentPlayer().removeMule();
+                                selected.outfit(temp);
+                                System.out.println(temp.getRep());
+                                mapParent.getChildren().addAll(temp.getRep());
+                                goToStoreScreen();
+                            } else {
+                                mapText.setText("Mule lost, silly");
+                                goToStoreScreen();
+                            }
+                        } else {
+                            mapText.setText("Can't buy, already bought!");
+                            goToStoreScreen();
+                        }
+
                     } else {
-                        if (Main.getTurn().getCurrentTurn() > 1) {
+
+                        if (Main.getTurn().getCurrentStage() == Turn.TOWN) {
+
+                            mapText.setText("Mule lost, you idiot");
+                            goToStoreScreen();
+
+                        } else if (Main.getTurn().getCurrentTurn() > 1) {
+
                             if (selected.buy(Main.getCurrentPlayer())) {
+
                                 mapText.setText(Main.getTurn().getCurrentPlayer()
                                         + " bought land");
                                 ((Label) infoBar.getItems().get(Main.getTurn()
                                         .getCurrentPlayer())).setText(Main.getCurrentPlayer()
                                         + ": " + Main.getCurrentPlayer().getMoney());
-                                Main.getTimer().reset();
                                 incrementTurn();
+
                             } else {
+
                                 mapText.setText("Could not buy land");
+
                             }
                         } else {
+
                             Main.getCurrentPlayer().addPlot(selected);
                             mapText.setText(Main.getCurrentPlayer()
                                     + " granted land");
-                            Main.getTimer().reset();
                             incrementTurn();
+
                         }
                     }
                 }
