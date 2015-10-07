@@ -34,12 +34,43 @@ public class StoreController implements Initializable, ControlledScreen {
 
     @Override public void initialize(URL location, ResourceBundle resources) {
         setupInfoBar();
-        resourceChoiceBox.setItems(FXCollections.observableArrayList(new Resource(1,1),
-                    new Resource(2,1), new Resource(3,1)));
+        resourceChoiceBox.setItems(FXCollections.observableArrayList(new Resource(1, 1),
+                new Resource(2, 1), new Resource(3, 1)));
         resourceChoiceBox.getSelectionModel().select(0);
 
-        quantityChoiceBox.setItems(FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10));
+        quantityChoiceBox.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         quantityChoiceBox.getSelectionModel().select(0);
+
+        buyButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+
+            }
+        });
+
+        sellButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+
+            }
+        });
+
+        foodMule.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+
+            }
+        });
+
+        energyMule.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+
+            }
+        });
+
+        oreMule.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+
+            }
+        });
 
     }
 
@@ -65,5 +96,4 @@ public class StoreController implements Initializable, ControlledScreen {
     public static Label getTimerLabel() { return _timerLabel; }
 
     public static ToolBar getInfoBar() { return _infoBar; }
-
 }
