@@ -9,14 +9,9 @@ import javafx.scene.shape.Rectangle;
  * Created by harrylane on 9/18/15.
 >>>>>>> 0ae40ed172f4077d16299c681ad06e0beb25a4ca
  */
-public class Mule {
+public class Mule<T extends Resource> {
 
-    private Resource type;
     private Rectangle rep;
-
-    public Mule(Resource type) {
-        this.type = type;
-    }
 
     public void draw(Rectangle rep) {
         int x = (int) rep.getX();
