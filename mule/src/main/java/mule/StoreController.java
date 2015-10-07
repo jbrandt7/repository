@@ -44,31 +44,41 @@ public class StoreController implements Initializable, ControlledScreen {
         buyButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-
+                if(Main.getCurrentPlayer().getMoney() > ) {
+                    Main.getCurrentPlayer().removeMoney();
+                }
             }
         });
 
         sellButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-
+                if() {
+                    Main.getCurrentPlayer().addMoney();
+                }
             }
         });
 
         foodMule.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-
+                if(Main.getCurrentPlayer().getMoney() > /*Mule Price*/) {
+                    Main.getCurrentPlayer().addMule(new Mule(new Resource()));
+                }
             }
         });
 
         energyMule.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-
+                if(Main.getCurrentPlayer().getMoney() > /*Mule Price*/) {
+                    Main.getCurrentPlayer().addMule(new Mule(new Resource()));
+                }
             }
         });
 
         oreMule.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-
+                if(Main.getCurrentPlayer().getMoney() > /*Mule Price*/) {
+                    Main.getCurrentPlayer().addMule(new Mule(new Resource()));
+                }
             }
         });
 
