@@ -1,6 +1,10 @@
 package mule.model;
 
 public class Turn {
+
+    public static final int LAND = 0;
+    public static final int TOWN = 1;
+
     private static int TOTAL_PLAYERS;
     private final static int TOTAL_TURNS = 12;
     private final static int TOTAL_STAGES = 2;

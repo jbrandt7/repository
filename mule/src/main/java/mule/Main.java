@@ -35,8 +35,6 @@ public class Main extends Application {
 
     private static Timeline timeline;
 
-    private static Timer timer;
-
     private static ToolBar infoBar;
 
     private static Label helperLabel;
@@ -60,8 +58,6 @@ public class Main extends Application {
 
         timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
-
-        timer = new Timer();
 
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
@@ -95,8 +91,6 @@ public class Main extends Application {
     public static void setTown(Town t) { town = t; }
 
     public static Timeline getTimeline() { return timeline; }
-
-    public static Timer getTimer() { return timer; }
 
     public static Map getMap() { return map; }
 
