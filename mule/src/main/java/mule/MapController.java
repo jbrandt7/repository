@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import mule.model.*;
 import mule.model.map.*;
 import mule.model.town.*;
+import mule.model.resources.*;
 
 public class MapController implements Initializable, ControlledScreen {
 

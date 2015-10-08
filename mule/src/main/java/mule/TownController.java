@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import mule.model.*;
 import mule.model.map.*;
 import mule.model.town.*;
+import mule.model.resources.*;
 
 public class TownController implements Initializable, ControlledScreen {
 
@@ -75,7 +76,7 @@ public class TownController implements Initializable, ControlledScreen {
         Main.setTimerLabel(MapController.getTimerLabel());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             ((Label) MapController.getInfoBar().getItems().get(i)).setText(Main
-                    .getPlayer(i) + ": " + Main.getPlayer(i).getMoney());
+                    .getPlayer(i).toString());
         }
     }
 
@@ -86,7 +87,7 @@ public class TownController implements Initializable, ControlledScreen {
         Main.setTimerLabel(StoreController.getTimerLabel());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             ((Label) StoreController.getInfoBar().getItems().get(i)).setText(Main
-                    .getPlayer(i) + ": " + Main.getPlayer(i).getMoney());
+                    .getPlayer(i).toString());
         }
     }
 
@@ -105,6 +106,7 @@ public class TownController implements Initializable, ControlledScreen {
         }
         _mapText = mapText;
         _timerLabel = timerLabel;
+        _infoBar = infoBar;
     }
 
     public static Label getHelperLabel() { return _mapText; }

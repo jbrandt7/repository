@@ -20,11 +20,11 @@ public class Town {
         this.parent = parent;
         stores = new Store[TOWN_WIDTH][TOWN_HEIGHT];
 
-        stores[0][0] = new AssayStore(new Rectangle(0, 0, 337.5, 125));
+        stores[0][0] = new Store(new Rectangle(0, 0, 337.5, 125));
 
         stores[0][1] = new Floor(new Rectangle(0, 125, 337.5, 125));
 
-        stores[0][2] = new MuleStore(new Rectangle(0, 250, 337.5, 125));
+        stores[0][2] = new LandStore(new Rectangle(0, 250, 337.5, 125));
         stores[0][2].getRep().setFill(Color.GREEN);
 
         stores[1][0] = new HarvestStore(new Rectangle(337.5, 0, 337.5, 125));
@@ -47,8 +47,8 @@ public class Town {
         parent.getChildren().addAll(pub);
     }
 
-    public Store getStore(int x, int y) {
-        return stores[x][y];
+    public Store getStore() {
+        return stores[0][0];
     }
 
 }

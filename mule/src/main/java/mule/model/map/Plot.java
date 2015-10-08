@@ -3,6 +3,7 @@ package mule.model.map;
 import javafx.scene.shape.Rectangle;
 
 import mule.model.*;
+import mule.model.resources.*;
 
 /**
  * Created by harrylane on 9/16/15.

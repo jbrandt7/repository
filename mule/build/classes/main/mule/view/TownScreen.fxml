@@ -6,13 +6,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.TownController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.TownController">
    <children>
       <Group fx:id="townParent" StackPane.alignment="CENTER">
          <StackPane.margin>
-            <Insets bottom="25.0" />
+            <Insets bottom="100.0" />
          </StackPane.margin></Group>
-      <ToolBar fx:id="infoBar" prefHeight="40.0" prefWidth="200.0" StackPane.alignment="BOTTOM_CENTER">
+      <ToolBar fx:id="infoBar" prefHeight="100.0" prefWidth="200.0" StackPane.alignment="BOTTOM_CENTER">
          <items>
             <Label prefWidth="75.0" text="Player 1:" />
             <Label prefWidth="75.0" text="Player 2:" />

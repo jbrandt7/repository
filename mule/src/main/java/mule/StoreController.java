@@ -17,12 +17,15 @@ import javafx.collections.FXCollections;
 import mule.model.*;
 import mule.model.map.*;
 import mule.model.town.*;
+import mule.model.resources.*;
 
 public class StoreController implements Initializable, ControlledScreen {
 
     ScreensController controller;
 
-    @FXML ChoiceBox resourceChoiceBox, quantityChoiceBox;
+    @FXML ChoiceBox<Resource> resourceChoiceBox;
+
+    @FXML ChoiceBox<Integer> quantityChoiceBox;
 
     @FXML Button buyButton, sellButton, foodMule, energyMule, oreMule;
 
@@ -34,8 +37,8 @@ public class StoreController implements Initializable, ControlledScreen {
 
     @Override public void initialize(URL location, ResourceBundle resources) {
         setupInfoBar();
-        resourceChoiceBox.setItems(FXCollections.observableArrayList(new Resource(1,1),
-                    new Resource(2,1), new Resource(3,1)));
+        resourceChoiceBox.setItems(FXCollections.observableArrayList(new Energy(),
+                    new Food(), new Smithore()));
         resourceChoiceBox.getSelectionModel().select(0);
 
         quantityChoiceBox.setItems(FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10));
@@ -43,9 +46,66 @@ public class StoreController implements Initializable, ControlledScreen {
 
     }
 
+    public void buyResource() {
+        for (int i = 0; i < quantityChoiceBox.getValue(); i++) {
+            if (Main.getTown().getStore().buyResource(Main.getCurrentPlayer(),
+                    resourceChoiceBox.getValue()))
+                mapText.setText(resourceChoiceBox.getValue() + " bought");
+            else
+                mapText.setText("Not enough money");
+        }
+        goToTownScreen();
+    }
+
+    public void sellResource() {
+        for (int i = 0; i < quantityChoiceBox.getValue(); i++) {
+            if (Main.getTown().getStore().sellResource(Main.getCurrentPlayer(),
+                    resourceChoiceBox.getValue()))
+                mapText.setText(resourceChoiceBox.getValue() + " sold");
+            else
+                mapText.setText("Not enough resources");
+        }
+    }
+
+    public void buyFoodMule() {
+        if (Main.getTown().getStore().buyMule(Main.getCurrentPlayer(), new Food()))
+            goToMapScreen();
+    }
+
+    public void buyEnergyMule() {
+        if (Main.getTown().getStore().buyMule(Main.getCurrentPlayer(), new Energy()))
+            goToMapScreen();
+    }
+
+    public void buyOreMule() {
+        if (Main.getTown().getStore().buyMule(Main.getCurrentPlayer(), new Energy()))
+            goToMapScreen();
+    }
+
     public void setScreenParent(ScreensController screenParent) {
         controller = screenParent;
     }
+
+    public void goToTownScreen() {
+        controller.setScreen(Main.townID);
+        Main.setHelperLabel(TownController.getHelperLabel());
+        Main.setTimerLabel(TownController.getTimerLabel());
+        for (int i = 0; i < Main.getPlayerCount(); i++) {
+            ((Label) TownController.getInfoBar().getItems().get(i)).setText(Main
+                    .getPlayer(i).toString());
+        }
+    }
+
+    public void goToMapScreen() {
+        controller.setScreen(Main.mapID);
+        Main.setHelperLabel(MapController.getHelperLabel());
+        Main.setTimerLabel(MapController.getTimerLabel());
+        for (int i = 0; i < Main.getPlayerCount(); i++) {
+            ((Label) MapController.getInfoBar().getItems().get(i)).setText(Main
+                    .getPlayer(i).toString());
+        }
+    }
+
 
     private void setupInfoBar() {
         for (int i = 0; i < Main.getPlayerCount(); i++) {

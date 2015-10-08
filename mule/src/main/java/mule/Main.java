@@ -16,6 +16,7 @@ import javafx.util.Duration;
 import mule.model.*;
 import mule.model.map.*;
 import mule.model.town.*;
+import mule.model.resources.*;
 
 public class Main extends Application {
 
@@ -48,7 +49,9 @@ public class Main extends Application {
     public static String mapID = "map";
     public static String mapFile = "view/MapScreen.fxml";
     public static String storeID = "store";
-    public static String storeFile = "view/TownScreen.fxml";
+    public static String storeFile = "view/StoreScreen.fxml";
+    public static String townID = "town";
+    public static String townFile = "view/TownScreen.fxml";
 
     @Override
     public void start(Stage stage) {

@@ -3,11 +3,11 @@ package mule.model.town;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 
-public class MuleStore extends Store {
+public class LandStore extends Store {
 
-    public MuleStore(Rectangle rep) {
+    public LandStore(Rectangle rep) {
         super(rep);
-        rep.setFill(Color.YELLOW);
+        rep.setFill(Color.BLUE);
     }
 
 }

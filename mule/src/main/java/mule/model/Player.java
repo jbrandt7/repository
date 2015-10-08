@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import javafx.scene.paint.Color;
 
 import mule.model.map.*;
+import mule.model.*;
+import mule.model.resources.*;
 
 public class Player implements Comparable {
 	private String name, race;
@@ -45,15 +47,17 @@ public class Player implements Comparable {
 		this.name = name;
 		this.race = race;
 		this.color = color;
-		this.money = 100;
+		this.money = 1000;
 		this.mule = null;
 		this.land = new ArrayList<Plot>();
-        this.bag = new ResourceBag(new ArrayList<Resource>());
+        this.bag = new ResourceBag();
+
+		bag.add(new Food(), 8);
+		bag.add(new Energy(), 4);
+
 		this.score = money;
 		this.timer = new Timer();
-		for (Resource r : bag.getResources()) {
-			score += r.getCost();
-		}
+		score += bag.getTotalCost();
 	}
 
 	public String getName() {
@@ -112,7 +116,11 @@ public class Player implements Comparable {
 	}
 
 	public void addResource(Resource resource) {
-		bag.add(resource);
+		bag.add(resource, 1);
+	}
+
+	public void removeResource(Resource resource) {
+		bag.remove(resource, 1);
 	}
 
 	public int getScore() {
@@ -121,9 +129,7 @@ public class Player implements Comparable {
 
 	public int updateScore() {
 	    score = money;
-		for (Resource r : bag.getResources()) {
-			score += r.getCost();
-		}
+		score += bag.getTotalCost();
 		for (Plot p : land) {
 			score += p.getCost();
 		}
@@ -135,7 +141,9 @@ public class Player implements Comparable {
 	}
 
 	public String toString() {
-		return name;
+		return name + "\nCash: " + money + "\nFood: "
+				+ bag.get(new Food()) + "\nEnergy: "
+				+ bag.get(new Energy());
 	}
 
     public boolean equals(Object other) {
@@ -159,6 +167,9 @@ public class Player implements Comparable {
 
 	public int compareTo(Object o) {
 		return this.score - ((Player) o).score;
+	}
+	public boolean hasMule() {
+		return (this.mule == null);
 	}
 
 
