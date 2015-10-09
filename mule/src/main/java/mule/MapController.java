@@ -107,9 +107,14 @@ public class MapController implements Initializable, ControlledScreen {
 
                     if (Main.getTurn().getCurrentStage() == Turn.LAND) {
 
-                        mapText.setText(Main.getCurrentPlayer() + "passes, "
+                        mapText.setText(Main.getCurrentPlayer().getName() + "passes, "
                                 + "no land bought");
+                        incrementTurn();
 
+                    } else if (Main.getTurn().getCurrentStage() == Turn.TOWN){
+                        Main.getCurrentPlayer().removeMule();
+                        mapText.setText("Mule lost, silly");
+                        goToTownScreen();
                     }
 
                 } else {
@@ -123,10 +128,10 @@ public class MapController implements Initializable, ControlledScreen {
                                     && selected.notOutfitted()) {
                                 Mule temp = Main.getCurrentPlayer().removeMule();
                                 selected.outfit(temp);
-                                System.out.println(temp.getRep());
                                 mapParent.getChildren().addAll(temp.getRep());
                                 goToTownScreen();
                             } else {
+                                Main.getCurrentPlayer().removeMule();
                                 mapText.setText("Mule lost, silly");
                                 goToTownScreen();
                             }
@@ -138,7 +143,7 @@ public class MapController implements Initializable, ControlledScreen {
                     } else {
 
                         if (Main.getTurn().getCurrentStage() == Turn.TOWN) {
-
+                            Main.getCurrentPlayer().removeMule();
                             mapText.setText("Mule lost, you idiot");
                             goToTownScreen();
 

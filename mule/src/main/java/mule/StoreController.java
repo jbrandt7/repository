@@ -65,6 +65,7 @@ public class StoreController implements Initializable, ControlledScreen {
             else
                 mapText.setText("Not enough resources");
         }
+        goToTownScreen();
     }
 
     public void buyFoodMule() {
