@@ -6,11 +6,14 @@ import javafx.animation.Timeline;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.*;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.animation.KeyValue;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+
+import mule.*;
 
 public class Turn {
 
@@ -23,42 +26,12 @@ public class Turn {
     private final static Integer TURN_TIME = 60;
 
     private int currentPlayer, currentStage, currentTurn;
-    private Timeline timeline;
-    private Label timerLabel;
-    private IntegerProperty time = new SimpleIntegerProperty(TURN_TIME);
 
     public Turn(int players) {
         TOTAL_PLAYERS = players;
         currentPlayer = 0;
         currentStage = 0;
         currentTurn = 0;
-	initTimer();
-    }
-    public void initTimer() {
-	timerLabel = new Label();
-	timerLabel.setText(TURN_TIME.toString());
-	timerLabel.setTextFill(Color.BLACK);	
-	Button button = new Button();
-	button.setText("Press to start your turn");
-	button.setOnAction(new EventHandler<ActionEvent>() {
-
-	    public void handle(ActionEvent event) {
-		if (timeline != null) {
-			timeline.stop();
-		}
-		
-		timerLabel.setText(time.toString());
-		timeline = new Timeline();
-		timeline.getKeyFrames().add(
-			new KeyFrame(Duration.seconds(TURN_TIME + 1),
-			new KeyValue(time, 0)));
-		timeline.playFromStart();
-	    }
-	});
-
-    }
-    public void next() {
-        nextPlayer();
     }
 
     public boolean hasNextPlayer() {
@@ -66,9 +39,8 @@ public class Turn {
     }
 
     public void nextPlayer() {
-        if (hasNextPlayer()) {
+        if (hasNextPlayer())
             currentPlayer++;
-        }
     }
 
     public boolean hasNextStage() {
@@ -76,11 +48,11 @@ public class Turn {
     }
 
     public void nextStage() {
-        if (hasNextStage()) {
+        if (hasNextStage())
             currentStage++;
-        } else {
+        else
             currentStage = 0;
-        }
+
         currentPlayer = 0;
     }
 
@@ -89,12 +61,19 @@ public class Turn {
     }
 
     public void nextTurn() {
-        if (hasNextTurn()) {
+        if (hasNextTurn())
             currentTurn++;
-        }
 
         currentPlayer = 0;
         currentStage = 0;
+
+        for (int i = 0; i < Main.getPlayerCount(); i++) {
+            Main.getPlayer(i).getTimer().reset();
+            Main.getPlayer(i).produce();
+        }
+
+        Main.sortPlayers();
+
     }
 
     public int getCurrentPlayer() {

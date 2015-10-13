@@ -4,12 +4,13 @@ import javafx.scene.shape.Rectangle;
 
 import mule.model.*;
 import mule.model.resources.*;
+import mule.model.player.*;
 
 /**
  * Created by harrylane on 9/16/15.
  */
-public class Plot implements Tradeable {
-    private Player owner;
+public abstract class Plot implements Tradeable {
+    protected Player owner;
     private Mule mule;
     private Rectangle rep;
     private static int VALUE = 1;
@@ -44,8 +45,12 @@ public class Plot implements Tradeable {
         mule.draw(rep);
     }
 
+    public boolean outfitted() {
+        return mule != null;
+    }
+
     public boolean notOutfitted() {
-        return mule == null;
+        return !outfitted();
     }
 
     public int bonus() {
@@ -59,5 +64,7 @@ public class Plot implements Tradeable {
     public int getCost() {
         return VALUE;
     }
+
+    public abstract boolean produce();
 
 }

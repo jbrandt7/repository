@@ -10,7 +10,7 @@ import mule.model.map.*;
 import mule.model.*;
 import mule.model.resources.*;
 
-public class Player implements Comparable {
+public abstract class Player implements Comparable {
 	private String name, race;
 	private Color color;
 	private int money, score;
@@ -42,7 +42,7 @@ public class Player implements Comparable {
 	}
 
 
-	public Player(String name, String race, Color color) {
+	public Player(String name, Color color) {
 		this.color = color;
 		this.name = name;
 		this.race = race;
@@ -115,12 +115,12 @@ public class Player implements Comparable {
 		plot.getRep().setFill(getColor());
 	}
 
-	public void addResource(Resource resource) {
-		bag.add(resource, 1);
+	public void addResource(Resource resource, int amount) {
+		bag.add(resource, amount);
 	}
 
-	public void removeResource(Resource resource) {
-		bag.remove(resource, 1);
+	public void removeResource(Resource resource, int amount) {
+		bag.remove(resource, amount);
 	}
 
 	public int getScore() {
@@ -130,10 +130,18 @@ public class Player implements Comparable {
 	public int updateScore() {
 	    score = money;
 		score += bag.getTotalCost();
+
 		for (Plot p : land) {
 			score += p.getCost();
 		}
+
 		return score;
+	}
+
+	public void produce() {
+		for (Plot plot : land) {
+			plot.produce();
+		}
 	}
 
 	public Timer getTimer() {
@@ -141,8 +149,8 @@ public class Player implements Comparable {
 	}
 
 	public String toString() {
-		return name + "\nCash: " + money + "\nFood: "
-				+ bag.get(new Food()) + "\nEnergy: "
+		return name + "Cash: " + money + "Food: "
+				+ bag.get(new Food()) + "Energy: "
 				+ bag.get(new Energy());
 	}
 

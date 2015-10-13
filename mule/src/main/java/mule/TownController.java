@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.text.*;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +16,7 @@ import mule.model.*;
 import mule.model.map.*;
 import mule.model.town.*;
 import mule.model.resources.*;
+import mule.model.player.*;
 
 public class TownController implements Initializable, ControlledScreen {
 
@@ -37,43 +39,50 @@ public class TownController implements Initializable, ControlledScreen {
                 @Override public void handle(MouseEvent event) {
                     int x = (int) (event.getSceneX());
                     int y = (int) (event.getSceneY());
-
-                    if (x >= 337.5 && y >= 250) {
-                        if (Main.getTurn().hasNextPlayer()) {
-                            Main.getCurrentPlayer().addMoney(Main.getCurrentPlayer().getTimer().getTime());
-                            Main.getCurrentPlayer().updateScore();
-                            ((Label) infoBar.getItems().get(Main.getTurn()
-                                    .getCurrentPlayer())).setText(Main.getCurrentPlayer()
-                                    + ": " + Main.getCurrentPlayer().getMoney());
-                            Main.getTurn().nextPlayer();
-                        } else if (Main.getTurn().hasNextStage()) {
-                            //go to next stage eventually
-                        } else if (Main.getTurn().hasNextTurn()) {
-                            Main.getCurrentPlayer().addMoney(Main.getCurrentPlayer().getTimer().getTime());
-                            Main.getCurrentPlayer().updateScore();
-                            ((Label) infoBar.getItems().get(Main.getTurn()
-                                    .getCurrentPlayer())).setText(Main.getCurrentPlayer()
-                                    + ": " + Main.getCurrentPlayer().getMoney());
-                            Main.getTurn().nextTurn();
-                            for (int i = 0; i < Main.getPlayerCount(); i++) {
-                                Main.getPlayer(i).getTimer().reset();
-                            }
-                            Main.sortPlayers();
-                            goToMapScreen();
-                        }
-                    } else if (x < 337.5 && y < 250) {
-                        //Main.getCurrentPlayer().addMule(new Mule(new Resource(1, 1)));
-                        goToStoreScreen();
-                    }
-
+                    processClick(x, y);
                 }
             });
     }
 
+    public void processClick(int x, int y) {
+            if (x >= 337.5 && y >= 250) {
+                Main.getTown().getPub().cashOut(Main.getCurrentPlayer());
+                ((Label) infoBar.getItems().get(Main.getTurn()
+                        .getCurrentPlayer())).setText(Main.getCurrentPlayer().toString());
+                incrementTurn();
+            } else if (x < 337.5 && y < 250) {
+                goToStoreScreen();
+            }
+    }
+
+    public void incrementTurn() {
+        if (Main.getTurn().hasNextPlayer()) {
+            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
+                    .setFont(Font.font("System", FontWeight.NORMAL, 13));
+
+            Main.getTurn().nextPlayer();
+
+            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
+                    .setFont(Font.font("System", FontWeight.BOLD, 13));
+        } else if (Main.getTurn().hasNextTurn()) {
+            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
+                    .setFont(Font.font("System", FontWeight.NORMAL, 13));
+
+            Main.getTurn().nextTurn();
+            goToMapScreen();
+
+            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
+                    .setFont(Font.font("System", FontWeight.BOLD, 13));
+        }
+    }
+
     public void goToMapScreen() {
         controller.setScreen(Main.mapID);
+
         Main.setHelperLabel(MapController.getHelperLabel());
         Main.setTimerLabel(MapController.getTimerLabel());
+        Main.setInfoBar(MapController.getInfoBar());
+
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             ((Label) MapController.getInfoBar().getItems().get(i)).setText(Main
                     .getPlayer(i).toString());
@@ -83,12 +92,18 @@ public class TownController implements Initializable, ControlledScreen {
     public void goToStoreScreen() {
         Main.loadScene(Main.storeID, Main.storeFile);
         controller.setScreen(Main.storeID);
+
         Main.setHelperLabel(StoreController.getHelperLabel());
         Main.setTimerLabel(StoreController.getTimerLabel());
+        Main.setInfoBar(StoreController.getInfoBar());
+
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             ((Label) StoreController.getInfoBar().getItems().get(i)).setText(Main
                     .getPlayer(i).toString());
         }
+
+        ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
+                .setFont(Font.font("System", FontWeight.BOLD, 13));
     }
 
 

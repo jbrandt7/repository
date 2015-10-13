@@ -51,4 +51,8 @@ public class Town {
         return stores[0][0];
     }
 
+    public Pub getPub() {
+        return (Pub) stores[1][2];
+    }
+
 }

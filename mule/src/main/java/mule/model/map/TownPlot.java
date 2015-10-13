@@ -18,4 +18,8 @@ public class TownPlot extends Plot {
     public int getBonus() {
         return energyBonus;
     }
+
+    public boolean produce() {
+        return false;
+    }
 }

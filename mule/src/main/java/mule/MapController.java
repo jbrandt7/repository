@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.text.*;
 import javafx.scene.control.*;
 import javafx.animation.*;
 import javafx.event.*;
@@ -17,6 +18,7 @@ import mule.model.*;
 import mule.model.map.*;
 import mule.model.town.*;
 import mule.model.resources.*;
+import mule.model.player.*;
 
 public class MapController implements Initializable, ControlledScreen {
 
@@ -42,9 +44,10 @@ public class MapController implements Initializable, ControlledScreen {
 
     public void goToTownScreen() {
         Main.loadScene(Main.townID, Main.townFile);
-        controller.setScreen(Main.townID);
         Main.setHelperLabel(TownController.getHelperLabel());
         Main.setTimerLabel(TownController.getTimerLabel());
+        Main.setInfoBar(TownController.getInfoBar());
+        controller.setScreen(Main.townID);
     }
 
     public void setScreenParent(ScreensController screenParent) {
@@ -53,11 +56,22 @@ public class MapController implements Initializable, ControlledScreen {
 
     private void incrementTurn() {
         if (Main.getTurn().hasNextPlayer()) {
+            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
+                    .setFont(Font.font("System", FontWeight.NORMAL, 13));
+
             Main.getTurn().nextPlayer();
+
+            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
+                            .setFont(Font.font("System", FontWeight.BOLD, 13));
         } else {
+            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
+                    .setFont(Font.font("System", FontWeight.NORMAL, 13));
+
             Main.getTurn().nextStage();
-            mapText.setText("Select a plot of land");
             goToTownScreen();
+
+            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
+                            .setFont(Font.font("System", FontWeight.BOLD, 13));
         }
     }
 

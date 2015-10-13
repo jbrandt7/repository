@@ -2,6 +2,7 @@ package mule.model.town;
 
 import mule.model.*;
 import mule.model.resources.*;
+import mule.model.player.*;
 import java.util.HashMap;
 import javafx.scene.shape.Rectangle;
 /**
@@ -32,7 +33,7 @@ public class Store {
             return false;
         }
         inventory.put(r, inventory.get(r) - 1);
-        p.addResource(r);
+        p.addResource(r, 1);
         p.removeMoney(r.getCost());
         return true;
     }
@@ -42,7 +43,7 @@ public class Store {
             return false;
         }
         inventory.put(r, inventory.get(r) + 1);
-        p.removeResource(r);
+        p.removeResource(r, 1);
         p.addMoney(r.getCost());
         return true;
     }

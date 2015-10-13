@@ -18,6 +18,7 @@ import mule.model.*;
 import mule.model.map.*;
 import mule.model.town.*;
 import mule.model.resources.*;
+import mule.model.player.*;
 
 public class StoreController implements Initializable, ControlledScreen {
 
