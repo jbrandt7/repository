@@ -149,8 +149,8 @@ public abstract class Player implements Comparable {
 	}
 
 	public String toString() {
-		return name + "Cash: " + money + "Food: "
-				+ bag.get(new Food()) + "Energy: "
+		return name + "\nCash: " + money + "\nFood: "
+				+ bag.get(new Food()) + "\nEnergy: "
 				+ bag.get(new Energy());
 	}
 

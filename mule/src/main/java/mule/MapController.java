@@ -80,8 +80,7 @@ public class MapController implements Initializable, ControlledScreen {
 
     private void setupInfoBar() {
         for (int i = 0; i < Main.getPlayerCount(); i++) {
-            ((Label) infoBar.getItems().get(i)).setText(Main.getPlayer(i) + ": "
-                    + Main.getPlayer(i).getMoney());
+            ((Label) infoBar.getItems().get(i)).setText(Main.getPlayer(i).toString());
         }
         for (int i = Main.getPlayerCount(); i < 4; i++) {
             ((Label) infoBar.getItems().get(i)).setOpacity(0.0);
@@ -99,7 +98,7 @@ public class MapController implements Initializable, ControlledScreen {
             public void handle(ActionEvent t) {
                 if (Main.getCurrentPlayer().getTimer().outOfTime()) {
                     Main.getCurrentPlayer().getTimer().reset();
-                    Main.getHelperLabel().setText(Main.getCurrentPlayer() + " ran out of time, "
+                    Main.getHelperLabel().setText(Main.getCurrentPlayer().getName() + " ran out of time, "
                             + "skipping to next player");
                     incrementTurn();
                 } else {
@@ -161,18 +160,17 @@ public class MapController implements Initializable, ControlledScreen {
 
                         if (Main.getTurn().getCurrentStage() == Turn.TOWN) {
                             Main.getCurrentPlayer().removeMule();
-                            mapText.setText("Mule lost, you idiot");
+                            mapText.setText("Mule lost, silly");
                             goToTownScreen();
 
                         } else if (Main.getTurn().getCurrentTurn() > 1) {
 
                             if (selected.buy(Main.getCurrentPlayer())) {
 
-                                mapText.setText(Main.getTurn().getCurrentPlayer()
+                                mapText.setText(Main.getCurrentPlayer().getName()
                                         + " bought land");
                                 ((Label) infoBar.getItems().get(Main.getTurn()
-                                        .getCurrentPlayer())).setText(Main.getCurrentPlayer()
-                                        + ": " + Main.getCurrentPlayer().getMoney());
+                                        .getCurrentPlayer())).setText(Main.getCurrentPlayer().toString());
                                 incrementTurn();
 
                             } else {
@@ -183,7 +181,7 @@ public class MapController implements Initializable, ControlledScreen {
                         } else {
 
                             Main.getCurrentPlayer().addPlot(selected);
-                            mapText.setText(Main.getCurrentPlayer()
+                            mapText.setText(Main.getCurrentPlayer().getName()
                                     + " granted land");
                             incrementTurn();
 
