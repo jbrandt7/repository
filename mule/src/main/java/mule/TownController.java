@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -21,6 +22,8 @@ import mule.model.player.*;
 public class TownController implements Initializable, ControlledScreen {
 
     ScreensController controller;
+
+    @FXML StackPane root;
 
     @FXML Group townParent;
 

@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.animation.*;
 import javafx.event.*;
 import javafx.util.Duration;
@@ -23,6 +24,8 @@ import mule.model.player.*;
 public class MapController implements Initializable, ControlledScreen {
 
     ScreensController controller;
+
+    @FXML StackPane root;
 
     @FXML Group mapParent;
 
