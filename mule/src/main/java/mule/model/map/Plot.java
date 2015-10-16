@@ -1,6 +1,6 @@
 package mule.model.map;
 
-import javafx.scene.shape.Rectangle;
+import javafx.scene.canvas.Canvas;
 
 import mule.model.*;
 import mule.model.resources.*;
@@ -11,12 +11,14 @@ import mule.model.player.*;
  */
 public abstract class Plot implements Tradeable {
     protected Player owner;
-    private Mule mule;
-    private Rectangle rep;
-    private static int VALUE = 1;
+    protected Mule mule;
+    private Canvas rep;
+    private int[] location;
+    private static int VALUE = 300;
 
-    public Plot(Rectangle rep) {
+    public Plot(Canvas rep, int x, int y) {
         this.rep = rep;
+        location = new int[] {x, y};
     }
 
     public boolean buy(Player p) {
@@ -32,6 +34,11 @@ public abstract class Plot implements Tradeable {
         owner = p;
     }
 
+    public void draw(Player p) {
+        rep.getGraphicsContext2D().setFill(p.getColor());
+        rep.getGraphicsContext2D().fillRect(location[0], location[1], 75, 75);
+    }
+
     public boolean hasOwner() {
         return owner != null;
     }
@@ -42,7 +49,7 @@ public abstract class Plot implements Tradeable {
 
     public void outfit(Mule m) {
         mule = m;
-        mule.draw(rep);
+        mule.draw(rep, location[0], location[1]);
     }
 
     public boolean outfitted() {
@@ -57,7 +64,7 @@ public abstract class Plot implements Tradeable {
         return 0;
     }
 
-    public Rectangle getRep() {
+    public Canvas getRep() {
         return rep;
     }
 

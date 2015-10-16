@@ -1,6 +1,7 @@
 package mule.model.map;
 
-import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.event.EventHandler;
@@ -11,38 +12,36 @@ import javafx.scene.input.KeyEvent;
  */
 public class Map {
 
-    private Group parent;
+    private Canvas parent;
     private Plot[][] plots;
     public static final int MAP_WIDTH = 9;
     public static final int MAP_HEIGHT = 5;
 
-    public Map(Group parent) {
+    public Map(Canvas parent) {
         this.parent = parent;
         plots = new Plot[MAP_WIDTH][MAP_HEIGHT];
 
         for (int i = 0; i < plots.length; i++) {
             for (int j = 0; j < plots[0].length; j++) {
-                Rectangle temp = new Rectangle(75 * i, 75 * j, 70, 70);
+                Image image;
+
                 if (isCenter(i, j)) {
-                    plots[i][j] = new TownPlot(temp);
+                    plots[i][j] = new TownPlot(parent, i * 75, j * 75);
+                    image = new Image("mule/view/town.jpg", false);
                 } else if (isMiddle(i, j)) {
-                    plots[i][j] = new RiverPlot(temp);
-                    plots[i][j].getRep().setFill(Color.BLUE);
-                    plots[i][j].getRep().setStroke(Color.BLUE);
+                    plots[i][j] = new RiverPlot(parent, i * 75, j * 75);
+                    image = new Image("mule/view/river.jpg", false);
                 } else if (isCorner(i, j)) {
-                    plots[i][j] = new MountainPlot(temp);
-                    plots[i][j].getRep().setFill(Color.GREY);
-                    plots[i][j].getRep().setStroke(Color.GREY);
+                    plots[i][j] = new MountainPlot(parent, i * 75, j * 75);
+                    image = new Image("mule/view/mountain.jpg", false);
                 } else {
-                    plots[i][j] = new PlainPlot(temp);
-                    plots[i][j].getRep().setFill(Color.GREEN);
-                    plots[i][j].getRep().setStroke(Color.GREEN);
+                    plots[i][j] = new PlainPlot(parent, i * 75, j * 75);
+                    image = new Image("mule/view/plain.jpg", false);
                 }
-                plots[i][j].getRep().setStrokeWidth(5.0);
-                parent.getChildren().addAll(plots[i][j].getRep());
+                parent.getGraphicsContext2D().drawImage(image, 75 * i, 75 * j);
             }
         }
-
+        parent.getGraphicsContext2D().setGlobalAlpha(.5);
     }
 
     public Plot getPlot(int x, int y) {

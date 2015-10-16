@@ -46,7 +46,11 @@ public class PlayersController implements Initializable, ControlledScreen {
     @FXML private void goToMapScreen(ActionEvent event) {
         if (processPlayers()) {
             initializeTurn();
-            Main.loadScene(Main.mapID, Main.mapFile);
+            if (Main.loadScene(Main.mapID, Main.mapFile)) {
+                System.out.println("LOAD SUCCESSFUL");
+            } else {
+                System.out.println("LOAD FAILED");
+            }
 
             ((Label) Main.getInfoBar().getItems().get(0))
                     .setFont(Font.font("System", FontWeight.BOLD, 13));

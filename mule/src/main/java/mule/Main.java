@@ -126,8 +126,8 @@ public class Main extends Application {
 
     public static void setTimerLabel(Label l) { timerLabel = l; }
 
-    public static void loadScene(String name, String resource) {
-        mainContainer.loadScreen(name, resource);
+    public static boolean loadScene(String name, String resource) {
+        return mainContainer.loadScreen(name, resource);
     }
 
     public static void main(String[] args) {

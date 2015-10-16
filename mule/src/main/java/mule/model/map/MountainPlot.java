@@ -1,6 +1,6 @@
 package mule.model.map;
 
-import javafx.scene.shape.Rectangle;
+import javafx.scene.canvas.Canvas;
 import mule.model.resources.*;
 
 /**
@@ -10,8 +10,8 @@ public class MountainPlot extends Plot {
 
     private static final int smithOre = 2;
 
-    public MountainPlot(Rectangle rep) {
-        super(rep);
+    public MountainPlot(Canvas rep, int x, int y) {
+        super(rep, x, y);
     }
 
     public int getBonus() {
@@ -21,9 +21,14 @@ public class MountainPlot extends Plot {
     public boolean produce() {
         if (outfitted() && hasOwner()) {
             if (owner.getBag().get(new Energy()) > 0) {
-                owner.addResource(new Food(), 1);
-                owner.addResource(new Energy(), 1);
-                owner.addResource(new Smithore(), 3);
+                if (mule.getType().equals(new Food())) {
+                    owner.addResource(new Food(), 1);
+                } else if (mule.getType().equals(new Energy())) {
+                    owner.addResource(new Energy(), 1);
+                } else {
+                    owner.addResource(new Smithore(), 3);
+                }
+                return true;
             }
         }
         return false;

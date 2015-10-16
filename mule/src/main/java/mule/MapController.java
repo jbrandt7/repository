@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -27,7 +28,7 @@ public class MapController implements Initializable, ControlledScreen {
 
     @FXML StackPane root;
 
-    @FXML Group mapParent;
+    @FXML Canvas mapParent;
 
     @FXML Label mapText, timerLabel;
     static Label _mapText, _timerLabel;
@@ -144,7 +145,7 @@ public class MapController implements Initializable, ControlledScreen {
                                     && selected.notOutfitted()) {
                                 Mule temp = Main.getCurrentPlayer().removeMule();
                                 selected.outfit(temp);
-                                mapParent.getChildren().addAll(temp.getRep());
+                                //mapParent.getChildren().addAll(temp.getRep());
                                 goToTownScreen();
                             } else {
                                 Main.getCurrentPlayer().removeMule();

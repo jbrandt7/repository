@@ -111,8 +111,7 @@ public abstract class Player implements Comparable {
 	public void addPlot(Plot plot) {
 		land.add(plot);
 		plot.assignOwner(this);
-		plot.getRep().setStroke(plot.getRep().getFill());
-		plot.getRep().setFill(getColor());
+		plot.draw(this);
 	}
 
 	public void addResource(Resource resource, int amount) {

@@ -1,6 +1,7 @@
 package mule.model.resources;
 
-import javafx.scene.shape.Rectangle;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
 
 /**
  * Created by The Boat on 9/22/2015.
@@ -10,7 +11,6 @@ public class Mule extends Resource{
 	private static final int COST = 100;
 
     private Resource type;
-    private Rectangle rep;
 
 	public Mule() {
 		super(COST);
@@ -21,15 +21,9 @@ public class Mule extends Resource{
         this.type = type;
     }
 
-    public void draw(Rectangle rep) {
-        int x = (int) rep.getX();
-        int y = (int) rep.getY();
-
-        this.rep = new Rectangle(x + 10, y + 10, 10, 10);
-    }
-
-    public Rectangle getRep() {
-        return rep;
+    public void draw(Canvas rep, int x, int y) {
+        rep.getGraphicsContext2D().setFill(Color.BLACK);
+		rep.getGraphicsContext2D().fillRect(x, y, 15, 15);
     }
 
 	public int getCost() {

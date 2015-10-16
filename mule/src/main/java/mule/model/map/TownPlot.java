@@ -1,6 +1,6 @@
 package mule.model.map;
 
-import javafx.scene.shape.Rectangle;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
 /**
@@ -10,9 +10,8 @@ public class TownPlot extends Plot {
 
     private static final int energyBonus = 2;
 
-    public TownPlot(Rectangle rep) {
-        super(rep);
-        rep.setFill(Color.RED);
+    public TownPlot(Canvas rep, int x, int y) {
+        super(rep, x, y);
     }
 
     public int getBonus() {

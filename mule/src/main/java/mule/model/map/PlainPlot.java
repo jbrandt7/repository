@@ -1,6 +1,6 @@
 package mule.model.map;
 
-import javafx.scene.shape.Rectangle;
+import javafx.scene.canvas.Canvas;
 import mule.model.resources.*;
 
 /**
@@ -10,8 +10,8 @@ public class PlainPlot extends Plot {
 
     private static final int energyBonus = 2;
 
-    public PlainPlot(Rectangle rep) {
-        super(rep);
+    public PlainPlot(Canvas rep, int x, int y) {
+        super(rep, x, y);
     }
 
     public int getBonus() {
@@ -21,9 +21,14 @@ public class PlainPlot extends Plot {
     public boolean produce() {
         if (outfitted() && hasOwner()) {
             if (owner.getBag().get(new Energy()) > 0) {
-                owner.addResource(new Food(), 2);
-                owner.addResource(new Energy(), 3);
-                owner.addResource(new Smithore(), 1);
+                if (mule.getType().equals(new Food())) {
+                    owner.addResource(new Food(), 2);
+                } else if (mule.getType().equals(new Energy())) {
+                    owner.addResource(new Energy(), 3);
+                } else {
+                    owner.addResource(new Smithore(), 1);
+                }
+                return true;
             }
         }
         return false;
