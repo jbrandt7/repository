@@ -31,9 +31,11 @@ public class ScreensController extends StackPane {
 
     public boolean loadScreen(String name, String resource) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(resource));
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource(resource));
             Parent loadScreen = (Parent) loader.load();
-            ControlledScreen myScreenController = ((ControlledScreen) loader.getController());
+            ControlledScreen myScreenController = ((ControlledScreen) loader
+                    .getController());
             myScreenController.setScreenParent(this);
             addScreen(name, loadScreen);
             return true;
@@ -50,13 +52,16 @@ public class ScreensController extends StackPane {
             if (!getChildren().isEmpty()) {
                 Timeline fade = new Timeline(
                         new KeyFrame(Duration.ZERO, new KeyValue(opacity, 1.0)),
-                        new KeyFrame(new Duration(300), new EventHandler<ActionEvent>() {
+                        new KeyFrame(new Duration(300),
+                                new EventHandler<ActionEvent>() {
                             @Override public void handle(ActionEvent t) {
                                 getChildren().remove(0);
                                 getChildren().add(0, screens.get(name));
                                 Timeline fadeIn = new Timeline(
-                                        new KeyFrame(Duration.ZERO, new KeyValue(opacity, 0.0)),
-                                        new KeyFrame(new Duration (300), new KeyValue(opacity, 1.0)));
+                                        new KeyFrame(Duration.ZERO,
+                                        new KeyValue(opacity, 0.0)),
+                                        new KeyFrame(new Duration (300),
+                                        new KeyValue(opacity, 1.0)));
                                 fadeIn.play();
                             }
                         }, new KeyValue(opacity, 0.0)));
@@ -65,8 +70,10 @@ public class ScreensController extends StackPane {
                 setOpacity(0.0);
                 getChildren().add(screens.get(name));
                 Timeline fadeIn = new Timeline(
-                        new KeyFrame(Duration.ZERO, new KeyValue(opacity, 0.0)),
-                        new KeyFrame(new Duration(2500), new KeyValue(opacity, 1.0)));
+                        new KeyFrame(Duration.ZERO,
+                                new KeyValue(opacity, 0.0)),
+                        new KeyFrame(new Duration(2500),
+                                new KeyValue(opacity, 1.0)));
                 fadeIn.play();
             }
             return true;

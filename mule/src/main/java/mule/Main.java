@@ -108,7 +108,9 @@ public class Main extends Application {
 
     public static void setPlayerCount(int number) { playerCount = number; }
 
-    public static Player getCurrentPlayer() { return players[turn.getCurrentPlayer()]; }
+    public static Player getCurrentPlayer() {
+        return players[turn.getCurrentPlayer()];
+    }
 
     public static void setTurn(Turn t) { turn = t; }
 

@@ -27,11 +27,12 @@ public class PlayersController implements Initializable, ControlledScreen {
 
     @Override public void initialize(URL url, ResourceBundle rb) {
         for (int i = 0; i < Main.getPlayerCount(); i++) {
-            ((ChoiceBox)((HBox) playersBox.getChildren().get(i)).getChildren().get(1))
-                    .setItems(FXCollections.observableArrayList("Human", "Flapper",
-                    "Bonzoid", "Ugaite", "Buzzite"));
-            ((ChoiceBox)((HBox) playersBox.getChildren().get(i)).getChildren().get(1))
-                    .getSelectionModel().select(0);
+            ((ChoiceBox)((HBox) playersBox.getChildren().get(i))
+                    .getChildren().get(1)).setItems(FXCollections
+                    .observableArrayList("Human", "Flapper","Bonzoid",
+                    "Ugaite", "Buzzite"));
+            ((ChoiceBox)((HBox) playersBox.getChildren().get(i))
+                    .getChildren().get(1)).getSelectionModel().select(0);
         }
 
         for (int i = Main.getPlayerCount(); i < 4; i++) {
@@ -46,11 +47,7 @@ public class PlayersController implements Initializable, ControlledScreen {
     @FXML private void goToMapScreen(ActionEvent event) {
         if (processPlayers()) {
             initializeTurn();
-            if (Main.loadScene(Main.mapID, Main.mapFile)) {
-                System.out.println("LOAD SUCCESSFUL");
-            } else {
-                System.out.println("LOAD FAILED");
-            }
+            Main.loadScene(Main.mapID, Main.mapFile)
 
             ((Label) Main.getInfoBar().getItems().get(0))
                     .setFont(Font.font("System", FontWeight.BOLD, 13));
@@ -61,17 +58,19 @@ public class PlayersController implements Initializable, ControlledScreen {
 
     private boolean processPlayers() {
         for (int i = 0; i < Main.getPlayerCount(); i++) {
-            String name = ((TextField)((HBox) playersBox.getChildren().get(i)).getChildren().get(0))
-                    .getCharacters().toString();
+            String name = ((TextField)((HBox) playersBox.getChildren()
+                    .get(i)).getChildren().get(0)).getCharacters().toString();
+
             if (name.equals(""))
                 return false;
 
-            String race = (String) ((ChoiceBox)((HBox) playersBox.getChildren().get(i)).getChildren().get(1))
-                    .getValue();
-            Color color = ((ColorPicker)((HBox) playersBox.getChildren().get(i)).getChildren().get(2))
-                    .getValue();
+            String race = (String) ((ChoiceBox)((HBox) playersBox
+                    .getChildren().get(i)).getChildren().get(1)).getValue();
+            Color color = ((ColorPicker)((HBox) playersBox.getChildren()
+                    .get(i)).getChildren().get(2)).getValue();
 
             Player p;
+
             if (race.equals("Human")) {
                 p = new Human(name, color);
             } else if (race.equals("Bonzoid")) {

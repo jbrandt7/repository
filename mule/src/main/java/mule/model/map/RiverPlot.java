@@ -26,6 +26,7 @@ public class RiverPlot extends Plot {
                 } else if (mule.getType().equals(new Energy())) {
                     owner.addResource(new Energy(), 2);
                 }
+                owner.removeResource(new Energy(), 1);
                 return true;
             }
         }

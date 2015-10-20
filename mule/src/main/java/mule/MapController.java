@@ -60,28 +60,31 @@ public class MapController implements Initializable, ControlledScreen {
 
     private void incrementTurn() {
         if (Main.getTurn().hasNextPlayer()) {
-            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
-                    .setFont(Font.font("System", FontWeight.NORMAL, 13));
+            ((Label) Main.getInfoBar().getItems().get(Main.getTurn()
+                    .getCurrentPlayer())).setFont(Font
+                    .font("System", FontWeight.NORMAL, 13));
 
             Main.getTurn().nextPlayer();
 
-            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
-                            .setFont(Font.font("System", FontWeight.BOLD, 13));
+            ((Label) Main.getInfoBar().getItems().get(Main.getTurn()
+                    .getCurrentPlayer())).setFont(Font
+                    .font("System", FontWeight.BOLD, 13));
         } else {
-            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
-                    .setFont(Font.font("System", FontWeight.NORMAL, 13));
-
-            Main.getTurn().nextStage();
+            ((Label) Main.getInfoBar().getItems().get(Main.getTurn()
+                    .getCurrentPlayer())).setFont(Font
+                    .font("System", FontWeight.NORMAL, 13))n().nextStage();
             goToTownScreen();
 
-            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
-                            .setFont(Font.font("System", FontWeight.BOLD, 13));
+            ((Label) Main.getInfoBar().getItems().get(Main.getTurn()
+                    .getCurrentPlayer())).setFont(Font
+                    .font("System", FontWeight.BOLD, 13));
         }
     }
 
     private void setupInfoBar() {
         for (int i = 0; i < Main.getPlayerCount(); i++) {
-            ((Label) infoBar.getItems().get(i)).setText(Main.getPlayer(i).toString());
+            ((Label) infoBar.getItems().get(i))
+                    .setText(Main.getPlayer(i).toString());
         }
         for (int i = Main.getPlayerCount(); i < 4; i++) {
             ((Label) infoBar.getItems().get(i)).setOpacity(0.0);
@@ -99,12 +102,12 @@ public class MapController implements Initializable, ControlledScreen {
             public void handle(ActionEvent t) {
                 if (Main.getCurrentPlayer().getTimer().outOfTime()) {
                     Main.getCurrentPlayer().getTimer().reset();
-                    Main.getHelperLabel().setText(Main.getCurrentPlayer().getName() + " ran out of time, "
-                            + "skipping to next player");
+                    Main.getHelperLabel().setText(Main.getCurrentPlayer().getName()
+                            + " ran out of time, " + "skipping to next player");
                     incrementTurn();
                 } else {
-                    Main.getTimerLabel().setText("Time: " + Main.getCurrentPlayer()
-                            .getTimer().getTime());
+                    Main.getTimerLabel().setText("Time: "
+                            + Main.getCurrentPlayer().getTimer().getTime());
                     Main.getCurrentPlayer().getTimer().tick();
                 }
             }
@@ -124,12 +127,12 @@ public class MapController implements Initializable, ControlledScreen {
 
                     if (Main.getTurn().getCurrentStage() == Turn.LAND) {
 
-                        mapText.setText(Main.getCurrentPlayer().getName() + "passes, "
-                                + "no land bought");
+                        mapText.setText(Main.getCurrentPlayer().getName()
+                                + "passes, " + "no land bought");
                         incrementTurn();
 
                     } else if (Main.getTurn().getCurrentStage() == Turn.TOWN){
-                        Main.getCurrentPlayer().removeMule();
+                        Main.getCurrentPlayer().  nremoveMule();
                         mapText.setText("Mule lost, silly");
                         goToTownScreen();
                     }
@@ -145,7 +148,6 @@ public class MapController implements Initializable, ControlledScreen {
                                     && selected.notOutfitted()) {
                                 Mule temp = Main.getCurrentPlayer().removeMule();
                                 selected.outfit(temp);
-                                //mapParent.getChildren().addAll(temp.getRep());
                                 goToTownScreen();
                             } else {
                                 Main.getCurrentPlayer().removeMule();
@@ -170,8 +172,10 @@ public class MapController implements Initializable, ControlledScreen {
 
                                 mapText.setText(Main.getCurrentPlayer().getName()
                                         + " bought land");
-                                ((Label) infoBar.getItems().get(Main.getTurn()
-                                        .getCurrentPlayer())).setText(Main.getCurrentPlayer().toString());
+                                ((Label) infoBar.getItems().get(Main
+                                        .getTurn().getCurrentPlayer()))
+                                        .setText(Main.getCurrentPlayer()
+                                        .toString());
                                 incrementTurn();
 
                             } else {

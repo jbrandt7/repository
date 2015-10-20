@@ -28,6 +28,7 @@ public class PlainPlot extends Plot {
                 } else {
                     owner.addResource(new Smithore(), 1);
                 }
+                owner.removeResource(new Energy(), 1);
                 return true;
             }
         }
