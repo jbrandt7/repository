@@ -102,7 +102,7 @@ public class Turn {
 				System.out.println("A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING "
 					+ "TWO BARS OF ORE.");
 				
-				Main.getPlayer(i).getBag().addResource(new Smithore, 2);
+				Main.getPlayer(i).getBag().addResource(new Smithore(), 2);
 				break;
 			case 3:
 				System.out.println("THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $" + (8 * m) + ".");
@@ -141,7 +141,7 @@ public class Turn {
 				System.out.println("A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING "
 					+ "TWO BARS OF ORE.");
 				
-				Main.getPlayer(i).getBag().addResource(new Smithore, 2);
+				Main.getPlayer(i).getBag().addResource(new Smithore(), 2);
 				break;
 			case 3:
 				System.out.println("THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $" + (8 * m) + ".");
