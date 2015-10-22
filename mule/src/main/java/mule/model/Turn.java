@@ -14,6 +14,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import mule.*;
+import mule.model.resources.*;
 
 public class Turn {
 
@@ -95,14 +96,14 @@ public class Turn {
 				System.out.println("YOU JUST RECEIVED A PACKAGE FROM THE GT ALUMNI CONTAINING "
 					+ "3 FOOD AND 2 ENERGY UNITS");
 				
-				Main.getPlayer(i).getBag().addResource(new Food(), 3);
-				Main.getPlayer(i).getBag().addResource(new Energy(), 2);
+				Main.getPlayer(i).getBag().add(new Food(), 3);
+				Main.getPlayer(i).getBag().add(new Energy(), 2);
 				break;
 			case 2:
 				System.out.println("A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING "
 					+ "TWO BARS OF ORE.");
 				
-				Main.getPlayer(i).getBag().addResource(new Smithore(), 2);
+				Main.getPlayer(i).getBag().add(new Smithore(), 2);
 				break;
 			case 3:
 				System.out.println("THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $" + (8 * m) + ".");
@@ -133,15 +134,15 @@ public class Turn {
 		    	case 1:
 				System.out.println("YOU JUST RECEIVED A PACKAGE FROM THE GT ALUMNI CONTAINING "
 					+ "3 FOOD AND 2 ENERGY UNITS");
-				
-				Main.getPlayer(i).getBag().addResource(new Food(), 3);
-				Main.getPlayer(i).getBag().addResource(new Energy(), 2);
+				Resource nrg = new Energy();
+				Main.getPlayer(i).getBag().add(new Food(), 3);
+				Main.getPlayer(i).getBag().add(nrg, 2);
 				break;
 			case 2:
 				System.out.println("A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING "
 					+ "TWO BARS OF ORE.");
 				
-				Main.getPlayer(i).getBag().addResource(new Smithore(), 2);
+				Main.getPlayer(i).getBag().add(new Smithore(), 2);
 				break;
 			case 3:
 				System.out.println("THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $" + (8 * m) + ".");
