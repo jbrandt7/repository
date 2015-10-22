@@ -25,13 +25,14 @@ public class Turn {
     private final static int TOTAL_STAGES = 2;
     private final static Integer TURN_TIME = 60;
 
-    private int currentPlayer, currentStage, currentTurn;
+    private int currentPlayer, currentStage, currentTurn, m;
 
     public Turn(int players) {
         TOTAL_PLAYERS = players;
         currentPlayer = 0;
         currentStage = 0;
         currentTurn = 0;
+	m = 25;
     }
 
     public boolean hasNextPlayer() {
@@ -59,21 +60,101 @@ public class Turn {
     public boolean hasNextTurn() {
         return currentTurn < TOTAL_TURNS - 1;
     }
-
+    public void updateM() {
+    	if (currentTurn == 12) {
+		m = 100;
+	} else if (currentTurn > 7) {
+		m = 75;
+	} else if (currentTurn > 3) {
+		m = 50;
+	} else {
+		m = 25;
+	}
+    }
+    public boolean hasRandomEvent() {
+	int randomNum = (int)((Math.random()*100) + 1);
+	return randomNum < 28;
+    }
     public void nextTurn() {
         if (hasNextTurn())
             currentTurn++;
-
+	updateM();
         currentPlayer = 0;
         currentStage = 0;
+
+        Main.sortPlayers();
 
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             Main.getPlayer(i).getTimer().reset();
             Main.getPlayer(i).produce();
-        }
-
-        Main.sortPlayers();
-
+	    if (hasRandomEvent()) {
+		if (i != Main.getPlayerCount() - 1) {
+		    int randomEventSelector = (int)((Math.random() * 7) + 1);
+		    switch (randomEventSelector) {
+		    	case 1:
+				System.out.println("YOU JUST RECEIVED A PACKAGE FROM THE GT ALUMNI CONTAINING "
+					+ "3 FOOD AND 2 ENERGY UNITS");
+				
+				Main.getPlayer(i).getBag().addResource(new Food(), 3);
+				Main.getPlayer(i).getBag().addResource(new Energy(), 2);
+				break;
+			case 2:
+				System.out.println("A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING "
+					+ "TWO BARS OF ORE.");
+				
+				Main.getPlayer(i).getBag().addResource(new Smithore, 2);
+				break;
+			case 3:
+				System.out.println("THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $" + (8 * m) + ".");
+				Main.getPlayer(i).addMoney(8 * m);
+				break;
+			case 4:
+				System.out.println("YOU FOUND A DEAD MOOSE RAT AN SOLD THE HIDE FOR $" + (2 * m) + ".");
+				Main.getPlayer(i).addMoney(2 * m);
+				break;
+			case 5:
+				System.out.println("FLYING CAT-BUGS ATE THE ROOF OF YOUR HOUSE. REPAIRS COST $" + (4 * m) + ".");
+				Main.getPlayer(i).removeMoney(4 * m);
+				break;
+			case 6:
+				System.out.println("MISCHIEVOUS UGA STUDENTS BROKE INTO YOUR STORAGE SHED AND STOLE HALF YOUR FOOD.");
+				int foodCount = Main.getPlayer(i).getBag().get(new Food()) / 2;
+				Main.getPlayer(i).getBag().remove(new Food(), foodCount);
+				break;
+			case 7:
+				System.out.println("YOUR SPACE GYPSY INLAWS MADE A MESS OF THE TOWN. IT COST YOU $"
+						+ (6 * m) + " TO CLEAN IT UP.");
+				Main.getPlayer(i).removeMoney(6 * m);
+				break;
+		    }
+		} else {
+		    int randomEventSelector = (int)((Math.random() * 4) + 1);
+		    switch (randomEventSelector) {
+		    	case 1:
+				System.out.println("YOU JUST RECEIVED A PACKAGE FROM THE GT ALUMNI CONTAINING "
+					+ "3 FOOD AND 2 ENERGY UNITS");
+				
+				Main.getPlayer(i).getBag().addResource(new Food(), 3);
+				Main.getPlayer(i).getBag().addResource(new Energy(), 2);
+				break;
+			case 2:
+				System.out.println("A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING "
+					+ "TWO BARS OF ORE.");
+				
+				Main.getPlayer(i).getBag().addResource(new Smithore, 2);
+				break;
+			case 3:
+				System.out.println("THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $" + (8 * m) + ".");
+				Main.getPlayer(i).addMoney(8 * m);
+				break;
+			case 4:
+				System.out.println("YOU FOUND A DEAD MOOSE RAT AN SOLD THE HIDE FOR $" + (2 * m) + ".");
+				Main.getPlayer(i).addMoney(2 * m);
+				break;
+		    }
+		}		
+	    }
+        }	
     }
 
     public int getCurrentPlayer() {
