@@ -33,7 +33,7 @@ public class Turn {
         currentPlayer = 0;
         currentStage = 0;
         currentTurn = 0;
-	m = 25;
+	    m = 25;
     }
 
     public boolean hasNextPlayer() {
@@ -61,25 +61,27 @@ public class Turn {
     public boolean hasNextTurn() {
         return currentTurn < TOTAL_TURNS - 1;
     }
+
     public void updateM() {
     	if (currentTurn == 12) {
-		m = 100;
-	} else if (currentTurn > 7) {
-		m = 75;
-	} else if (currentTurn > 3) {
-		m = 50;
-	} else {
-		m = 25;
-	}
+		    m = 100;
+	    } else if (currentTurn > 7) {
+		    m = 75;
+	    } else if (currentTurn > 3) {
+		    m = 50;
+	    } else {
+		    m = 25;
+	    }
     }
     public boolean hasRandomEvent() {
-	int randomNum = (int)((Math.random()*100) + 1);
-	return randomNum < 28;
+	    int randomNum = (int)((Math.random()*100) + 1);
+	    return randomNum < 28;
     }
     public void nextTurn() {
         if (hasNextTurn())
             currentTurn++;
-	updateM();
+
+	    updateM();
         currentPlayer = 0;
         currentStage = 0;
 
@@ -88,7 +90,7 @@ public class Turn {
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             Main.getPlayer(i).getTimer().reset();
             Main.getPlayer(i).produce();
-	    if (hasRandomEvent()) {
+	    if (true) {
 		if (i != Main.getPlayerCount() - 1) {
 		    int randomEventSelector = (int)((Math.random() * 7) + 1);
 		    switch (randomEventSelector) {

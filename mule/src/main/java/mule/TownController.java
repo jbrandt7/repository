@@ -116,8 +116,7 @@ public class TownController implements Initializable, ControlledScreen {
 
     private void setupInfoBar() {
         for (int i = 0; i < Main.getPlayerCount(); i++) {
-            ((Label) infoBar.getItems().get(i)).setText(Main.getPlayer(i) + ": "
-                    + Main.getPlayer(i).getMoney());
+            ((Label) infoBar.getItems().get(i)).setText(Main.getPlayer(i).toString());
         }
         for (int i = Main.getPlayerCount(); i < 4; i++) {
             ((Label) infoBar.getItems().get(i)).setOpacity(0.0);

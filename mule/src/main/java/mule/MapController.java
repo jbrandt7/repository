@@ -72,7 +72,9 @@ public class MapController implements Initializable, ControlledScreen {
         } else {
             ((Label) Main.getInfoBar().getItems().get(Main.getTurn()
                     .getCurrentPlayer())).setFont(Font
-                    .font("System", FontWeight.NORMAL, 13))n().nextStage();
+                    .font("System", FontWeight.NORMAL, 13));
+
+            Main.getTurn().nextStage();
             goToTownScreen();
 
             ((Label) Main.getInfoBar().getItems().get(Main.getTurn()
@@ -132,7 +134,7 @@ public class MapController implements Initializable, ControlledScreen {
                         incrementTurn();
 
                     } else if (Main.getTurn().getCurrentStage() == Turn.TOWN){
-                        Main.getCurrentPlayer().  nremoveMule();
+                        Main.getCurrentPlayer().removeMule();
                         mapText.setText("Mule lost, silly");
                         goToTownScreen();
                     }

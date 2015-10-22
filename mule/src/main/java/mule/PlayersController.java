@@ -47,7 +47,7 @@ public class PlayersController implements Initializable, ControlledScreen {
     @FXML private void goToMapScreen(ActionEvent event) {
         if (processPlayers()) {
             initializeTurn();
-            Main.loadScene(Main.mapID, Main.mapFile)
+            Main.loadScene(Main.mapID, Main.mapFile);
 
             ((Label) Main.getInfoBar().getItems().get(0))
                     .setFont(Font.font("System", FontWeight.BOLD, 13));
