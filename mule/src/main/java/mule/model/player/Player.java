@@ -86,7 +86,11 @@ public abstract class Player implements Comparable {
 	}
 
 	public int removeMoney(int m) {
-		money -= m;
+		if (m >= money) {
+			money = 0;
+		} else {
+			money -= m;
+		}
 		return money;
 	}
 
