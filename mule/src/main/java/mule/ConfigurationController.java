@@ -16,6 +16,8 @@ public class ConfigurationController implements Initializable, ControlledScreen 
 
     @FXML ChoiceBox mapChoiceBox, difficultyChoiceBox;
 
+    @FXML TextField saveTextField;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mapChoiceBox.setItems(FXCollections.observableArrayList(
@@ -32,9 +34,19 @@ public class ConfigurationController implements Initializable, ControlledScreen 
 
     @FXML
     private void goToPlayerScreen(ActionEvent event) {
-        Main.setPlayerCount((int) playersSlider.getValue());
-        Main.loadScene(Main.playerConID, Main.playerConFile);
-        controller.setScreen(Main.playerConID);
+        if (Main.getDBController().checkName(saveTextField.getCharacters().toString())) {
+            Main.setSaveName(saveTextField.getCharacters().toString());
+            Main.setPlayerCount((int) playersSlider.getValue());
+            Main.loadScene(Main.playerConID, Main.playerConFile);
+            controller.setScreen(Main.playerConID);
+        } else {
+            /*Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Save Error");
+            alert.setHeaderText("Invalid Name");
+            alert.setContentText("A game already exists with that name, please choose another");
+            alert.showAndWait();
+            */
+        }
     }
 
 }

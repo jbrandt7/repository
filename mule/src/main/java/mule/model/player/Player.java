@@ -10,43 +10,23 @@ import mule.model.map.*;
 import mule.model.*;
 import mule.model.resources.*;
 
-public abstract class Player implements Comparable {
+public abstract class Player implements Comparable, java.io.Serializable {
+
+    private static final long serialVersionUID = 42L;
+
 	private String name, race;
-	private Color color;
+	private double[] color;
 	private int money, score;
 	private Timer timer;
 	private ResourceBag bag;
 	private Mule mule;
 	private ArrayList<Plot> land;
-	private Location location;
-
-
-	private class Location {
-		private int x, y;
-
-		public Location(int x, int y) {
-			this.x = x;
-			this.y = y;
-		}
-		public int getX(){
-			return x;
-		}
-		public int getY() {
-			return y;
-		}
-		public void setLocation(int x, int y) {
-			this.x = x;
-			this.y = y;
-		}
-
-	}
-
 
 	public Player(String name, Color color) {
-		this.color = color;
 		this.name = name;
 		this.race = race;
-		this.color = color;
+		this.color = new double[] { (color.getRed()),
+                (color.getGreen()), (color.getBlue()) };
 		this.money = 1000;
 		this.mule = null;
 		this.land = new ArrayList<Plot>();
@@ -58,6 +38,7 @@ public abstract class Player implements Comparable {
 		this.score = money;
 		this.timer = new Timer();
 		score += bag.getTotalCost();
+
 	}
 
 	public String getName() {
@@ -69,7 +50,7 @@ public abstract class Player implements Comparable {
 	}
 
 	public Color getColor() {
-		return color;
+        return new Color(color[0], color[1], color[2], 1.0);
 	}
 
 	public int getMoney() {
@@ -107,10 +88,6 @@ public abstract class Player implements Comparable {
     public Mule getMule() {
         return mule;
     }
-
-	public void setLoc(int x, int y) {
-		location.setLocation(x, y);
-	}
 
 	public void addPlot(Plot plot) {
 		land.add(plot);
@@ -183,5 +160,10 @@ public abstract class Player implements Comparable {
 		return (this.mule == null);
 	}
 
+    private String colorToString(Color c) {
+        return String.format("#%02X%02X%02X", (int) (c.getRed() * 255),
+                (int) (c.getGreen() * 255), (int) (c.getBlue() * 255));
+    }
 
-}//end class
+
+}

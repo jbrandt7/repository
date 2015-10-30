@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Created by The Boat on 9/22/2015.
  */
-public class ResourceBag {
+public class ResourceBag implements java.io.Serializable {
 
     private HashMap<Resource, Integer> bag;
 

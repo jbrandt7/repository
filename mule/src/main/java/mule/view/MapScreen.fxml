@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -7,12 +8,12 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.MapController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.MapController">
    <children>
-      <Group fx:id="mapParent">
+      <Canvas fx:id="mapParent" height="375.0" width="675.0">
          <StackPane.margin>
-            <Insets bottom="100.0" />
-         </StackPane.margin></Group>
+            <Insets bottom="75.0" />
+         </StackPane.margin></Canvas>
       <ToolBar fx:id="infoBar" prefHeight="100.0" prefWidth="200.0" StackPane.alignment="BOTTOM_CENTER">
         <items>
             <Label prefWidth="75.0" text="Player 1:" />
@@ -25,6 +26,35 @@
             <Label fx:id="timerLabel" prefWidth="75.0" text="Time Left: " />
         </items>
       </ToolBar>
+      <MenuBar minHeight="30.0" StackPane.alignment="TOP_CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#saveGame" text="Save" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Player 1">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Money" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Player 2">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Money" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Player 3">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Money" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Player 4">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Money" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
    </children>
    <opaqueInsets>
       <Insets bottom="25.0" />

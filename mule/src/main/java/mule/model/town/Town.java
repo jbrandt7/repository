@@ -7,9 +7,11 @@ import javafx.scene.control.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 
-public class Town {
+public class Town implements java.io.Serializable {
 
-    private Group parent;
+    private static final long serialVersionUID = 42L;
+
+    private transient Group parent;
 
     private Store[][] stores;
 

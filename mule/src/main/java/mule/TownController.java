@@ -33,6 +33,9 @@ public class TownController implements Initializable, ControlledScreen {
     @FXML Label timerLabel, mapText;
     static Label _timerLabel, _mapText;
 
+    @FXML MenuBar menuBar;
+    static MenuBar _menuBar;
+
     @Override public void initialize(URL url, ResourceBundle rb) {
         Main.setTown(new Town(townParent));
         setupInfoBar();
@@ -120,6 +123,7 @@ public class TownController implements Initializable, ControlledScreen {
         }
         for (int i = Main.getPlayerCount(); i < 4; i++) {
             ((Label) infoBar.getItems().get(i)).setOpacity(0.0);
+            menuBar.getMenus().get(i).setVisible(false);
         }
         _mapText = mapText;
         _timerLabel = timerLabel;
@@ -131,5 +135,7 @@ public class TownController implements Initializable, ControlledScreen {
     public static Label getTimerLabel() { return _timerLabel; }
 
     public static ToolBar getInfoBar() { return _infoBar; }
+
+    public static MenuBar getMenuBar() { return _menuBar; }
 
 }

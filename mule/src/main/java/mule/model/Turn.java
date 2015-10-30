@@ -16,7 +16,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 import mule.*;
 import mule.model.resources.*;
 
-public class Turn {
+public class Turn implements java.io.Serializable {
+
+    private static final long serialVersionUID = 42L;
 
     public static final int LAND = 0;
     public static final int TOWN = 1;
@@ -86,77 +88,77 @@ public class Turn {
         currentStage = 0;
 
         Main.sortPlayers();
+        Main.getDBController().saveGame();
 
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             Main.getPlayer(i).getTimer().reset();
             Main.getPlayer(i).produce();
-	    if (true) {
-		if (i != Main.getPlayerCount() - 1) {
-		    int randomEventSelector = (int)((Math.random() * 7) + 1);
-		    switch (randomEventSelector) {
-		    	case 1:
-				System.out.println("YOU JUST RECEIVED A PACKAGE FROM THE GT ALUMNI CONTAINING "
-					+ "3 FOOD AND 2 ENERGY UNITS");
+	        if (hasRandomEvent()) {
+		        if (i != Main.getPlayerCount() - 1) {
+		            int randomEventSelector = (int)((Math.random() * 7) + 1);
+		            switch (randomEventSelector) {
+		    	        case 1:
+				            System.out.println(Main.getPlayer(i).getName() + "YOU JUST RECEIVED A PACKAGE FROM THE GT ALUMNI CONTAINING "
+					                + "3 FOOD AND 2 ENERGY UNITS");
+				            Main.getPlayer(i).getBag().add(new Food(), 3);
+				            Main.getPlayer(i).getBag().add(new Energy(), 2);
+				            break;
+			            case 2:
+				            System.out.println(Main.getPlayer(i).getName() + "A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING "
+					                + "TWO BARS OF ORE.");
 				
-				Main.getPlayer(i).getBag().add(new Food(), 3);
-				Main.getPlayer(i).getBag().add(new Energy(), 2);
-				break;
-			case 2:
-				System.out.println("A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING "
-					+ "TWO BARS OF ORE.");
+				            Main.getPlayer(i).getBag().add(new Smithore(), 2);
+				            break;
+			            case 3:
+				            System.out.println(Main.getPlayer(i).getName() + "THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $" + (8 * m) + ".");
+				            Main.getPlayer(i).addMoney(8 * m);
+				            break;
+			            case 4:
+				            System.out.println(Main.getPlayer(i).getName() + "YOU FOUND A DEAD MOOSE RAT AN SOLD THE HIDE FOR $" + (2 * m) + ".");
+				            Main.getPlayer(i).addMoney(2 * m);
+				            break;
+			            case 5:
+				            System.out.println(Main.getPlayer(i).getName() + "FLYING CAT-BUGS ATE THE ROOF OF YOUR HOUSE. REPAIRS COST $" + (4 * m) + ".");
+				            Main.getPlayer(i).removeMoney(4 * m);
+				            break;
+			            case 6:
+				            System.out.println(Main.getPlayer(i).getName() + "MISCHIEVOUS UGA STUDENTS BROKE INTO YOUR STORAGE SHED AND STOLE HALF YOUR FOOD.");
+				            int foodCount = Main.getPlayer(i).getBag().get(new Food()) / 2;
+				            Main.getPlayer(i).getBag().remove(new Food(), foodCount);
+				            break;
+			            case 7:
+				            System.out.println(Main.getPlayer(i).getName() + "YOUR SPACE GYPSY INLAWS MADE A MESS OF THE TOWN. IT COST YOU $"
+						            + (6 * m) + " TO CLEAN IT UP.");
+				            Main.getPlayer(i).removeMoney(6 * m);
+				            break;
+		            }
+		        } else {
+		            int randomEventSelector = (int)((Math.random() * 4) + 1);
+		            switch (randomEventSelector) {
+		    	        case 1:
+				        System.out.println(Main.getPlayer(i).getName() + "YOU JUST RECEIVED A PACKAGE FROM THE GT ALUMNI CONTAINING "
+				                + "3 FOOD AND 2 ENERGY UNITS");
+				        Resource nrg = new Energy();
+				        Main.getPlayer(i).getBag().add(new Food(), 3);
+				        Main.getPlayer(i).getBag().add(nrg, 2);
+				        break;
+			        case 2:
+				        System.out.println(Main.getPlayer(i).getName() + "A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING "
+				                + "TWO BARS OF ORE.");
 				
-				Main.getPlayer(i).getBag().add(new Smithore(), 2);
-				break;
-			case 3:
-				System.out.println("THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $" + (8 * m) + ".");
-				Main.getPlayer(i).addMoney(8 * m);
-				break;
-			case 4:
-				System.out.println("YOU FOUND A DEAD MOOSE RAT AN SOLD THE HIDE FOR $" + (2 * m) + ".");
-				Main.getPlayer(i).addMoney(2 * m);
-				break;
-			case 5:
-				System.out.println("FLYING CAT-BUGS ATE THE ROOF OF YOUR HOUSE. REPAIRS COST $" + (4 * m) + ".");
-				Main.getPlayer(i).removeMoney(4 * m);
-				break;
-			case 6:
-				System.out.println("MISCHIEVOUS UGA STUDENTS BROKE INTO YOUR STORAGE SHED AND STOLE HALF YOUR FOOD.");
-				int foodCount = Main.getPlayer(i).getBag().get(new Food()) / 2;
-				Main.getPlayer(i).getBag().remove(new Food(), foodCount);
-				break;
-			case 7:
-				System.out.println("YOUR SPACE GYPSY INLAWS MADE A MESS OF THE TOWN. IT COST YOU $"
-						+ (6 * m) + " TO CLEAN IT UP.");
-				Main.getPlayer(i).removeMoney(6 * m);
-				break;
-		    }
-		} else {
-		    int randomEventSelector = (int)((Math.random() * 4) + 1);
-		    switch (randomEventSelector) {
-		    	case 1:
-				System.out.println("YOU JUST RECEIVED A PACKAGE FROM THE GT ALUMNI CONTAINING "
-					+ "3 FOOD AND 2 ENERGY UNITS");
-				Resource nrg = new Energy();
-				Main.getPlayer(i).getBag().add(new Food(), 3);
-				Main.getPlayer(i).getBag().add(nrg, 2);
-				break;
-			case 2:
-				System.out.println("A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING "
-					+ "TWO BARS OF ORE.");
-				
-				Main.getPlayer(i).getBag().add(new Smithore(), 2);
-				break;
-			case 3:
-				System.out.println("THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $" + (8 * m) + ".");
-				Main.getPlayer(i).addMoney(8 * m);
-				break;
-			case 4:
-				System.out.println("YOU FOUND A DEAD MOOSE RAT AN SOLD THE HIDE FOR $" + (2 * m) + ".");
-				Main.getPlayer(i).addMoney(2 * m);
-				break;
-		    }
-		}		
-	    }
+				        Main.getPlayer(i).getBag().add(new Smithore(), 2);
+				        break;
+			        case 3:
+				        System.out.println(Main.getPlayer(i).getName() + "THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $" + (8 * m) + ".");
+				        Main.getPlayer(i).addMoney(8 * m);
+				        break;
+			        case 4:
+				        System.out.println(Main.getPlayer(i).getName() + "YOU FOUND A DEAD MOOSE RAT AN SOLD THE HIDE FOR $" + (2 * m) + ".");
+				        Main.getPlayer(i).addMoney(2 * m);
+				        break;
+		            }
+            	}		
+	        }
         }	
     }
 

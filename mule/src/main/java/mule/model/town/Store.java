@@ -8,9 +8,11 @@ import javafx.scene.shape.Rectangle;
 /**
  * Created by harrylane on 9/16/15.
  */
-public class Store {
+public class Store implements java.io.Serializable {
 
-    protected Rectangle rep;
+    private static final long serialVersionUID = 42L;
+
+    protected transient Rectangle rep;
     protected Resource resource;
     private HashMap<Resource, Integer> inventory;
 

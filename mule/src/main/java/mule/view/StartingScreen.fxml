@@ -6,9 +6,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.Controller">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.StartingController">
    <children>
-      <Label alignment="CENTER" prefHeight="55.0" prefWidth="278.0" text="Team Live Badass M3" StackPane.alignment="TOP_CENTER">
+      <Label alignment="CENTER" prefHeight="55.0" prefWidth="278.0" text="Team Live Badass" StackPane.alignment="TOP_CENTER">
          <font>
             <Font size="25.0" />
          </font>
@@ -22,6 +22,17 @@
          </StackPane.margin>
       </Label>
       <Button fx:id="toConfigButton" mnemonicParsing="false" onAction="#toConfigScreen" text="New Game">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <StackPane.margin>
+            <Insets right="250.0" />
+         </StackPane.margin>
+      </Button>
+      <Button fx:id="loadGameButton" mnemonicParsing="false" onAction="#toLoadGameScreen" text="Load Game">
+         <StackPane.margin>
+            <Insets left="250.0" />
+         </StackPane.margin>
          <font>
             <Font size="20.0" />
          </font>

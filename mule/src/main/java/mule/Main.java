@@ -39,10 +39,20 @@ public class Main extends Application {
 
     private static ToolBar infoBar;
 
+    private static MenuBar menuBar;
+
     private static Label helperLabel;
 
     private static Label timerLabel;
 
+    private static DatabaseController dbController;
+
+    private static String saveGame;
+
+    public static String startingID = "start";
+    public static String startingFile = "view/StartingScreen.fxml";
+    public static String loadID = "load";
+    public static String loadFile = "view/LoadGameScreen.fxml";
     public static String configureID = "configure";
     public static String configureFile = "view/GameConfigurationScreen.fxml";
     public static String playerConID = "playerCon";
@@ -57,11 +67,14 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         mainContainer = new ScreensController();
+        mainContainer.loadScreen(Main.startingID, Main.startingFile);
         mainContainer.loadScreen(Main.configureID, Main.configureFile);
-        mainContainer.setScreen(Main.configureID);
+        mainContainer.setScreen(Main.startingID);
 
         timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
+
+        dbController = new DatabaseController();
 
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
@@ -104,6 +117,10 @@ public class Main extends Application {
 
     public static Player getPlayer(int i) { return players[i]; }
 
+    public static String getSaveName() { return saveGame; }
+
+    public static void setSaveName(String s) { saveGame = s; }
+
     public static void setPlayer(int i, Player p) { players[i] = p; }
 
     public static void setPlayerCount(int number) { playerCount = number; }
@@ -112,9 +129,15 @@ public class Main extends Application {
         return players[turn.getCurrentPlayer()];
     }
 
+    public static DatabaseController getDBController() { return dbController; }
+
     public static void setTurn(Turn t) { turn = t; }
 
     public static Turn getTurn() { return turn; }
+
+    public static MenuBar getMenuBar() { return menuBar; }
+
+    public static void setMenuBar(MenuBar m) { menuBar = m; }
 
     public static ToolBar getInfoBar() { return infoBar; }
 

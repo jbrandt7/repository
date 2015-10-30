@@ -36,8 +36,15 @@ public class MapController implements Initializable, ControlledScreen {
     @FXML ToolBar infoBar;
     static ToolBar _infoBar;
 
+    @FXML MenuBar menuBar;
+    static MenuBar _menuBar;
+
     @Override public void initialize(URL url, ResourceBundle rb) {
-        Main.setMap(new Map(mapParent));
+        if (Main.getMap() == null) {
+            Main.setMap(new Map(mapParent));
+        } else {
+            Main.getMap().redraw(mapParent);
+        }
         setupInfoBar();
         startTimer();
 
@@ -51,11 +58,16 @@ public class MapController implements Initializable, ControlledScreen {
         Main.setHelperLabel(TownController.getHelperLabel());
         Main.setTimerLabel(TownController.getTimerLabel());
         Main.setInfoBar(TownController.getInfoBar());
+        Main.setMenuBar(TownController.getMenuBar());
         controller.setScreen(Main.townID);
     }
 
     public void setScreenParent(ScreensController screenParent) {
         controller = screenParent;
+    }
+
+    @FXML public void saveGame() {
+        Main.getDBController().saveGame();
     }
 
     private void incrementTurn() {
@@ -90,6 +102,7 @@ public class MapController implements Initializable, ControlledScreen {
         }
         for (int i = Main.getPlayerCount(); i < 4; i++) {
             ((Label) infoBar.getItems().get(i)).setOpacity(0.0);
+            menuBar.getMenus().get(i).setVisible(false);
         }
         Main.setInfoBar(infoBar);
         Main.setHelperLabel(mapText);
@@ -122,8 +135,8 @@ public class MapController implements Initializable, ControlledScreen {
     private EventHandler<MouseEvent> createLandSelectionHandler() {
         return new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent event) {
-                int x = (int) (event.getSceneX() / 75);
-                int y = (int) (event.getSceneY() / 75);
+                int x = (int) ((event.getSceneX()) / 75);
+                int y = (int) ((event.getSceneY() - 30) / 75);
 
                 if (x == Map.MAP_WIDTH / 2 && y == Map.MAP_HEIGHT / 2) {
 
@@ -204,4 +217,6 @@ public class MapController implements Initializable, ControlledScreen {
     public static Label getTimerLabel() { return _timerLabel; }
 
     public static ToolBar getInfoBar() { return _infoBar; }
+
+    public static MenuBar getMenuBar() { return _menuBar; }
 }

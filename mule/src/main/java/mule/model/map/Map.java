@@ -10,9 +10,11 @@ import javafx.scene.input.KeyEvent;
 /**
  * Created by harrylane on 9/16/15.
  */
-public class Map {
+public class Map implements java.io.Serializable {
 
-    private Canvas parent;
+    private static final long serialVersionUID = 42L;
+
+    private transient Canvas parent;
     private Plot[][] plots;
     public static final int MAP_WIDTH = 9;
     public static final int MAP_HEIGHT = 5;
@@ -46,6 +48,18 @@ public class Map {
 
     public Plot getPlot(int x, int y) {
         return plots[x][y];
+    }
+
+    public void redraw(Canvas rep) {
+        parent = rep;
+
+        for (int i = 0; i < plots.length; i++) {
+            for (int j = 0; j < plots[0].length; j++) {
+                plots[i][j].setRep(rep);
+                plots[i][j].redraw();
+            }
+        }
+
     }
 
     private boolean isCorner(int x, int y) {

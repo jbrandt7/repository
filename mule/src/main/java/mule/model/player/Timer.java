@@ -1,6 +1,8 @@
 package mule.model;
 
-public class Timer {
+public class Timer implements java.io.Serializable {
+
+    private static final long serialVersionUID = 42L;
 
     private int time;
     private static final int TOTAL_TIME = 60;
