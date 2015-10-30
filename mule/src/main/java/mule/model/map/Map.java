@@ -60,6 +60,8 @@ public class Map implements java.io.Serializable {
             }
         }
 
+        parent.getGraphicsContext2D().setGlobalAlpha(.5);
+
     }
 
     private boolean isCorner(int x, int y) {

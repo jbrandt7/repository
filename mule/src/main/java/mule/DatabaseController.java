@@ -123,7 +123,7 @@ public class DatabaseController {
 
             String select = "SELECT total_player_count,"
                     + " player1, player2, player3, player4, turn, map,"
-                    + " town, time_saved FROM mule.saves WHERE name = ?";
+                    + " town, time_saved, name FROM mule.saves WHERE name = ?";
 
             selectSave = conn.prepareStatement(select);
             selectSave.setString(1, id);
@@ -147,6 +147,9 @@ public class DatabaseController {
 
             buf = result.getBytes(8);
             Main.setTown((Town) readInObject(buf));
+
+            Main.setSaveName(result.getString(10));
+            System.out.println(Main.getTurn().TOWN);
 
         } catch (SQLException ex) {
             ex.printStackTrace();

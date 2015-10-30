@@ -23,15 +23,14 @@ public class Turn implements java.io.Serializable {
     public static final int LAND = 0;
     public static final int TOWN = 1;
 
-    private static int TOTAL_PLAYERS;
     private final static int TOTAL_TURNS = 12;
     private final static int TOTAL_STAGES = 2;
     private final static Integer TURN_TIME = 60;
 
-    private int currentPlayer, currentStage, currentTurn, m;
+    private int total_players, currentPlayer, currentStage, currentTurn, m;
 
     public Turn(int players) {
-        TOTAL_PLAYERS = players;
+        total_players = players;
         currentPlayer = 0;
         currentStage = 0;
         currentTurn = 0;
@@ -39,7 +38,7 @@ public class Turn implements java.io.Serializable {
     }
 
     public boolean hasNextPlayer() {
-        return currentPlayer < TOTAL_PLAYERS - 1;
+        return currentPlayer < total_players - 1;
     }
 
     public void nextPlayer() {
@@ -173,5 +172,6 @@ public class Turn implements java.io.Serializable {
     public int getCurrentTurn() {
         return currentTurn;
     }
+
 
 }

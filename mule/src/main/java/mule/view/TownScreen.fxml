@@ -24,5 +24,29 @@
             <Label fx:id="timerLabel" prefWidth="75.0" text="Time Left: " />
          </items>
       </ToolBar>
+      <MenuBar fx:id="menuBar" minHeight="30.0" StackPane.alignment="TOP_CENTER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Player 1">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Money" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Player 2">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Money" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Player 3">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Money" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Player 4">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Money" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
    </children>
 </StackPane>

@@ -128,6 +128,7 @@ public class TownController implements Initializable, ControlledScreen {
         _mapText = mapText;
         _timerLabel = timerLabel;
         _infoBar = infoBar;
+        _menuBar = menuBar;
     }
 
     public static Label getHelperLabel() { return _mapText; }

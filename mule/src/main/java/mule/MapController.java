@@ -110,6 +110,7 @@ public class MapController implements Initializable, ControlledScreen {
         Main.setTimerLabel(timerLabel);
         _timerLabel = timerLabel;
         _infoBar = infoBar;
+        _menuBar = menuBar;
     }
 
     private void startTimer() {

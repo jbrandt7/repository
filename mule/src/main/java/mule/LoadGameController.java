@@ -52,7 +52,7 @@ public class LoadGameController implements Initializable, ControlledScreen {
     }
 
     @FXML public void goBack() {
-        controller.setScreen(Main.loadID);
+        controller.setScreen(Main.startingID);
     }
 
 }
