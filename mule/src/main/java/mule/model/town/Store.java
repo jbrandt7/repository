@@ -1,36 +1,31 @@
 package mule.model.town;
 
-import mule.model.*;
 import mule.model.resources.*;
-import mule.model.player.*;
+import mule.model.player.Player;
 import java.util.HashMap;
 import javafx.scene.shape.Rectangle;
-/**
- * Created by harrylane on 9/16/15.
- */
+
 public class Store implements java.io.Serializable {
 
     private static final long serialVersionUID = 42L;
 
-    protected transient Rectangle rep;
+    private static final int STARTINGFOOD = 16;
+    private static final int STARTINGENERGY = 16;
+    private static final int STARTINGMULES = 25;
+
     protected Resource resource;
     private HashMap<Resource, Integer> inventory;
 
-    public Store(Rectangle rep) {
-        this.rep = rep;
-        inventory = new HashMap<Resource, Integer>();
-        inventory.put(new Food(), 16);
-        inventory.put(new Energy(), 16);
+    public Store() {
+        inventory = new HashMap<>();
+        inventory.put(new Food(), STARTINGFOOD);
+        inventory.put(new Energy(), STARTINGENERGY);
         inventory.put(new Smithore(), 0);
         inventory.put(new Crystite(), 0);
-        inventory.put(new Mule(), 25);
+        inventory.put(new Mule(), STARTINGMULES);
     }
 
-    public Rectangle getRep() {
-        return rep;
-    }
-
-    public boolean buyResource(Player p, Resource r) {
+    public final boolean buyResource(Player p, Resource r) {
    	    if (p.getMoney() < r.getCost()) {
             return false;
         }
@@ -40,7 +35,7 @@ public class Store implements java.io.Serializable {
         return true;
     }
 
-    public boolean sellResource(Player p, Resource r) {
+    public final boolean sellResource(Player p, Resource r) {
         if (p.getBag().get(r) == 0) {
             return false;
         }
@@ -50,12 +45,11 @@ public class Store implements java.io.Serializable {
         return true;
     }
 
-    public boolean buyMule(Player p, Resource type) {
+    public final boolean buyMule(Player p, Resource type) {
         Mule toAdd = new Mule(type);
         if (p.getMoney() < (toAdd.getCost())) {
             return false;
         }
-        System.out.println(inventory.get(new Mule()));
         inventory.put(type, inventory.get(new Mule()) - 1);
         p.addMule(toAdd);
         p.removeMoney(toAdd.getCost());

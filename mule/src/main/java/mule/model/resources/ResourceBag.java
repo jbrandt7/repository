@@ -18,11 +18,11 @@ public class ResourceBag implements java.io.Serializable {
         bag.put(new Crystite(), 0);
     }
 
-    public void add(Resource type, int amount) {
+    public final void add(Resource type, int amount) {
         bag.put(type, bag.get(type) + amount);
     }
 
-    public void remove(Resource type, int amount) {
+    public final void remove(Resource type, int amount) {
         int currentAmount = bag.get(type);
         if (currentAmount - amount < 0) {
             bag.put(type, 0);
@@ -31,11 +31,11 @@ public class ResourceBag implements java.io.Serializable {
         }
     }
 
-    public int get(Resource type) {
+    public final int get(Resource type) {
         return bag.get(type);
     }
 
-    public int getTotalCost() {
+    public final int getTotalCost() {
         int result = 0;
         for (Resource r : bag.keySet()) {
             result += (r.getCost() * bag.get(r));
@@ -43,7 +43,7 @@ public class ResourceBag implements java.io.Serializable {
         return result;
     }
 
-    public Set getResources() {
+    public final Set getResources() {
         return bag.keySet();
     }
 

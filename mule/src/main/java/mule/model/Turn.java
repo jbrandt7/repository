@@ -23,64 +23,71 @@ public class Turn implements java.io.Serializable {
     public static final int LAND = 0;
     public static final int TOWN = 1;
 
-    private final static int TOTAL_TURNS = 12;
-    private final static int TOTAL_STAGES = 2;
-    private final static Integer TURN_TIME = 60;
+    private static final int TOTAL_TURNS = 12;
+    private static final int TOTAL_STAGES = 2;
 
-    private int total_players, currentPlayer, currentStage, currentTurn, m;
+    private static final int STARTING_M = 25;
+    private static final int PHASE1_M = 50;
+    private static final int PHASE2_M = 75;
+    private static final int FINAL_M = 100;
+
+    private int totalPlayers, currentPlayer, currentStage, currentTurn, m;
 
     public Turn(int players) {
-        total_players = players;
+        totalPlayers = players;
         currentPlayer = 0;
         currentStage = 0;
         currentTurn = 0;
-	    m = 25;
+	    m = STARTING_M;
     }
 
-    public boolean hasNextPlayer() {
-        return currentPlayer < total_players - 1;
+    public final boolean hasNextPlayer() {
+        return currentPlayer < totalPlayers - 1;
     }
 
-    public void nextPlayer() {
-        if (hasNextPlayer())
-            currentPlayer++;
+    public final void nextPlayer() {
+        if (hasNextPlayer()) {
+			currentPlayer++;
+		}
     }
 
-    public boolean hasNextStage() {
+    public final boolean hasNextStage() {
         return currentStage < TOTAL_STAGES - 1;
     }
 
-    public void nextStage() {
-        if (hasNextStage())
-            currentStage++;
-        else
-            currentStage = 0;
+    public final void nextStage() {
+        if (hasNextStage()) {
+			currentStage++;
+		} else {
+			currentStage = 0;
+		}
 
         currentPlayer = 0;
     }
 
-    public boolean hasNextTurn() {
+    public final boolean hasNextTurn() {
         return currentTurn < TOTAL_TURNS - 1;
     }
 
-    public void updateM() {
+    public final void updateM() {
     	if (currentTurn == 12) {
-		    m = 100;
+		    m = FINAL_M;
 	    } else if (currentTurn > 7) {
-		    m = 75;
+            m = PHASE2_M;
 	    } else if (currentTurn > 3) {
-		    m = 50;
+		    m = PHASE1_M;
 	    } else {
-		    m = 25;
+		    m = STARTING_M;
 	    }
     }
-    public boolean hasRandomEvent() {
+    public final boolean hasRandomEvent() {
 	    int randomNum = (int)((Math.random()*100) + 1);
 	    return randomNum < 28;
     }
-    public void nextTurn() {
-        if (hasNextTurn())
-            currentTurn++;
+    public final void nextTurn() {
+        if (hasNextTurn()) {
+			currentTurn++;
+		}
 
 	    updateM();
         currentPlayer = 0;
@@ -161,15 +168,15 @@ public class Turn implements java.io.Serializable {
         }	
     }
 
-    public int getCurrentPlayer() {
+    public final int getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public int getCurrentStage() {
+    public final int getCurrentStage() {
         return currentStage;
     }
 
-    public int getCurrentTurn() {
+    public final int getCurrentTurn() {
         return currentTurn;
     }
 

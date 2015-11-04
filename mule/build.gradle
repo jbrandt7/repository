@@ -4,8 +4,25 @@ version = '1.0'
 
 defaultTasks 'jar'
 
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/main/java'
+        }
+    }
+}
+
 jar {
     manifest {
-        attributes 'Implementation-Title': 'M.U.L.E', 'Implementation-Version': version
+        attributes 'Implementation-Title': 'M.U.L.E', 'Implementation-Version': version,
+                'Main-Class' : 'mule/Main'
     }
+}
+
+dependencies {
+    compile 'mysql:mysql-connector-java:5.1.+'
 }

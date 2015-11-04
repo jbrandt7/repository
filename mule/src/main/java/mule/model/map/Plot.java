@@ -1,15 +1,10 @@
 package mule.model.map;
 
 import javafx.scene.canvas.Canvas;
-import javafx.scene.image.Image;
 
-import mule.model.*;
 import mule.model.resources.*;
 import mule.model.player.*;
 
-/**
- * Created by harrylane on 9/16/15.
- */
 public abstract class Plot implements Tradeable, java.io.Serializable {
 
     private static final long serialVersionUID = 42L;
@@ -18,32 +13,32 @@ public abstract class Plot implements Tradeable, java.io.Serializable {
     protected Mule mule;
     protected int[] location;
     protected transient Canvas rep;
-    private static int VALUE = 300;
+    private static int value = 300;
 
-    public Plot(Canvas rep, int x, int y) {
-        this.rep = rep;
+    public Plot(Canvas canvas, int x, int y) {
+        this.rep = canvas;
         location = new int[] {x, y};
     }
 
-    public boolean buy(Player p) {
+    public final boolean buy(Player p) {
         if (p.getMoney() > getCost()) {
             p.addPlot(this);
-            p.removeMoney(VALUE);
+            p.removeMoney(value);
             return true;
         }
         return false;
     }
 
-    public void assignOwner(Player p) {
+    public final void assignOwner(Player p) {
         owner = p;
     }
 
-    public void draw(Player p) {
+    public final void draw(Player p) {
         rep.getGraphicsContext2D().setFill(p.getColor());
         rep.getGraphicsContext2D().fillRect(location[0], location[1], 75, 75);
     }
 
-    public void redraw() {
+    public final void redraw() {
         drawBackground();
         if (hasOwner()) {
             rep.getGraphicsContext2D().setGlobalAlpha(.5);
@@ -55,41 +50,41 @@ public abstract class Plot implements Tradeable, java.io.Serializable {
         }
     }
 
-    public boolean hasOwner() {
+    public final boolean hasOwner() {
         return owner != null;
     }
 
-    public Player getOwner() {
+    public final Player getOwner() {
         return owner;
     }
 
-    public void outfit(Mule m) {
+    public final void outfit(Mule m) {
         mule = m;
         mule.draw(rep, location[0], location[1]);
     }
 
-    public boolean outfitted() {
+    public final boolean outfitted() {
         return mule != null;
     }
 
-    public boolean notOutfitted() {
+    public final boolean notOutfitted() {
         return !outfitted();
     }
 
-    public int bonus() {
+    public final int bonus() {
         return 0;
     }
 
-    public Canvas getRep() {
+    public final Canvas getRep() {
         return rep;
     }
 
-    public void setRep(Canvas rep) {
-        this.rep = rep;
+    public final void setRep(Canvas canvas) {
+        this.rep = canvas;
     }
 
     public int getCost() {
-        return VALUE;
+        return value;
     }
 
     public abstract boolean produce();

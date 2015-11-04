@@ -1,4 +1,4 @@
-package mule.model;
+package mule.model.player;
 
 /***************************/
 /**Player Class*************/
@@ -14,7 +14,7 @@ public abstract class Player implements Comparable, java.io.Serializable {
 
     private static final long serialVersionUID = 42L;
 
-	private String name, race;
+	private String name;
 	private double[] color;
 	private int money, score;
 	private Timer timer;
@@ -22,11 +22,10 @@ public abstract class Player implements Comparable, java.io.Serializable {
 	private Mule mule;
 	private ArrayList<Plot> land;
 
-	public Player(String name, Color color) {
-		this.name = name;
-		this.race = race;
-		this.color = new double[] { (color.getRed()),
-                (color.getGreen()), (color.getBlue()) };
+    public Player(String n, Color c) {
+		this.name = n;
+		this.color = new double[] { (c.getRed()),
+                (c.getGreen()), (c.getBlue()) };
 		this.money = 1000;
 		this.mule = null;
 		this.land = new ArrayList<Plot>();
@@ -41,32 +40,28 @@ public abstract class Player implements Comparable, java.io.Serializable {
 
 	}
 
-	public String getName() {
+	public final String getName() {
 		return name;
 	}
 
-	public String getRace() {
-		return race;
-	}
-
-	public Color getColor() {
+	public final Color getColor() {
         return new Color(color[0], color[1], color[2], 1.0);
 	}
 
-	public int getMoney() {
+	public final int getMoney() {
 		return money;
 	}
 
-	public ResourceBag getBag() {
+	public final ResourceBag getBag() {
 		return bag;
 	}
 
-	public int addMoney(int m) {
+	public final int addMoney(int m) {
 		money += m;
 		return money;
 	}
 
-	public int removeMoney(int m) {
+	public final int removeMoney(int m) {
 		if (m >= money) {
 			money = 0;
 		} else {
@@ -75,39 +70,39 @@ public abstract class Player implements Comparable, java.io.Serializable {
 		return money;
 	}
 
-	public void addMule(Mule mule) {
-		this.mule = mule;
+	public final void addMule(Mule m) {
+		this.mule = m;
 	}
 
-	public Mule removeMule() {
+	public final Mule removeMule() {
         Mule result = mule;
 		this.mule = null;
         return result;
 	}
 
-    public Mule getMule() {
+    public final Mule getMule() {
         return mule;
     }
 
-	public void addPlot(Plot plot) {
+	public final void addPlot(Plot plot) {
 		land.add(plot);
 		plot.assignOwner(this);
 		plot.draw(this);
 	}
 
-	public void addResource(Resource resource, int amount) {
+	public final void addResource(Resource resource, int amount) {
 		bag.add(resource, amount);
 	}
 
-	public void removeResource(Resource resource, int amount) {
+	public final void removeResource(Resource resource, int amount) {
 		bag.remove(resource, amount);
 	}
 
-	public int getScore() {
-		return score;
+	public final int getResource(Resource resource) {
+		return bag.get(resource);
 	}
 
-	public int updateScore() {
+	public final int updateScore() {
 	    score = money;
 		score += bag.getTotalCost();
 
@@ -118,23 +113,27 @@ public abstract class Player implements Comparable, java.io.Serializable {
 		return score;
 	}
 
-	public void produce() {
+	public final void produce() {
 		for (Plot plot : land) {
 			plot.produce();
 		}
 	}
 
-	public Timer getTimer() {
+	public final Timer getTimer() {
 		return timer;
 	}
 
-	public String toString() {
+    public final int getScore() {
+        return score;
+    }
+
+	public final String toString() {
 		return name + "\nCash: " + money + "\nFood: "
 				+ bag.get(new Food()) + "\nEnergy: "
 				+ bag.get(new Energy());
 	}
 
-    public boolean equals(Object other) {
+    public final boolean equals(Object other) {
         if (other == null) {
             return false;
         } else if (other == this) {
@@ -142,21 +141,20 @@ public abstract class Player implements Comparable, java.io.Serializable {
         } else if (other instanceof Player) {
             Player that = (Player) other;
             return that.name.equals(this.name)
-                    && that.race.equals(this.name)
                     && that.color.equals(this.color);
         }
 
         return false;
     }
 
-	public int hashCode() {
+	public final int hashCode() {
 		return score;
 	}
 
-	public int compareTo(Object o) {
+	public final int compareTo(Object o) {
 		return this.score - ((Player) o).score;
 	}
-	public boolean hasMule() {
+	public final boolean hasMule() {
 		return (this.mule == null);
 	}
 

@@ -2,7 +2,6 @@ package mule;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.*;
@@ -10,8 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.text.*;
 import javafx.animation.*;
 import javafx.event.*;
-import javafx.util.Duration;
-import javafx.scene.paint.Color;
 import javafx.collections.FXCollections;
 import java.util.List;
 
@@ -22,13 +19,13 @@ import mule.model.player.*;
 
 public class LoadGameController implements Initializable, ControlledScreen {
 
-    ScreensController controller;
+    private ScreensController controller;
 
     @FXML private ListView savesListView;
 
     private List<String> saves;
 
-    @Override public void initialize(URL url, ResourceBundle rb) {
+    @Override public final void initialize(URL url, ResourceBundle rb) {
         saves = Main.getDBController().getSaves();
         if (saves != null) {
             savesListView.setItems(FXCollections.observableArrayList(saves));
@@ -37,22 +34,26 @@ public class LoadGameController implements Initializable, ControlledScreen {
         }
     }
 
-    public void setScreenParent(ScreensController screenParent) {
+    public final void setScreenParent(ScreensController screenParent) {
         controller = screenParent;
     }
 
-    @FXML public void loadGame() {
+    @FXML public final void loadGame() {
         String gameID = (String) savesListView.getSelectionModel().getSelectedItem();
         Main.getDBController().loadGame(gameID);
-        Main.loadScene(Main.mapID, Main.mapFile);
+        Main.loadScene(Main.MAP_ID, Main.MAP_FILE);
 
-        ((Label) Main.getInfoBar().getItems().get(0)) .setFont(Font.font("System", FontWeight.BOLD, 13));
+        ((Label) Main.getInfoBar().getItems().get(0)) .setFont(Font.font("System", FontWeight.BOLD, Main.FONT_SIZE));
 
-        controller.setScreen(Main.mapID);
+        controller.setScreen(Main.MAP_ID);
     }
 
-    @FXML public void goBack() {
-        controller.setScreen(Main.startingID);
+    @FXML public final void goBack() {
+        controller.setScreen(Main.STARTING_ID);
+    }
+
+    public ScreensController getController() {
+        return controller;
     }
 
 }

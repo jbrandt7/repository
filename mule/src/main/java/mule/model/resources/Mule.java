@@ -3,9 +3,6 @@ package mule.model.resources;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
-/**
- * Created by The Boat on 9/22/2015.
- */
 public class Mule extends Resource{
 
 	private static final int COST = 100;
@@ -16,48 +13,42 @@ public class Mule extends Resource{
 		super(COST);
 	}
 
-    public Mule(Resource type) {
+    public Mule(Resource t) {
 		super(COST);
-        this.type = type;
+        this.type = t;
     }
 
-    public void draw(Canvas rep, int x, int y) {
+    public final void draw(Canvas rep, int x, int y) {
         rep.getGraphicsContext2D().setFill(Color.BLACK);
 		rep.getGraphicsContext2D().fillRect(x, y, 15, 15);
     }
 
-	public int getCost() {
+	public final int getCost() {
 		if (type != null) {
 			return COST + type.getCost();
 		}
 		return COST;
 	}
 
-    public Resource getType() {
+    public final Resource getType() {
         return type;
     }
 
-	public void setType(Resource type) {
-		this.type = type;
-	}
-
-	public boolean equals(Object o) {
+	public final boolean equals(Object o) {
 		if (o == null) {
 			return false;
 		} else if (o == this) {
 			return true;
 		} else if (o instanceof Mule) {
 			Mule that = (Mule) o;
-			if (that.type == null) {
+			if (that.type == null || this.type == that.type) {
 				return true;
-			} else {
-				return this.type == that.type;
 			}
 		}
 		return false;
 	}
 
-	public int hashCode() {
+	public final int hashCode() {
 		if (type == null) {
 			return 31 * COST + 41;
 		}

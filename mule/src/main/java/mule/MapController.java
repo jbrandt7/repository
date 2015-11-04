@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
@@ -26,20 +25,12 @@ public class MapController implements Initializable, ControlledScreen {
 
     ScreensController controller;
 
-    @FXML StackPane root;
+    @FXML private Canvas mapParent;
 
-    @FXML Canvas mapParent;
+    @FXML private MenuBar menuBar;
+    private static MenuBar menuBarInstance;
 
-    @FXML Label mapText, timerLabel;
-    static Label _mapText, _timerLabel;
-
-    @FXML ToolBar infoBar;
-    static ToolBar _infoBar;
-
-    @FXML MenuBar menuBar;
-    static MenuBar _menuBar;
-
-    @Override public void initialize(URL url, ResourceBundle rb) {
+    @Override public final void initialize(URL url, ResourceBundle rb) {
         if (Main.getMap() == null) {
             Main.setMap(new Map(mapParent));
         } else {
@@ -49,68 +40,46 @@ public class MapController implements Initializable, ControlledScreen {
         startTimer();
 
         mapParent.addEventHandler(MouseEvent.MOUSE_CLICKED,
-            createLandSelectionHandler());
+                createLandSelectionHandler());
 
     }
 
-    public void goToTownScreen() {
-        Main.loadScene(Main.townID, Main.townFile);
-        Main.setHelperLabel(TownController.getHelperLabel());
-        Main.setTimerLabel(TownController.getTimerLabel());
-        Main.setInfoBar(TownController.getInfoBar());
+    public final void goToTownScreen() {
+        Main.loadScene(Main.TOWN_ID, Main.TOWN_FILE);
         Main.setMenuBar(TownController.getMenuBar());
-        controller.setScreen(Main.townID);
+        controller.setScreen(Main.TOWN_ID);
+
+        for (int i = 0; i < Main.getPlayerCount(); i++) {
+            MapController.updatePlayerMenu(i);
+        }
     }
 
-    public void setScreenParent(ScreensController screenParent) {
+    public final void setScreenParent(ScreensController screenParent) {
         controller = screenParent;
     }
 
-    @FXML public void saveGame() {
+    @FXML public final void saveGame() {
         Main.getDBController().saveGame();
     }
 
     private void incrementTurn() {
         if (Main.getTurn().hasNextPlayer()) {
-            ((Label) Main.getInfoBar().getItems().get(Main.getTurn()
-                    .getCurrentPlayer())).setFont(Font
-                    .font("System", FontWeight.NORMAL, 13));
-
             Main.getTurn().nextPlayer();
-
-            ((Label) Main.getInfoBar().getItems().get(Main.getTurn()
-                    .getCurrentPlayer())).setFont(Font
-                    .font("System", FontWeight.BOLD, 13));
         } else {
-            ((Label) Main.getInfoBar().getItems().get(Main.getTurn()
-                    .getCurrentPlayer())).setFont(Font
-                    .font("System", FontWeight.NORMAL, 13));
-
             Main.getTurn().nextStage();
             goToTownScreen();
-
-            ((Label) Main.getInfoBar().getItems().get(Main.getTurn()
-                    .getCurrentPlayer())).setFont(Font
-                    .font("System", FontWeight.BOLD, 13));
         }
     }
 
     private void setupInfoBar() {
+        menuBarInstance = menuBar;
+        Main.setMenuBar(menuBarInstance);
         for (int i = 0; i < Main.getPlayerCount(); i++) {
-            ((Label) infoBar.getItems().get(i))
-                    .setText(Main.getPlayer(i).toString());
-        }
+            updatePlayerMenu(i);        }
         for (int i = Main.getPlayerCount(); i < 4; i++) {
-            ((Label) infoBar.getItems().get(i)).setOpacity(0.0);
             menuBar.getMenus().get(i).setVisible(false);
         }
-        Main.setInfoBar(infoBar);
-        Main.setHelperLabel(mapText);
-        _mapText = mapText;
-        Main.setTimerLabel(timerLabel);
-        _timerLabel = timerLabel;
-        _infoBar = infoBar;
-        _menuBar = menuBar;
+
     }
 
     private void startTimer() {
@@ -118,11 +87,13 @@ public class MapController implements Initializable, ControlledScreen {
             public void handle(ActionEvent t) {
                 if (Main.getCurrentPlayer().getTimer().outOfTime()) {
                     Main.getCurrentPlayer().getTimer().reset();
-                    Main.getHelperLabel().setText(Main.getCurrentPlayer().getName()
-                            + " ran out of time, " + "skipping to next player");
+                    //Main.getHelperLabel().setText(Main.getCurrentPlayer().getName()
+                    //        + " ran out of time, " + "skipping to next player");
                     incrementTurn();
                 } else {
-                    Main.getTimerLabel().setText("Time: "
+                    //Main.getTimerLabel().setText("Time: "
+                    //        + Main.getCurrentPlayer().getTimer().getTime());
+                    Main.getMenuBar().getMenus().get(4).setText("Time: "
                             + Main.getCurrentPlayer().getTimer().getTime());
                     Main.getCurrentPlayer().getTimer().tick();
                 }
@@ -131,6 +102,20 @@ public class MapController implements Initializable, ControlledScreen {
         KeyFrame keyFrame = new KeyFrame(Duration.millis(1000), onFinished);
         Main.getTimeline().getKeyFrames().addAll(keyFrame);
         Main.getTimeline().play();
+    }
+
+    public static void updatePlayerMenu(int i) {
+        menuBarInstance.getMenus().get(i).setText(Main.getPlayer(i).getName());
+        menuBarInstance.getMenus().get(i).getItems().get(0).setText(
+                "Money: " + Main.getPlayer(i).getMoney());
+        menuBarInstance.getMenus().get(i).getItems().get(1).setText(
+                "Energy: " + Main.getPlayer(i).getResource(new Energy()));
+        menuBarInstance.getMenus().get(i).getItems().get(2).setText(
+                "Food: " + Main.getPlayer(i).getResource(new Food()));
+        menuBarInstance.getMenus().get(i).getItems().get(3).setText(
+                "Smithore: " + Main.getPlayer(i).getResource(new Smithore()));
+        menuBarInstance.getMenus().get(i).getItems().get(4).setText(
+                "Score: " + Main.getPlayer(i).getScore());
     }
 
     private EventHandler<MouseEvent> createLandSelectionHandler() {
@@ -143,13 +128,13 @@ public class MapController implements Initializable, ControlledScreen {
 
                     if (Main.getTurn().getCurrentStage() == Turn.LAND) {
 
-                        mapText.setText(Main.getCurrentPlayer().getName()
-                                + "passes, " + "no land bought");
+                        //mapText.setText(Main.getCurrentPlayer().getName()
+                        //        + "passes, " + "no land bought");
                         incrementTurn();
 
                     } else if (Main.getTurn().getCurrentStage() == Turn.TOWN){
                         Main.getCurrentPlayer().removeMule();
-                        mapText.setText("Mule lost, silly");
+                        //mapText.setText("Mule lost, silly");
                         goToTownScreen();
                     }
 
@@ -167,11 +152,11 @@ public class MapController implements Initializable, ControlledScreen {
                                 goToTownScreen();
                             } else {
                                 Main.getCurrentPlayer().removeMule();
-                                mapText.setText("Mule lost, silly");
+                                //mapText.setText("Mule lost, silly");
                                 goToTownScreen();
                             }
                         } else {
-                            mapText.setText("Can't buy, already bought!");
+                            //mapText.setText("Can't buy, already bought!");
                             goToTownScreen();
                         }
 
@@ -179,31 +164,27 @@ public class MapController implements Initializable, ControlledScreen {
 
                         if (Main.getTurn().getCurrentStage() == Turn.TOWN) {
                             Main.getCurrentPlayer().removeMule();
-                            mapText.setText("Mule lost, silly");
+                            //mapText.setText("Mule lost, silly");
                             goToTownScreen();
 
                         } else if (Main.getTurn().getCurrentTurn() > 1) {
 
                             if (selected.buy(Main.getCurrentPlayer())) {
 
-                                mapText.setText(Main.getCurrentPlayer().getName()
-                                        + " bought land");
-                                ((Label) infoBar.getItems().get(Main
-                                        .getTurn().getCurrentPlayer()))
-                                        .setText(Main.getCurrentPlayer()
-                                        .toString());
+                                //mapText.setText(Main.getCurrentPlayer().getName()
+                                 //       + " bought land");
                                 incrementTurn();
 
                             } else {
 
-                                mapText.setText("Could not buy land");
+                                //mapText.setText("Could not buy land");
 
                             }
                         } else {
 
                             Main.getCurrentPlayer().addPlot(selected);
-                            mapText.setText(Main.getCurrentPlayer().getName()
-                                    + " granted land");
+                            //mapText.setText(Main.getCurrentPlayer().getName()
+                            //      + " granted land");
                             incrementTurn();
 
                         }
@@ -213,11 +194,5 @@ public class MapController implements Initializable, ControlledScreen {
         };
     }
 
-    public static Label getHelperLabel() { return _mapText; }
-
-    public static Label getTimerLabel() { return _timerLabel; }
-
-    public static ToolBar getInfoBar() { return _infoBar; }
-
-    public static MenuBar getMenuBar() { return _menuBar; }
+    public static MenuBar getMenuBar() { return menuBarInstance; }
 }

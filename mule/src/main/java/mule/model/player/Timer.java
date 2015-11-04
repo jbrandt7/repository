@@ -1,4 +1,4 @@
-package mule.model;
+package mule.model.player;
 
 public class Timer implements java.io.Serializable {
 
@@ -11,19 +11,19 @@ public class Timer implements java.io.Serializable {
         time = TOTAL_TIME;
     }
 
-    public void tick() {
+    public final void tick() {
         time--;
     }
 
-    public void reset() {
+    public final void reset() {
         time = TOTAL_TIME;
     }
 
-    public boolean outOfTime() {
+    public final boolean outOfTime() {
         return time == 0;
     }
 
-    public int getTime() {
+    public final int getTime() {
         return time;
     }
 

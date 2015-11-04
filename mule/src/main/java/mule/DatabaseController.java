@@ -1,7 +1,6 @@
 package mule;
 
 import java.sql.*;
-import com.mysql.jdbc.Driver;
 import java.io.ObjectInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -16,16 +15,21 @@ import mule.model.town.*;
 
 public class DatabaseController {
 
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/mule";
-
-    static final String USER = "root";
-    static final String PASSWORD = "password";
+    private static final String DB_URL = "jdbc:sqlite:saves.db";
 
     private static Connection conn;
-    private static Statement statement;
 
-    public List<String> getSaves() {
+    private static final int TURN_COL = 7;
+    private static final int MAP_COL = 8;
+    private static final int TOWN_COL = 9;
+    private static final int PLAYER_START_COL = 3;
+
+    private static final int U_TURN_COL = 1;
+    private static final int U_MAP_COL = 2;
+    private static final int U_TOWN_COL = 3;
+    private static final int U_NAME_COL = 4;
+
+    public final List<String> getSaves() {
         PreparedStatement selectSaves = null;
         try {
             openConnection();
@@ -42,8 +46,6 @@ public class DatabaseController {
             return result;
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             try {
@@ -64,39 +66,65 @@ public class DatabaseController {
         return null;
     }
 
-    public void saveGame() {
+    public final void saveGame() {
         PreparedStatement insertSave = null;
         try {
+
+            boolean updateNotInsert = checkName(Main.getSaveName());
+
             openConnection();
 
-            String insert = "INSERT INTO mule.saves (name, total_player_count,"
-                    + " player1, player2, player3, player4, turn, map,"
-                    + " town, time_saved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql;
 
-            insertSave = conn.prepareStatement(insert);
-            insertSave.setString(1, Main.getSaveName());
-            insertSave.setInt(2, Main.getPlayerCount());
+            if (!updateNotInsert) {
+                sql = "UPDATE saves SET "; 
 
-            for (int i = 0; i < Main.getPlayerCount(); i++) {
-                insertSave.setObject(i + 3, Main.getPlayer(i));
+                for (int i = 0; i < Main.getPlayerCount(); i++) {
+                    sql = sql + "player" + (i + 1) + "=?, ";
+                }
+
+                sql = sql + "turn=?, map=?, town=? WHERE name=?";
+
+                insertSave = conn.prepareStatement(sql);
+
+                for (int i = 0; i < Main.getPlayerCount(); i++) {
+                    insertSave.setObject(i + 1, Main.getPlayer(i));
+                }
+
+                insertSave.setObject(Main.getPlayerCount() + U_TURN_COL, Main.getTurn());
+                insertSave.setObject(Main.getPlayerCount() + U_NAME_COL, Main.getMap());
+                insertSave.setObject(Main.getPlayerCount() + U_TOWN_COL, Main.getTown());
+
+                insertSave.setString(Main.getPlayerCount() + U_NAME_COL, Main.getSaveName());
+            } else {
+
+                sql = "INSERT INTO mule.saves (name, total_player_count,"
+                        + " player1, player2, player3, player4, turn, map,"
+                        + " town, time_saved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                insertSave = conn.prepareStatement(sql);
+                insertSave.setString(1, Main.getSaveName());
+                insertSave.setInt(2, Main.getPlayerCount());
+
+                for (int i = 0; i < Main.getPlayerCount(); i++) {
+                    insertSave.setObject(i + PLAYER_START_COL, Main.getPlayer(i));
+                }
+
+                for (int i = Main.getPlayerCount(); i < Main.MAX_PLAYERS; i++) {
+                    insertSave.setNull(i + PLAYER_START_COL, Types.BLOB);
+                }
+
+                insertSave.setObject(TURN_COL, Main.getTurn());
+                insertSave.setObject(MAP_COL, Main.getMap());
+                insertSave.setObject(TOWN_COL, Main.getTown());
+
+                long now = new java.util.Date().getTime();
+                Date sqlDate = new Date(now);
+                insertSave.setDate(10, sqlDate);
             }
-
-            for (int i = Main.getPlayerCount(); i < 4; i++) {
-                insertSave.setNull(i + 3, Types.BLOB);
-            }
-
-            insertSave.setObject(7, Main.getTurn());
-            insertSave.setObject(8, Main.getMap());
-            insertSave.setObject(9, Main.getTown());
-
-            long now = new java.util.Date().getTime();
-            Date sql_date = new Date(now);
-            insertSave.setDate(10, sql_date);
 
             insertSave.executeUpdate();
         } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             try {
@@ -116,7 +144,7 @@ public class DatabaseController {
         }
     }
 
-    public void loadGame(String id) {
+    public final void loadGame(String id) {
         PreparedStatement selectSave = null;
         try {
             openConnection();
@@ -139,20 +167,17 @@ public class DatabaseController {
                 Main.setPlayer(i - 2, (Player) readInObject(buf));
             }
 
-            buf = result.getBytes(6);
+            buf = result.getBytes(TURN_COL - 1);
             Main.setTurn((Turn) readInObject(buf));
 
-            buf = result.getBytes(7);
+            buf = result.getBytes(MAP_COL - 1);
             Main.setMap((Map) readInObject(buf));
 
-            buf = result.getBytes(8);
+            buf = result.getBytes(TOWN_COL - 1);
             Main.setTown((Town) readInObject(buf));
 
-            Main.setSaveName(result.getString(10));
-            System.out.println(Main.getTurn().TOWN);
+            Main.setSaveName(id);
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -173,7 +198,7 @@ public class DatabaseController {
         }
     }
 
-    public boolean checkName(String toCheck) {
+    public final boolean checkName(String toCheck) {
         PreparedStatement selectSaves = null;
         try {
             openConnection();
@@ -188,9 +213,6 @@ public class DatabaseController {
             }
 
             return true;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -209,12 +231,11 @@ public class DatabaseController {
                 ex.printStackTrace();
             }
         }
-        return true;
+        return false;
     }
 
-    private void openConnection() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.jdbc.Driver");
-        conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+    private void openConnection() throws SQLException {
+        conn = DriverManager.getConnection(DB_URL);
     }
 
     private void closeConnection() throws SQLException {
@@ -223,8 +244,9 @@ public class DatabaseController {
 
     private Object readInObject(byte[] buf) throws IOException, ClassNotFoundException {
         ObjectInputStream objectIn = null;
-        if (buf != null)
+        if (buf != null) {
             objectIn = new ObjectInputStream(new ByteArrayInputStream(buf));
+        }
         return objectIn.readObject();
     }
 

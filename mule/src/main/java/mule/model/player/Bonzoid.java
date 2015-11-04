@@ -1,6 +1,5 @@
 package mule.model.player;
 
-import java.util.ArrayList;
 import javafx.scene.paint.Color;
 
 import mule.model.map.*;

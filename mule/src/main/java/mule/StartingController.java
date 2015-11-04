@@ -2,45 +2,28 @@ package mule;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.text.*;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.animation.*;
-import javafx.event.*;
-import javafx.util.Duration;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
+import javafx.fxml.FXML;
 
-import mule.model.*;
-import mule.model.map.*;
-import mule.model.town.*;
-import mule.model.resources.*;
-import mule.model.player.*;
 
 public class StartingController implements Initializable, ControlledScreen {
 
-    ScreensController controller; 
-
-    @FXML Button toConfigButton, loadGameButton;
+    private ScreensController controller;
 
     @Override public void initialize(URL url, ResourceBundle rb) {
     }
 
     @FXML public void toConfigScreen() {
-        controller.setScreen(Main.configureID);
+        controller.setScreen(Main.CONFIGURE_ID);
     }
 
-    @FXML public void toLoadGameScreen() {
-        Main.loadScene(Main.loadID, Main.loadFile);
-        controller.setScreen(Main.loadID);
+    @FXML public final void toLoadGameScreen() {
+        Main.loadScene(Main.LOAD_ID, Main.LOAD_FILE);
+        controller.setScreen(Main.LOAD_ID);
     }
 
-    public void setScreenParent(ScreensController screenParent) {
+    public final void setScreenParent(ScreensController screenParent) {
         controller = screenParent;
     }
 }

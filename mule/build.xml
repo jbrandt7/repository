@@ -46,6 +46,11 @@
         </jar>
     </target>
 
+    <target name="build-jar" description="Build and create jar">
+        <antcall target="build" />
+        <antcall target="jar" />
+    </target>
+
     <target name="run">
         <java jar="mule.jar" fork="true"/>
     </target>

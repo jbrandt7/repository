@@ -5,9 +5,8 @@ import javafx.scene.paint.Color;
 
 public class AssayStore extends Store {
 
-    public AssayStore(Rectangle rep) {
-        super(rep);
-        rep.setFill(Color.BLACK);
+    public AssayStore() {
+        super();
     }
 
 }

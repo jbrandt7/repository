@@ -12,6 +12,7 @@ import javafx.scene.layout.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.canvas.Canvas;
 
 import mule.model.*;
 import mule.model.map.*;
@@ -21,22 +22,15 @@ import mule.model.player.*;
 
 public class TownController implements Initializable, ControlledScreen {
 
-    ScreensController controller;
+    private ScreensController controller;
 
-    @FXML StackPane root;
 
-    @FXML Group townParent;
+    @FXML private Canvas townParent;
 
-    @FXML ToolBar infoBar;
-    static ToolBar _infoBar;
+    @FXML private MenuBar menuBar;
+    private static MenuBar menuBarInstance;
 
-    @FXML Label timerLabel, mapText;
-    static Label _timerLabel, _mapText;
-
-    @FXML MenuBar menuBar;
-    static MenuBar _menuBar;
-
-    @Override public void initialize(URL url, ResourceBundle rb) {
+    @Override public final void initialize(URL url, ResourceBundle rb) {
         Main.setTown(new Town(townParent));
         setupInfoBar();
 
@@ -50,58 +44,35 @@ public class TownController implements Initializable, ControlledScreen {
             });
     }
 
-    public void processClick(int x, int y) {
-            if (x >= 337.5 && y >= 250) {
+    public final void processClick(int x, int y) {
+            if (x >= Town.STORE_WIDTH && y >= Town.STORE_HEIGHT * 2) {
                 Main.getTown().getPub().cashOut(Main.getCurrentPlayer());
-                ((Label) infoBar.getItems().get(Main.getTurn()
-                        .getCurrentPlayer())).setText(Main.getCurrentPlayer().toString());
                 incrementTurn();
-            } else if (x < 337.5 && y < 250) {
+            } else if (x < Town.STORE_WIDTH && y < Town.STORE_HEIGHT * 2) {
                 goToStoreScreen();
             }
     }
 
-    public void incrementTurn() {
+    public final void incrementTurn() {
         if (Main.getTurn().hasNextPlayer()) {
-            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
-                    .setFont(Font.font("System", FontWeight.NORMAL, 13));
-
             Main.getTurn().nextPlayer();
-
-            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
-                    .setFont(Font.font("System", FontWeight.BOLD, 13));
         } else if (Main.getTurn().hasNextTurn()) {
-            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
-                    .setFont(Font.font("System", FontWeight.NORMAL, 13));
-
             Main.getTurn().nextTurn();
             goToMapScreen();
-
-            ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
-                    .setFont(Font.font("System", FontWeight.BOLD, 13));
         }
     }
 
-    public void goToMapScreen() {
-        controller.setScreen(Main.mapID);
-
-        Main.setHelperLabel(MapController.getHelperLabel());
-        Main.setTimerLabel(MapController.getTimerLabel());
-        Main.setInfoBar(MapController.getInfoBar());
+    public final void goToMapScreen() {
+        controller.setScreen(Main.MAP_ID);
 
         for (int i = 0; i < Main.getPlayerCount(); i++) {
-            ((Label) MapController.getInfoBar().getItems().get(i)).setText(Main
-                    .getPlayer(i).toString());
+            MapController.updatePlayerMenu(i);
         }
     }
 
-    public void goToStoreScreen() {
-        Main.loadScene(Main.storeID, Main.storeFile);
-        controller.setScreen(Main.storeID);
-
-        Main.setHelperLabel(StoreController.getHelperLabel());
-        Main.setTimerLabel(StoreController.getTimerLabel());
-        Main.setInfoBar(StoreController.getInfoBar());
+    public final void goToStoreScreen() {
+        Main.loadScene(Main.STORE_ID, Main.STORE_FILE);
+        controller.setScreen(Main.STORE_ID);
 
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             ((Label) StoreController.getInfoBar().getItems().get(i)).setText(Main
@@ -113,30 +84,35 @@ public class TownController implements Initializable, ControlledScreen {
     }
 
 
-    public void setScreenParent(ScreensController screenParent) {
+    public final void setScreenParent(ScreensController screenParent) {
         controller = screenParent;
     }
 
-    private void setupInfoBar() {
+    private final void setupInfoBar() {
+        menuBarInstance = menuBar;
         for (int i = 0; i < Main.getPlayerCount(); i++) {
-            ((Label) infoBar.getItems().get(i)).setText(Main.getPlayer(i).toString());
+            updatePlayerMenu(i);
         }
         for (int i = Main.getPlayerCount(); i < 4; i++) {
-            ((Label) infoBar.getItems().get(i)).setOpacity(0.0);
             menuBar.getMenus().get(i).setVisible(false);
         }
-        _mapText = mapText;
-        _timerLabel = timerLabel;
-        _infoBar = infoBar;
-        _menuBar = menuBar;
     }
 
-    public static Label getHelperLabel() { return _mapText; }
+    public static void updatePlayerMenu(int i) {
+        menuBarInstance.getMenus().get(i).setText(Main.getPlayer(i).getName());
+        menuBarInstance.getMenus().get(i).getItems().get(0).setText(
+                "Money: " + Main.getPlayer(i).getMoney());
+        menuBarInstance.getMenus().get(i).getItems().get(1).setText(
+                "Energy: " + Main.getPlayer(i).getResource(new Energy()));
+        menuBarInstance.getMenus().get(i).getItems().get(2).setText(
+                "Food: " + Main.getPlayer(i).getResource(new Food()));
+        menuBarInstance.getMenus().get(i).getItems().get(3).setText(
+                "Smithore: " + Main.getPlayer(i).getResource(new Smithore()));
+        menuBarInstance.getMenus().get(i).getItems().get(4).setText(
+                "Score: " + Main.getPlayer(i).getScore());
+    }
 
-    public static Label getTimerLabel() { return _timerLabel; }
 
-    public static ToolBar getInfoBar() { return _infoBar; }
-
-    public static MenuBar getMenuBar() { return _menuBar; }
+    public static MenuBar getMenuBar() { return menuBarInstance; }
 
 }

@@ -2,30 +2,24 @@ package mule;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
-import javafx.animation.*;
-import javafx.event.*;
-import javafx.util.Duration;
 import javafx.scene.paint.Color;
 import javafx.collections.FXCollections;
 
 import mule.model.*;
-import mule.model.map.*;
-import mule.model.town.*;
 import mule.model.player.*;
 
 public class PlayersController implements Initializable, ControlledScreen {
 
-    ScreensController controller;
+    private ScreensController controller;
 
     @FXML private VBox playersBox;
 
-    @Override public void initialize(URL url, ResourceBundle rb) {
+    @Override public final void initialize(URL url, ResourceBundle rb) {
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             ((ChoiceBox)((HBox) playersBox.getChildren().get(i))
                     .getChildren().get(1)).setItems(FXCollections
@@ -40,19 +34,16 @@ public class PlayersController implements Initializable, ControlledScreen {
         }
     }
 
-    public void setScreenParent(ScreensController screenParent) {
+    public final void setScreenParent(ScreensController screenParent) {
         controller = screenParent;
     }
 
-    @FXML private void goToMapScreen(ActionEvent event) {
+    @FXML private final void goToMapScreen() {
         if (processPlayers()) {
             initializeTurn();
-            Main.loadScene(Main.mapID, Main.mapFile);
+            Main.loadScene(Main.MAP_ID, Main.MAP_FILE);
 
-            ((Label) Main.getInfoBar().getItems().get(0))
-                    .setFont(Font.font("System", FontWeight.BOLD, 13));
-
-            controller.setScreen(Main.mapID);
+            controller.setScreen(Main.MAP_ID);
         }
     }
 
@@ -61,8 +52,9 @@ public class PlayersController implements Initializable, ControlledScreen {
             String name = ((TextField)((HBox) playersBox.getChildren()
                     .get(i)).getChildren().get(0)).getCharacters().toString();
 
-            if (name.equals(""))
+            if (name.equals("")) {
                 return false;
+            }
 
             String race = (String) ((ChoiceBox)((HBox) playersBox
                     .getChildren().get(i)).getChildren().get(1)).getValue();
@@ -71,16 +63,21 @@ public class PlayersController implements Initializable, ControlledScreen {
 
             Player p;
 
-            if (race.equals("Human")) {
-                p = new Human(name, color);
-            } else if (race.equals("Bonzoid")) {
-                p = new Bonzoid(name, color);
-            } else if (race.equals("Ugaite")) {
-                p = new Ugaite(name, color);
-            } else if (race.equals("Buzzite")) {
-                p = new Buzzite(name, color);
-            } else {
-                p = new Flapper(name, color);
+            switch (race) {
+                case ("Human"):
+                    p = new Human(name, color);
+                    break;
+                case ("Bonzoid"):
+                    p = new Bonzoid(name, color);
+                    break;
+                case ("Ugaite"):
+                    p = new Ugaite(name, color);
+                    break;
+                case ("Buzzite"):
+                    p = new Buzzite(name, color);
+                    break;
+                default:
+                    p = new Flapper(name, color);
             }
 
             Main.setPlayer(i, p);

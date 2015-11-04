@@ -8,12 +8,11 @@ import mule.model.player.*;
 
 public class Pub extends Store {
 
-    public Pub(Rectangle rep) {
-        super(rep);
-        rep.setFill(Color.RED);
+    public Pub() {
+        super();
     }
 
-    public void cashOut(Player player) {
+    public final void cashOut(Player player) {
         player.addMoney(player.getTimer().getTime());
         player.updateScore();
     }

@@ -8,7 +8,7 @@ public class Crystite extends Resource {
 		super(VALUE);
 	}
 
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (o == null) {
             return false;
         } else if (this == o) {
@@ -19,7 +19,7 @@ public class Crystite extends Resource {
         return false;
     }
 
-    public String toString() {
+    public final String toString() {
         return "Crystite";
     }
 

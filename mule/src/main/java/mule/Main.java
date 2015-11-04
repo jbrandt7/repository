@@ -1,17 +1,11 @@
 package mule;
 
-import java.util.ArrayList;
-
-import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.*;
 import javafx.animation.*;
 import javafx.event.*;
 import javafx.stage.Stage;
-import javafx.scene.layout.StackPane;
 import javafx.scene.control.*;
-import javafx.fxml.FXMLLoader;
-import javafx.util.Duration;
 
 import mule.model.*;
 import mule.model.map.*;
@@ -23,9 +17,9 @@ public class Main extends Application {
 
     private static Stage stage;
 
-    private static Player[] players = new Player[4];
+    private static Player[] players = new Player[Main.MAX_PLAYERS];
 
-    private static int playerCount, currentPlayer, time;
+    private static int playerCount;
 
     private static Turn turn;
 
@@ -49,27 +43,31 @@ public class Main extends Application {
 
     private static String saveGame;
 
-    public static String startingID = "start";
-    public static String startingFile = "view/StartingScreen.fxml";
-    public static String loadID = "load";
-    public static String loadFile = "view/LoadGameScreen.fxml";
-    public static String configureID = "configure";
-    public static String configureFile = "view/GameConfigurationScreen.fxml";
-    public static String playerConID = "playerCon";
-    public static String playerConFile = "view/PlayerConfigurationScreen.fxml";
-    public static String mapID = "map";
-    public static String mapFile = "view/MapScreen.fxml";
-    public static String storeID = "store";
-    public static String storeFile = "view/StoreScreen.fxml";
-    public static String townID = "town";
-    public static String townFile = "view/TownScreen.fxml";
+    public static final String STARTING_ID = "start";
+    public static final String STARTING_FILE = "view/StartingScreen.fxml";
+    public static final String LOAD_ID = "load";
+    public static final String LOAD_FILE = "view/LoadGameScreen.fxml";
+    public static final String CONFIGURE_ID = "configure";
+    public static final String CONFIGURE_FILE = "view/GameConfigurationScreen.fxml";
+    public static final String PLAYER_CONFIG_ID = "playerCon";
+    public static final String PLAYER_CONFIG_FILE = "view/PlayerConfigurationScreen.fxml";
+    public static final String MAP_ID = "map";
+    public static final String MAP_FILE = "view/MapScreen.fxml";
+    public static final String STORE_ID = "store";
+    public static final String STORE_FILE = "view/StoreScreen.fxml";
+    public static final String TOWN_ID = "town";
+    public static final String TOWN_FILE = "view/TownScreen.fxml";
+
+    public static final int MAX_PLAYERS = 4;
+    public static final int FONT_SIZE = 13;
+    public static final String FONT = "System";
 
     @Override
-    public void start(Stage stage) {
+    public final void start(Stage primaryStage) {
         mainContainer = new ScreensController();
-        mainContainer.loadScreen(Main.startingID, Main.startingFile);
-        mainContainer.loadScreen(Main.configureID, Main.configureFile);
-        mainContainer.setScreen(Main.startingID);
+        mainContainer.loadScreen(Main.STARTING_ID, Main.STARTING_FILE);
+        mainContainer.loadScreen(Main.CONFIGURE_ID, Main.CONFIGURE_FILE);
+        mainContainer.setScreen(Main.STARTING_ID);
 
         timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -78,8 +76,8 @@ public class Main extends Application {
 
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
-        stage.setScene(new Scene(root));
-        stage.show();
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
 
         timeline.play();
     }
@@ -101,55 +99,101 @@ public class Main extends Application {
         }
     }
 
-    public static Stage getStage() { return stage; }
+    public static Stage getStage() {
+        return stage;
+    }
 
-    public static void setMap(Map m) { map = m; }
+    public static void setMap(Map m) {
+        map = m;
+    }
 
-    public static void setTown(Town t) { town = t; }
+    public static void setTown(Town t) {
+        town = t;
+    }
 
-    public static Timeline getTimeline() { return timeline; }
+    public static Timeline getTimeline() {
+        return timeline;
+    }
 
-    public static Map getMap() { return map; }
+    public static Map getMap() {
+        return map;
+    }
 
-    public static Town getTown() { return town; }
+    public static Town getTown() {
+        return town;
+    }
 
-    public static int getPlayerCount() { return playerCount; }
+    public static int getPlayerCount() {
+        return playerCount;
+    }
 
-    public static Player getPlayer(int i) { return players[i]; }
+    public static Player getPlayer(int i) {
+        return players[i];
+    }
 
-    public static String getSaveName() { return saveGame; }
+    public static String getSaveName() {
+        return saveGame;
+    }
 
-    public static void setSaveName(String s) { saveGame = s; }
+    public static void setSaveName(String s) {
+        saveGame = s;
+    }
 
-    public static void setPlayer(int i, Player p) { players[i] = p; }
+    public static void setPlayer(int i, Player p) {
+        players[i] = p;
+    }
 
-    public static void setPlayerCount(int number) { playerCount = number; }
+    public static void setPlayerCount(int number) {
+        playerCount = number;
+    }
 
     public static Player getCurrentPlayer() {
         return players[turn.getCurrentPlayer()];
     }
 
-    public static DatabaseController getDBController() { return dbController; }
+    public static DatabaseController getDBController() {
+        return dbController;
+    }
 
-    public static void setTurn(Turn t) { turn = t; }
+    public static void setTurn(Turn t) {
+        turn = t;
+    }
 
-    public static Turn getTurn() { return turn; }
+    public static Turn getTurn() {
+        return turn;
+    }
 
-    public static MenuBar getMenuBar() { return menuBar; }
+    public static MenuBar getMenuBar() {
+        return menuBar;
+    }
 
-    public static void setMenuBar(MenuBar m) { menuBar = m; }
+    public static void setMenuBar(MenuBar m) {
+        menuBar = m;
+    }
 
-    public static ToolBar getInfoBar() { return infoBar; }
+    public static ToolBar getInfoBar() {
+        return infoBar;
+    }
 
-    public static void setInfoBar(ToolBar t) { infoBar = t; }
+    public static void setInfoBar(ToolBar t) {
+        infoBar = t;
+    }
 
-    public static Label getHelperLabel() { return helperLabel; }
+    public static Label getHelperLabel() {
+        return helperLabel;
+    }
 
-    public static void setHelperLabel(Label l) { helperLabel = l; }
+    public static void setHelperLabel(Label l) {
+        helperLabel = l;
+    }
 
-    public static Label getTimerLabel() { return timerLabel; }
+    public static Label getTimerLabel() {
+        return timerLabel;
+    }
 
-    public static void setTimerLabel(Label l) { timerLabel = l; }
+    public static void setTimerLabel(Label l) {
+        timerLabel = l;
+    }
 
     public static boolean loadScene(String name, String resource) {
         return mainContainer.loadScreen(name, resource);

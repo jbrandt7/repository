@@ -1,0 +1,4 @@
+#pane {
+    -fx-background-image: url("starting.jpg");
+    -fx-background-position: center center;
+}
