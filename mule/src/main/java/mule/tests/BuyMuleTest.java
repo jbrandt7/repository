@@ -19,7 +19,6 @@ public class BuyMuleTest {
     public void setUp() {
         store = new Store();
         player = new Human("Kyle", Color.BLUE);
-        food = new Food();
     }
 
     @Test
