@@ -54,35 +54,43 @@ public class UpdateScoreTest {
     }
     @Test
     public void testMoneyEffectOnScore() {
-        int expectedScore = 1000;
+        p = new Human("Jay", Color.BLUE);
+        p.updateScore();
+        int expectedScore = 940;
         Assert.assertEquals(p.getScore(), expectedScore);
 
-        expectedScore = 0;
+        expectedScore = p.getScore() - p.getMoney();
         p.removeMoney(1001);
+        p.updateScore();
         Assert.assertEquals(p.getScore(), expectedScore);
 
-        expectedScore = 10;
+        expectedScore = expectedScore + 10;
         p.addMoney(10);
+        p.updateScore();
         Assert.assertEquals(p.getScore(), expectedScore);
-        p.addMoney(-10);
 
     }
     @Test
     public void testPlotScoreCount() {
+        p = new Human("Jay", Color.BLUE);
+        p.updateScore();
         p.addPlot(new RiverPlot(new Canvas(), 0, 0));
-        int expectedScore = 300;
+        int expectedScore = 300 + p.getScore();
+        p.updateScore();
         Assert.assertEquals(p.getScore(), expectedScore);
     }
     @Test
     public void testUpdateScore() {
         p = new Human("Jay", Color.BLUE);
-        int expectedScore = 1340;
+        p.updateScore();
+        int expectedScore = 940;
         Assert.assertEquals(p.getScore(), expectedScore);
 
         p.addMoney(100);
         p.addPlot(new RiverPlot(new Canvas(), 20, 20));
         p.addResource(new Crystite(), 2);
-        expectedScore = 1940;
+        expectedScore = 1540;
+        p.updateScore();
         Assert.assertEquals(p.getScore(), expectedScore);
     }
 
