@@ -26,7 +26,7 @@ public class Store implements java.io.Serializable {
     }
 
     public final boolean buyResource(Player p, Resource r) {
-   	    if (p.getMoney() < r.getCost()) {
+   	    if (p.getMoney() < r.getCost() || getResource(r) == 0) {
             return false;
         }
         inventory.put(r, inventory.get(r) - 1);
@@ -54,6 +54,10 @@ public class Store implements java.io.Serializable {
         p.addMule(toAdd);
         p.removeMoney(toAdd.getCost());
         return true;
+    }
+
+    public final int getResource(Resource r) {
+        return inventory.get(r);
     }
 
 }

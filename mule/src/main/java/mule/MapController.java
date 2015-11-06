@@ -124,75 +124,75 @@ public class MapController implements Initializable, ControlledScreen {
                 int x = (int) ((event.getSceneX()) / 75);
                 int y = (int) ((event.getSceneY() - 30) / 75);
 
-                if (x == Map.MAP_WIDTH / 2 && y == Map.MAP_HEIGHT / 2) {
-
-                    if (Main.getTurn().getCurrentStage() == Turn.LAND) {
-
-                        //mapText.setText(Main.getCurrentPlayer().getName()
-                        //        + "passes, " + "no land bought");
-                        incrementTurn();
-
-                    } else if (Main.getTurn().getCurrentStage() == Turn.TOWN){
-                        Main.getCurrentPlayer().removeMule();
-                        //mapText.setText("Mule lost, silly");
-                        goToTownScreen();
-                    }
-
+                if (isTown(x, y)) {
+                    processTownClick();
                 } else {
-
                     Plot selected = Main.getMap().getPlot(x, y);
-
                     if (selected.hasOwner()) {
-
-                        if (Main.getTurn().getCurrentStage() == Turn.TOWN) {
-                            if (selected.getOwner().equals(Main.getCurrentPlayer())
-                                    && selected.notOutfitted()) {
-                                Mule temp = Main.getCurrentPlayer().removeMule();
-                                selected.outfit(temp);
-                                goToTownScreen();
-                            } else {
-                                Main.getCurrentPlayer().removeMule();
-                                //mapText.setText("Mule lost, silly");
-                                goToTownScreen();
-                            }
-                        } else {
-                            //mapText.setText("Can't buy, already bought!");
-                            goToTownScreen();
-                        }
-
+                        processLandOwnedClick(selected);
                     } else {
-
-                        if (Main.getTurn().getCurrentStage() == Turn.TOWN) {
-                            Main.getCurrentPlayer().removeMule();
-                            //mapText.setText("Mule lost, silly");
-                            goToTownScreen();
-
-                        } else if (Main.getTurn().getCurrentTurn() > 1) {
-
-                            if (selected.buy(Main.getCurrentPlayer())) {
-
-                                //mapText.setText(Main.getCurrentPlayer().getName()
-                                 //       + " bought land");
-                                incrementTurn();
-
-                            } else {
-
-                                //mapText.setText("Could not buy land");
-
-                            }
-                        } else {
-
-                            Main.getCurrentPlayer().addPlot(selected);
-                            //mapText.setText(Main.getCurrentPlayer().getName()
-                            //      + " granted land");
-                            incrementTurn();
-
-                        }
+                        processLandNotOwnedClick(selected);
                     }
                 }
             }
         };
     }
+
+    private boolean isTown(int x, int y) {
+        return x == Map.MAP_WIDTH / 2 && y == Map.MAP_HEIGHT / 2;
+    }
+
+    private void processTownClick() {
+        if (Main.getTurn().getCurrentStage() == Turn.LAND) {
+            //mapText.setText(Main.getCurrentPlayer().getName()
+            //        + "passes, " + "no land bought");
+            incrementTurn();
+        } else if (Main.getTurn().getCurrentStage() == Turn.TOWN) {
+            Main.getCurrentPlayer().removeMule();
+            //mapText.setText("Mule lost, silly");
+            goToTownScreen();
+        }
+    }
+
+    private void processLandOwnedClick(Plot selected) {
+        if (Main.getTurn().getCurrentStage() == Turn.TOWN) {
+            if (selected.getOwner().equals(Main.getCurrentPlayer())
+                    && selected.notOutfitted()) {
+                Mule temp = Main.getCurrentPlayer().removeMule();
+                selected.outfit(temp);
+                goToTownScreen();
+            } else {
+                Main.getCurrentPlayer().removeMule();
+                //mapText.setText("Mule lost, silly");
+                goToTownScreen();
+            }
+        } else {
+            //mapText.setText("Can't buy, already bought!");
+            goToTownScreen();
+        }
+    }
+
+    private void processLandNotOwnedClick(Plot selected) {
+        if (Main.getTurn().getCurrentStage() == Turn.TOWN) {
+            Main.getCurrentPlayer().removeMule();
+            //mapText.setText("Mule lost, silly");
+            goToTownScreen();
+        } else if (Main.getTurn().getCurrentTurn() > 1) {
+            if (selected.buy(Main.getCurrentPlayer())) {
+                //mapText.setText(Main.getCurrentPlayer().getName()
+                 //       + " bought land");
+                incrementTurn();
+            } else {
+                //mapText.setText("Could not buy land");
+            }
+        } else {
+            Main.getCurrentPlayer().addPlot(selected);
+            //mapText.setText(Main.getCurrentPlayer().getName()
+            //      + " granted land");
+            incrementTurn();
+        }
+    }
+
 
     public static MenuBar getMenuBar() { return menuBarInstance; }
 }

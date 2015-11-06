@@ -43,7 +43,7 @@ public class LoadGameController implements Initializable, ControlledScreen {
         Main.getDBController().loadGame(gameID);
         Main.loadScene(Main.MAP_ID, Main.MAP_FILE);
 
-        ((Label) Main.getInfoBar().getItems().get(0)) .setFont(Font.font("System", FontWeight.BOLD, Main.FONT_SIZE));
+        //((Label) Main.getInfoBar().getItems().get(0)) .setFont(Font.font("System", FontWeight.BOLD, Main.FONT_SIZE));
 
         controller.setScreen(Main.MAP_ID);
     }
