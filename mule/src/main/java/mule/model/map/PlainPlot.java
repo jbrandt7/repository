@@ -5,27 +5,23 @@ import mule.model.resources.*;
 import javafx.scene.image.Image;
 
 /**
- * Created by harrylane on 9/18/15.
+ * A standard plaint plot
  */
 public class PlainPlot extends Plot {
 
     private static final long serialVersionUID = 42L;
 
-    private static final int ENERGYBONUS = 2;
-
     public PlainPlot(Canvas rep, int x, int y) {
         super(rep, x, y);
     }
 
-    public final int getBonus() {
-        return ENERGYBONUS;
-    }
-
+    @Override
     public final void drawBackground() {
         Image image = new Image("mule/view/plain.jpg", false);
         rep.getGraphicsContext2D().drawImage(image, location[0], location[1]);
     }
 
+    @Override
     public final boolean produce() {
         if (outfitted() && hasOwner()
                 && owner.getBag().get(new Energy()) > 0) {

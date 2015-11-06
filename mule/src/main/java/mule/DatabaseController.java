@@ -103,7 +103,7 @@ public class DatabaseController {
                 }
 
                 insertSave.setBytes(Main.getPlayerCount() + U_TURN_COL, writeInObject(Main.getTurn()));
-                insertSave.setBytes(Main.getPlayerCount() + U_NAME_COL, writeInObject(Main.getMap()));
+                insertSave.setBytes(Main.getPlayerCount() + U_MAP_COL, writeInObject(Main.getMap()));
                 insertSave.setBytes(Main.getPlayerCount() + U_TOWN_COL, writeInObject(Main.getTown()));
 
                 insertSave.setString(Main.getPlayerCount() + U_NAME_COL, Main.getSaveName());
@@ -189,6 +189,8 @@ public class DatabaseController {
 
             Main.setSaveName(id);
 
+            result.close();
+
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -209,7 +211,7 @@ public class DatabaseController {
         }
     }
 
-    public final boolean checkName(String toCheck) {
+    private boolean checkName(String toCheck) {
         PreparedStatement selectSaves = null;
         try {
             openConnection();
@@ -222,6 +224,8 @@ public class DatabaseController {
                     return false;
                 }
             }
+
+            saves.close();
 
             return true;
         } catch (Exception ex) {

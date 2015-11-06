@@ -3,6 +3,9 @@ package mule.model.map;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 
+/**
+ * Holder class for all the plots used throughout the game
+ */
 public class Map implements java.io.Serializable {
 
     private static final long serialVersionUID = 42L;
@@ -11,8 +14,13 @@ public class Map implements java.io.Serializable {
     private Plot[][] plots;
     public static final int MAP_WIDTH = 9;
     public static final int MAP_HEIGHT = 5;
-    public static final int PLOT_SIZE = 75;
+    @SuppressWarnings("WeakerAccess")
+    private static final int PLOT_SIZE = 75;
 
+    /**
+     * Sets up an initial map of 9 X 5 with rivers, plains, mountains, and a town
+     * @param canvas The canvas on which plots are drawn onto
+     */
     public Map(Canvas canvas) {
         this.parent = canvas;
         plots = new Plot[MAP_WIDTH][MAP_HEIGHT];
@@ -40,11 +48,20 @@ public class Map implements java.io.Serializable {
         parent.getGraphicsContext2D().setGlobalAlpha(1.0 / 2);
     }
 
+    /**
+     * @param x the x coordinate of the plot
+     * @param y the y coordinate of the plot
+     * @return the plot at (x, y)
+     */
     public final Plot getPlot(int x, int y) {
         return plots[x][y];
     }
 
-    public void redraw(Canvas rep) {
+    /**
+     * Redraws all plots when a saved game is loaded
+     * @param rep The canvas to draw onto
+     */
+    public final void redraw(Canvas rep) {
         parent = rep;
 
         for (Plot[] row : plots) {

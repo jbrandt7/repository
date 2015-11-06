@@ -3,7 +3,6 @@ package mule;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
 import javafx.fxml.FXML;
 
 
@@ -14,7 +13,7 @@ public class StartingController implements Initializable, ControlledScreen {
     @Override public void initialize(URL url, ResourceBundle rb) {
     }
 
-    @FXML public void toConfigScreen() {
+    @FXML public final void toConfigScreen() {
         controller.setScreen(Main.CONFIGURE_ID);
     }
 

@@ -1,6 +1,7 @@
 package mule;
 
 import java.util.HashMap;
+import java.util.Map;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -17,13 +18,13 @@ public class ScreensController extends StackPane {
 
     private static final int TRANSITION_DURATION = 300;
 
-    private HashMap<String, Node> screens = new HashMap<>();
+    private Map<String, Node> screens = new HashMap<>();
 
     public ScreensController() {
         super();
     }
 
-    public final void addScreen(String name, Node screen) {
+    private void addScreen(String name, Node screen) {
         screens.put(name, screen);
     }
 
@@ -42,7 +43,6 @@ public class ScreensController extends StackPane {
             addScreen(name, loadScreen);
             return true;
         } catch (Exception e) {
-            System.out.println(name + ": " + e.getMessage());
             return false;
         }
     }

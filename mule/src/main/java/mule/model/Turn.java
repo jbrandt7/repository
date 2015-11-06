@@ -1,20 +1,8 @@
 package mule.model;
 
-import javafx.util.Duration;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.scene.paint.Color;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.text.*;
-import javafx.event.EventHandler;
-import javafx.event.ActionEvent;
-import javafx.animation.KeyValue;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-
 import mule.*;
-import mule.model.resources.*;
+import mule.model.random_events.RandomEventGenerator;
+import mule.model.random_events.EventTypes;
 
 public class Turn implements java.io.Serializable {
 
@@ -100,70 +88,16 @@ public class Turn implements java.io.Serializable {
             Main.getPlayer(i).getTimer().reset();
             Main.getPlayer(i).produce();
 	        if (hasRandomEvent()) {
+                RandomEventGenerator eventGenerator;
 		        if (i != Main.getPlayerCount() - 1) {
-		            int randomEventSelector = (int)((Math.random() * 7) + 1);
-		            switch (randomEventSelector) {
-		    	        case 1:
-				            System.out.println(Main.getPlayer(i).getName() + "YOU JUST RECEIVED A PACKAGE FROM THE GT ALUMNI CONTAINING "
-					                + "3 FOOD AND 2 ENERGY UNITS");
-				            Main.getPlayer(i).getBag().add(new Food(), 3);
-				            Main.getPlayer(i).getBag().add(new Energy(), 2);
-				            break;
-			            case 2:
-				            System.out.println(Main.getPlayer(i).getName() + "A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING "
-					                + "TWO BARS OF ORE.");
-				
-				            Main.getPlayer(i).getBag().add(new Smithore(), 2);
-				            break;
-			            case 3:
-				            System.out.println(Main.getPlayer(i).getName() + "THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $" + (8 * m) + ".");
-				            Main.getPlayer(i).addMoney(8 * m);
-				            break;
-			            case 4:
-				            System.out.println(Main.getPlayer(i).getName() + "YOU FOUND A DEAD MOOSE RAT AN SOLD THE HIDE FOR $" + (2 * m) + ".");
-				            Main.getPlayer(i).addMoney(2 * m);
-				            break;
-			            case 5:
-				            System.out.println(Main.getPlayer(i).getName() + "FLYING CAT-BUGS ATE THE ROOF OF YOUR HOUSE. REPAIRS COST $" + (4 * m) + ".");
-				            Main.getPlayer(i).removeMoney(4 * m);
-				            break;
-			            case 6:
-				            System.out.println(Main.getPlayer(i).getName() + "MISCHIEVOUS UGA STUDENTS BROKE INTO YOUR STORAGE SHED AND STOLE HALF YOUR FOOD.");
-				            int foodCount = Main.getPlayer(i).getBag().get(new Food()) / 2;
-				            Main.getPlayer(i).getBag().remove(new Food(), foodCount);
-				            break;
-			            case 7:
-				            System.out.println(Main.getPlayer(i).getName() + "YOUR SPACE GYPSY INLAWS MADE A MESS OF THE TOWN. IT COST YOU $"
-						            + (6 * m) + " TO CLEAN IT UP.");
-				            Main.getPlayer(i).removeMoney(6 * m);
-				            break;
-		            }
+                    eventGenerator = new RandomEventGenerator(EventTypes.BAD, Main.getPlayer(i));
+                    eventGenerator.generateAction();
+
 		        } else {
-		            int randomEventSelector = (int)((Math.random() * 4) + 1);
-		            switch (randomEventSelector) {
-		    	        case 1:
-				        System.out.println(Main.getPlayer(i).getName() + "YOU JUST RECEIVED A PACKAGE FROM THE GT ALUMNI CONTAINING "
-				                + "3 FOOD AND 2 ENERGY UNITS");
-				        Resource nrg = new Energy();
-				        Main.getPlayer(i).getBag().add(new Food(), 3);
-				        Main.getPlayer(i).getBag().add(nrg, 2);
-				        break;
-			        case 2:
-				        System.out.println(Main.getPlayer(i).getName() + "A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING "
-				                + "TWO BARS OF ORE.");
-				
-				        Main.getPlayer(i).getBag().add(new Smithore(), 2);
-				        break;
-			        case 3:
-				        System.out.println(Main.getPlayer(i).getName() + "THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $" + (8 * m) + ".");
-				        Main.getPlayer(i).addMoney(8 * m);
-				        break;
-			        case 4:
-				        System.out.println(Main.getPlayer(i).getName() + "YOU FOUND A DEAD MOOSE RAT AN SOLD THE HIDE FOR $" + (2 * m) + ".");
-				        Main.getPlayer(i).addMoney(2 * m);
-				        break;
-		            }
+                    eventGenerator = new RandomEventGenerator(EventTypes.GOOD, Main.getPlayer(i));
+                    eventGenerator.generateAction();
             	}		
+                MapController.updateDisplayText(eventGenerator.getEvent().getMessage());
 	        }
         }	
     }
@@ -178,6 +112,10 @@ public class Turn implements java.io.Serializable {
 
     public final int getCurrentTurn() {
         return currentTurn;
+    }
+
+    public final int getM() {
+        return m;
     }
 
 

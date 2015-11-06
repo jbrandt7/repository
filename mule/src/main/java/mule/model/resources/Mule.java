@@ -10,11 +10,11 @@ public class Mule extends Resource{
     private Resource type;
 
 	public Mule() {
-		super(COST);
+		super();
 	}
 
     public Mule(Resource t) {
-		super(COST);
+		super();
         this.type = t;
     }
 

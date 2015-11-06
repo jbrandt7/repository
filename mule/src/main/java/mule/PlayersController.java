@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
-import javafx.scene.text.*;
 import javafx.scene.paint.Color;
 import javafx.collections.FXCollections;
 
@@ -38,7 +37,7 @@ public class PlayersController implements Initializable, ControlledScreen {
         controller = screenParent;
     }
 
-    @FXML private final void goToMapScreen() {
+    @FXML private void goToMapScreen() {
         if (processPlayers()) {
             initializeTurn();
             Main.loadScene(Main.MAP_ID, Main.MAP_FILE);

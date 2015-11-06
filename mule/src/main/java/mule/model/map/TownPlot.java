@@ -1,12 +1,8 @@
 package mule.model.map;
 
 import javafx.scene.canvas.Canvas;
-import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 
-/**
- * Created by harrylane on 9/18/15.
- */
 public class TownPlot extends Plot {
 
     private static final long serialVersionUID = 42L;

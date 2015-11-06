@@ -2,23 +2,12 @@ package mule;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.control.*;
-import javafx.animation.*;
-import javafx.event.*;
-import javafx.util.Duration;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 import javafx.collections.FXCollections;
 
-import mule.model.*;
-import mule.model.map.*;
-import mule.model.town.*;
 import mule.model.resources.*;
-import mule.model.player.*;
 
 public class StoreController implements Initializable, ControlledScreen {
 
@@ -87,11 +76,15 @@ public class StoreController implements Initializable, ControlledScreen {
         }
     }
 
+    /**
+     * Sets the main screen controller
+     * @param screenParent the screen controller
+     */
     public final void setScreenParent(ScreensController screenParent) {
         controller = screenParent;
     }
 
-    public final void goToTownScreen() {
+    private void goToTownScreen() {
         controller.setScreen(Main.TOWN_ID);
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             MapController.getMenuBar().getMenus().get(i).setText(
@@ -108,7 +101,7 @@ public class StoreController implements Initializable, ControlledScreen {
     }
 
 
-    private final void setupInfoBar() {
+    private void setupInfoBar() {
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             ((Label) infoBar.getItems().get(i)).setText(Main.getPlayer(i) + ": "
                     + Main.getPlayer(i).getMoney());

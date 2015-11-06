@@ -3,7 +3,7 @@ package mule.model.town;
 import mule.model.resources.*;
 import mule.model.player.Player;
 import java.util.HashMap;
-import javafx.scene.shape.Rectangle;
+import java.util.Map;
 
 public class Store implements java.io.Serializable {
 
@@ -14,7 +14,7 @@ public class Store implements java.io.Serializable {
     private static final int STARTINGMULES = 25;
 
     protected Resource resource;
-    private HashMap<Resource, Integer> inventory;
+    private Map<Resource, Integer> inventory;
 
     public Store() {
         inventory = new HashMap<>();

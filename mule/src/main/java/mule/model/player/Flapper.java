@@ -2,10 +2,6 @@ package mule.model.player;
 
 import javafx.scene.paint.Color;
 
-import mule.model.map.*;
-import mule.model.*;
-import mule.model.resources.*;
-
 public class Flapper extends Player {
 
     private static final int FLAPPER_MONEY = 600;

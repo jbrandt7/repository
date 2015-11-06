@@ -1,9 +1,5 @@
 package mule.model.town;
 
-import javafx.scene.shape.Rectangle;
-import javafx.scene.paint.Color;
-
-import mule.model.*;
 import mule.model.player.*;
 
 public class Pub extends Store {

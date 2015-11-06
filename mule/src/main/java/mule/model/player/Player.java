@@ -4,31 +4,32 @@ package mule.model.player;
 /**Player Class*************/
 /**Last updated: 9/15/2015**/
 import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.paint.Color;
+import java.util.Arrays;
 
 import mule.model.map.*;
-import mule.model.*;
 import mule.model.resources.*;
 
 public abstract class Player implements Comparable, java.io.Serializable {
 
     private static final long serialVersionUID = 42L;
 
-	private String name;
-	private double[] color;
+	private final String name;
+	private final double[] color;
 	private int money, score;
-	private Timer timer;
-	private ResourceBag bag;
+	private final Timer timer;
+	private final ResourceBag bag;
 	private Mule mule;
-	private ArrayList<Plot> land;
+	private final List<Plot> land;
 
-    public Player(String n, Color c) {
+    Player(String n, Color c) {
 		this.name = n;
 		this.color = new double[] { (c.getRed()),
                 (c.getGreen()), (c.getBlue()) };
 		this.money = 1000;
 		this.mule = null;
-		this.land = new ArrayList<Plot>();
+		this.land = new ArrayList<>();
         this.bag = new ResourceBag();
 
 		bag.add(new Food(), 8);
@@ -141,7 +142,7 @@ public abstract class Player implements Comparable, java.io.Serializable {
         } else if (other instanceof Player) {
             Player that = (Player) other;
             return that.name.equals(this.name)
-                    && that.color.equals(this.color);
+                    && Arrays.equals(that.color, this.color);
         }
 
         return false;
@@ -154,14 +155,10 @@ public abstract class Player implements Comparable, java.io.Serializable {
 	public final int compareTo(Object o) {
 		return this.score - ((Player) o).score;
 	}
+
 	public final boolean hasMule() {
 		return (this.mule == null);
 	}
-
-    private String colorToString(Color c) {
-        return String.format("#%02X%02X%02X", (int) (c.getRed() * 255),
-                (int) (c.getGreen() * 255), (int) (c.getBlue() * 255));
-    }
 
 
 }

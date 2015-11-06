@@ -1,17 +1,15 @@
 package mule.model.resources;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by The Boat on 9/22/2015.
- */
 public class ResourceBag implements java.io.Serializable {
 
-    private HashMap<Resource, Integer> bag;
+    private final Map<Resource, Integer> bag;
 
     public ResourceBag() {
-        bag = new HashMap<Resource, Integer>();
+        bag = new HashMap<>();
         bag.put(new Energy(), 0);
         bag.put(new Food(), 0);
         bag.put(new Smithore(), 0);

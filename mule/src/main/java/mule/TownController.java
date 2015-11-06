@@ -2,23 +2,15 @@ package mule;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.text.*;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.canvas.Canvas;
 
-import mule.model.*;
-import mule.model.map.*;
 import mule.model.town.*;
 import mule.model.resources.*;
-import mule.model.player.*;
 
 public class TownController implements Initializable, ControlledScreen {
 
@@ -30,9 +22,13 @@ public class TownController implements Initializable, ControlledScreen {
     @FXML private MenuBar menuBar;
     private static MenuBar menuBarInstance;
 
+    @FXML private TextArea displayText;
+    private static TextArea displayTextInstance;
+
     @Override public final void initialize(URL url, ResourceBundle rb) {
         Main.setTown(new Town(townParent));
         setupInfoBar();
+        setupDisplayText();
 
         townParent.addEventHandler(MouseEvent.MOUSE_CLICKED,
             new EventHandler<MouseEvent>() {
@@ -44,7 +40,7 @@ public class TownController implements Initializable, ControlledScreen {
             });
     }
 
-    public final void processClick(int x, int y) {
+    private void processClick(int x, int y) {
             if (x >= Town.STORE_WIDTH && y >= Town.STORE_HEIGHT * 2) {
                 Main.getTown().getPub().cashOut(Main.getCurrentPlayer());
                 incrementTurn();
@@ -53,7 +49,7 @@ public class TownController implements Initializable, ControlledScreen {
             }
     }
 
-    public final void incrementTurn() {
+    private void incrementTurn() {
         if (Main.getTurn().hasNextPlayer()) {
             Main.getTurn().nextPlayer();
         } else if (Main.getTurn().hasNextTurn()) {
@@ -62,7 +58,7 @@ public class TownController implements Initializable, ControlledScreen {
         }
     }
 
-    public final void goToMapScreen() {
+    private void goToMapScreen() {
         controller.setScreen(Main.MAP_ID);
 
         for (int i = 0; i < Main.getPlayerCount(); i++) {
@@ -70,25 +66,24 @@ public class TownController implements Initializable, ControlledScreen {
         }
     }
 
-    public final void goToStoreScreen() {
+    private void goToStoreScreen() {
         Main.loadScene(Main.STORE_ID, Main.STORE_FILE);
         controller.setScreen(Main.STORE_ID);
 
         for (int i = 0; i < Main.getPlayerCount(); i++) {
-            ((Label) StoreController.getInfoBar().getItems().get(i)).setText(Main
-                    .getPlayer(i).toString());
+            MapController.updatePlayerMenu(i);
         }
-
-        ((Label) Main.getInfoBar().getItems().get(Main.getTurn().getCurrentPlayer()))
-                .setFont(Font.font("System", FontWeight.BOLD, 13));
     }
 
-
+    /**
+     * Sets the main screen controller
+     * @param screenParent the screen controller
+     */
     public final void setScreenParent(ScreensController screenParent) {
         controller = screenParent;
     }
 
-    private final void setupInfoBar() {
+    private void setupInfoBar() {
         menuBarInstance = menuBar;
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             updatePlayerMenu(i);
@@ -98,6 +93,10 @@ public class TownController implements Initializable, ControlledScreen {
         }
     }
 
+    /**
+     * Updates the players information in the menubar
+     * @param i The rank of the player to update
+     */
     public static void updatePlayerMenu(int i) {
         menuBarInstance.getMenus().get(i).setText(Main.getPlayer(i).getName());
         menuBarInstance.getMenus().get(i).getItems().get(0).setText(
@@ -112,7 +111,22 @@ public class TownController implements Initializable, ControlledScreen {
                 "Score: " + Main.getPlayer(i).getScore());
     }
 
+    private void setupDisplayText() {
+        displayText.setEditable(false);
+        displayTextInstance = displayText;
+    }
 
+    private void updateDisplayText(String text) {
+        displayText.setText(displayText.getText() + text + "\n");
+    }
+
+
+    /**
+     * Gets the menubar located in this screen
+     * @return this screen's menubar
+     */
     public static MenuBar getMenuBar() { return menuBarInstance; }
+
+    public static TextArea getDisplayText() { return displayTextInstance; }
 
 }

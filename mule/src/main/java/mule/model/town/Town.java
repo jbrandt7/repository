@@ -1,8 +1,5 @@
 package mule.model.town;
 
-import javafx.scene.Group;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.paint.Color;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 
