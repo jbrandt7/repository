@@ -13,11 +13,11 @@ public abstract class Plot implements java.io.Serializable {
 
     private static final long serialVersionUID = 42L;
 
-    Player owner;
-    Mule mule;
-    final int[] location;
-    transient Canvas rep;
-    private static final int value = 300;
+    private Player owner;
+    private Mule mule;
+    private final int[] location;
+    private transient Canvas rep;
+    private static final int VALUE = 300;
 
     /**
      * Initializes plot
@@ -38,7 +38,7 @@ public abstract class Plot implements java.io.Serializable {
     public final boolean buy(Player p) {
         if (p.getMoney() > getCost()) {
             p.addPlot(this);
-            p.removeMoney(value);
+            p.removeMoney(VALUE);
             return true;
         }
         return false;
@@ -118,7 +118,7 @@ public abstract class Plot implements java.io.Serializable {
      * @return the cost of this plot
      */
     public final int getCost() {
-        return value;
+        return VALUE;
     }
 
     /**
@@ -131,5 +131,17 @@ public abstract class Plot implements java.io.Serializable {
      * Draws the graphical representation onto the parent canvas
      */
     protected abstract void drawBackground();
+
+    public final Mule getMule() {
+        return mule;
+    }
+
+    public final int[] getLocation() {
+        return location;
+    }
+
+    public final Canvas getRep() {
+        return rep;
+    }
 
 }

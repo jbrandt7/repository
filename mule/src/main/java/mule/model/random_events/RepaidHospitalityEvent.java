@@ -11,7 +11,7 @@ public class RepaidHospitalityEvent extends RandomEvent {
     }
 
     public final void commit() {
-		player.getBag().add(new Smithore(), 2);
+		super.getPlayer().getBag().add(new Smithore(), 2);
     }
 
 }

@@ -5,7 +5,7 @@ import mule.model.player.Player;
 @SuppressWarnings("CanBeFinal")
 public abstract class RandomEvent {
     private static String message;
-    final Player player;
+    private Player player;
 
     RandomEvent(Player p, String msg) {
         player = p;
@@ -17,4 +17,6 @@ public abstract class RandomEvent {
     public final String getMessage() {
         return message;
     }
+
+    public final Player getPlayer() { return player; }
 }

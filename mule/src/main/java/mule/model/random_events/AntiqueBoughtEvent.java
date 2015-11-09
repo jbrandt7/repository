@@ -10,7 +10,7 @@ public class AntiqueBoughtEvent extends RandomEvent {
     }
 
     public final void commit() {
-		player.addMoney(8 * Main.getTurn().getM());
+		super.getPlayer().addMoney(8 * Main.getTurn().getM());
     }
 
 }

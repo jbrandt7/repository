@@ -19,6 +19,7 @@ public class Food extends Resource {
         return false;
     }
 
+    @Override
     public final int getCost() {
         return VALUE;
     }

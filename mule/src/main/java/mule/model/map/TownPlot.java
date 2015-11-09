@@ -19,7 +19,8 @@ public class TownPlot extends Plot {
 
     public final void drawBackground() {
         Image image = new Image("mule/view/town.jpg", false);
-        rep.getGraphicsContext2D().drawImage(image, location[0], location[1]);
+        super.getRep().getGraphicsContext2D().drawImage(image, super.getLocation()[0],
+                super.getLocation()[1]);
     }
 
     public final boolean produce() {

@@ -80,17 +80,14 @@ public class ScreensController extends StackPane {
             }
             return true;
         } else {
-            System.out.println("Screen hasn't been loaded!!");
             return false;
         }
     }
 
     public final boolean unloadScreen(String name) {
         if (screens.remove(name) == null) {
-            System.out.println("Screen didn't exist");
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 }

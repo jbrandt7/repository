@@ -11,7 +11,7 @@ public class SoldHideEvent extends RandomEvent {
     }
 
     public final void commit() {
-        player.addMoney(2 * Main.getTurn().getM());
+        super.getPlayer().addMoney(2 * Main.getTurn().getM());
     }
 
 }

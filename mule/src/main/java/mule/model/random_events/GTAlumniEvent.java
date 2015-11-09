@@ -12,8 +12,8 @@ public class GTAlumniEvent extends RandomEvent {
     }
 
     public final void commit() {
-		player.getBag().add(new Food(), 3);
-		player.getBag().add(new Energy(), 2);
+		super.getPlayer().getBag().add(new Food(), 3);
+		super.getPlayer().getBag().add(new Energy(), 2);
     }
 
 }

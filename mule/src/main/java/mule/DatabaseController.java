@@ -42,11 +42,12 @@ public class DatabaseController {
 
     public final List<String> getSaves() {
         PreparedStatement selectSaves = null;
+        ResultSet saves = null;
         try {
             openConnection();
             String select = "SELECT name FROM saves";
             selectSaves = conn.prepareStatement(select);
-            ResultSet saves = selectSaves.executeQuery();
+            saves = selectSaves.executeQuery();
 
             List<String> result = new ArrayList<>();
 
@@ -63,12 +64,11 @@ public class DatabaseController {
                 if (selectSaves != null) {
                     selectSaves.close();
                 }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-            try {
                 if (conn != null) {
                     closeConnection();
+                }
+                if (saves != null) {
+                    saves.close();
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -142,10 +142,6 @@ public class DatabaseController {
                 if (insertSave != null) {
                     insertSave.close();
                 }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-            try {
                 if (conn != null) {
                     closeConnection();
                 }
@@ -157,6 +153,7 @@ public class DatabaseController {
 
     public final void loadGame(String id) {
         PreparedStatement selectSave = null;
+        ResultSet result = null;
         try {
             openConnection();
 
@@ -166,7 +163,7 @@ public class DatabaseController {
 
             selectSave = conn.prepareStatement(select);
             selectSave.setString(1, id);
-            ResultSet result = selectSave.executeQuery();
+            result = selectSave.executeQuery();
             result.next();
 
             Main.setPlayerCount(result.getInt(1));
@@ -198,12 +195,11 @@ public class DatabaseController {
                 if (selectSave != null) {
                     selectSave.close();
                 }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-            try {
                 if (conn != null) {
                     closeConnection();
+                }
+                if (result != null) {
+                    result.close();
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -213,11 +209,12 @@ public class DatabaseController {
 
     private boolean checkName(String toCheck) {
         PreparedStatement selectSaves = null;
+        ResultSet saves = null;
         try {
             openConnection();
             String select = "SELECT name FROM saves";
             selectSaves = conn.prepareStatement(select);
-            ResultSet saves = selectSaves.executeQuery();
+            saves = selectSaves.executeQuery();
 
             while (saves.next()) {
                 if (saves.getString(1).equals(toCheck)) {
@@ -235,12 +232,11 @@ public class DatabaseController {
                 if (selectSaves != null) {
                     selectSaves.close();
                 }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-            try {
                 if (conn != null) {
                     closeConnection();
+                }
+                if (saves != null) {
+                    saves.close();
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -276,22 +272,36 @@ public class DatabaseController {
         return resultStream.toByteArray();
     }
 
-    private void tryToCreateTable() throws SQLException {
-        Statement stmt = conn.createStatement();
-        String sql = "CREATE TABLE IF NOT EXISTS saves (" +
-            "name VARCHAR(15), " +
-            "total_player_count INTEGER, " +
-            "player1 BLOB, " +
-            "player2 BLOB, " +
-            "player3 BLOB, " +
-            "player4 BLOB, " +
-            "turn BLOB, " +
-            "map BLOB, " +
-            "town BLOB, " +
-            "time_saved DATE, " +
-            "PRIMARY KEY(name));";
-        stmt.executeUpdate(sql);
-        stmt.close();
+    private void tryToCreateTable() {
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+
+            String sql = "CREATE TABLE IF NOT EXISTS saves (" +
+                    "name VARCHAR(15), " +
+                    "total_player_count INTEGER, " +
+                    "player1 BLOB, " +
+                    "player2 BLOB, " +
+                    "player3 BLOB, " +
+                    "player4 BLOB, " +
+                    "turn BLOB, " +
+                    "map BLOB, " +
+                    "town BLOB, " +
+                    "time_saved DATE, " +
+                    "PRIMARY KEY(name));";
+
+            stmt.executeUpdate(sql);
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
 }

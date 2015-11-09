@@ -24,21 +24,22 @@ public class MountainPlot extends Plot {
     @Override
     public final void drawBackground() {
         Image image = new Image("mule/view/mountain.jpg", false);
-        rep.getGraphicsContext2D().drawImage(image, location[0], location[1]);
+        super.getRep().getGraphicsContext2D().drawImage(image, super.getLocation()[0],
+                super.getLocation()[1]);
     }
 
     @Override
     public final boolean produce() {
         if (outfitted() && hasOwner()
-                && owner.getBag().get(new Energy()) > 0) {
-            if (mule.getType().equals(new Food())) {
-                owner.addResource(new Food(), 1);
-            } else if (mule.getType().equals(new Energy())) {
-                owner.addResource(new Energy(), 1);
+                && super.getOwner().getBag().get(new Energy()) > 0) {
+            if (super.getMule().getType().equals(new Food())) {
+                super.getOwner().addResource(new Food(), 1);
+            } else if (super.getMule().getType().equals(new Energy())) {
+                super.getOwner().addResource(new Energy(), 1);
             } else {
-                owner.addResource(new Smithore(), 3);
+                super.getOwner().addResource(new Smithore(), 3);
             }
-            owner.removeResource(new Energy(), 1);
+            super.getOwner().removeResource(new Energy(), 1);
             return true;
         }
         return false;

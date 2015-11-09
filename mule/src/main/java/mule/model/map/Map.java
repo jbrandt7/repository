@@ -76,10 +76,23 @@ public class Map implements java.io.Serializable {
     }
 
     private boolean isCorner(int x, int y) {
-        return ((x % MAP_WIDTH == MAP_WIDTH / 4 && y % MAP_HEIGHT == MAP_HEIGHT / 4)
-                || (x % MAP_WIDTH == MAP_WIDTH * 3 / 4 && y % MAP_HEIGHT == MAP_HEIGHT / 4)
-                || (x % MAP_WIDTH == MAP_WIDTH / 4 && y % MAP_HEIGHT == MAP_HEIGHT * 3 / 4)
-                || (x % MAP_WIDTH == MAP_WIDTH * 3 / 4 && y % MAP_HEIGHT == MAP_HEIGHT * 3 / 4));
+        return isUpperLeft(x, y) || isUpperRight(x, y) || isLowerRight(x, y) || isLowerLeft(x, y);
+    }
+
+    private boolean isUpperLeft(int x, int y) {
+        return x % MAP_WIDTH == MAP_WIDTH / 4 && y % MAP_HEIGHT == MAP_HEIGHT / 4;
+    }
+
+    private boolean isUpperRight(int x, int y) {
+        return x % MAP_WIDTH == MAP_WIDTH * 3 / 4 && y % MAP_HEIGHT == MAP_HEIGHT / 4;
+    }
+
+    private boolean isLowerRight(int x, int y) {
+        return x % MAP_WIDTH == MAP_WIDTH * 3 / 4 && y % MAP_HEIGHT == MAP_HEIGHT * 3 / 4;
+    }
+
+    private boolean isLowerLeft(int x, int y) {
+        return x % MAP_WIDTH == MAP_WIDTH / 4 && y % MAP_HEIGHT == MAP_HEIGHT * 3 / 4;
     }
 
     private boolean isCenter(int x, int y) {

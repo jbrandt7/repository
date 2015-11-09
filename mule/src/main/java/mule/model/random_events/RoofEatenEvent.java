@@ -11,7 +11,7 @@ public class RoofEatenEvent extends RandomEvent {
     }
 
     public final void commit() {
-        player.removeMoney(4 * Main.getTurn().getM());
+        super.getPlayer().removeMoney(4 * Main.getTurn().getM());
     }
 
 }

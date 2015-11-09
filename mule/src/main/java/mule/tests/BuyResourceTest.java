@@ -8,7 +8,7 @@ import mule.model.player.*;
 import mule.model.resources.*;
 import mule.model.town.Store;
 
-class BuyResourceTest {
+public class BuyResourceTest {
 
     private Store store;
     private Player player;

@@ -6,6 +6,8 @@ import java.util.Set;
 
 public class ResourceBag implements java.io.Serializable {
 
+    private static final long serialVersionUID = 42L;
+
     private final Map<Resource, Integer> bag;
 
     public ResourceBag() {

@@ -19,7 +19,7 @@ public class Main extends Application {
 
     private static Stage stage;
 
-    private static final Player[] players = new Player[Main.MAX_PLAYERS];
+    private static final Player[] PLAYERS = new Player[Main.MAX_PLAYERS];
 
     private static int playerCount;
 
@@ -72,14 +72,16 @@ public class Main extends Application {
 
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+
+        primaryStage.setScene(scene);
         primaryStage.show();
 
         timeline.play();
     }
 
     /**
-     * Sorts the players based on their score
+     * Sorts the PLAYERS based on their score
      */
     public static void sortPlayers() {
         int j;
@@ -88,10 +90,10 @@ public class Main extends Application {
         while (flag) {
             flag = false;
             for (j = 0; j < playerCount - 1; j++) {
-                if (players[j].hashCode() < players[j + 1].hashCode()) {
-                    temp = players[j];
-                    players[j] = players[j + 1];
-                    players[j + 1] = temp;
+                if (PLAYERS[j].hashCode() < PLAYERS[j + 1].hashCode()) {
+                    temp = PLAYERS[j];
+                    PLAYERS[j] = PLAYERS[j + 1];
+                    PLAYERS[j + 1] = temp;
                     flag = true;
                 }
             }
@@ -147,7 +149,7 @@ public class Main extends Application {
     }
 
     /**
-     * Gets the total number of players playing the game
+     * Gets the total number of PLAYERS playing the game
      * @return the player count
      */
     public static int getPlayerCount() {
@@ -160,7 +162,7 @@ public class Main extends Application {
      * @return the player at rank i
      */
     public static Player getPlayer(int i) {
-        return players[i];
+        return PLAYERS[i];
     }
 
     /**
@@ -185,11 +187,11 @@ public class Main extends Application {
      * @param p the player
      */
     public static void setPlayer(int i, Player p) {
-        players[i] = p;
+        PLAYERS[i] = p;
     }
 
     /**
-     * Sets the total_number of players in the game
+     * Sets the total_number of PLAYERS in the game
      * @param number the number of playesrs
      */
     public static void setPlayerCount(int number) {
@@ -201,7 +203,7 @@ public class Main extends Application {
      * @return the current player
      */
     public static Player getCurrentPlayer() {
-        return players[turn.getCurrentPlayer()];
+        return PLAYERS[turn.getCurrentPlayer()];
     }
 
     /**

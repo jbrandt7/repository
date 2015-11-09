@@ -10,8 +10,8 @@ public class ShedBrokenEvent extends RandomEvent {
     }
 
     public final void commit() {
-		int foodCount = player.getBag().get(new Food()) / 2;
-		player.getBag().remove(new Food(), foodCount);
+		int foodCount = super.getPlayer().getBag().get(new Food()) / 2;
+		super.getPlayer().getBag().remove(new Food(), foodCount);
     }
 
 }

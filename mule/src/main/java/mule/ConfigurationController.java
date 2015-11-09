@@ -36,7 +36,7 @@ public class ConfigurationController implements Initializable, ControlledScreen 
     }
 
     @FXML
-    private void goToPlayerScreen() {
+    public final void goToPlayerScreen() {
         //if (Main.getDBController().checkName(saveTextField.getCharacters().toString())) {
             Main.setSaveName(saveTextField.getCharacters().toString());
             Main.setPlayerCount((int) playersSlider.getValue());

@@ -1,0 +1,10 @@
+#startingpane {
+    -fx-background-image: url("starting.jpg");
+    -fx-background-position: center center;
+}
+
+.button {
+    -fx-background-color: #FFEB99;
+    -fx-background-radius: 0;
+    -fx-border-color: #FFCC00;
+}

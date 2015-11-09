@@ -13,9 +13,11 @@ public class Store implements java.io.Serializable {
     private static final int STARTINGENERGY = 16;
     private static final int STARTINGMULES = 25;
 
-    protected Resource resource;
     private Map<Resource, Integer> inventory;
 
+    /**
+     * Creates a new store with a starting inventory
+     */
     public Store() {
         inventory = new HashMap<>();
         inventory.put(new Food(), STARTINGFOOD);
@@ -25,6 +27,12 @@ public class Store implements java.io.Serializable {
         inventory.put(new Mule(), STARTINGMULES);
     }
 
+    /**
+     * Attempts to buy a resource for a player
+     * @param p the player trying to buy the resource
+     * @param r the type of resource attempting to be bought
+     * @return whether or not the transaction was successful
+     */
     public final boolean buyResource(Player p, Resource r) {
    	    if (p.getMoney() < r.getCost() || getResource(r) == 0) {
             return false;
@@ -35,6 +43,12 @@ public class Store implements java.io.Serializable {
         return true;
     }
 
+    /**
+     * Attempts to sell a resource from a player
+     * @param p the player trying to sell the resource
+     * @param r the type of resource attempting to be sold
+     * @return whether or not the transaction was successful
+     */
     public final boolean sellResource(Player p, Resource r) {
         if (p.getBag().get(r) == 0) {
             return false;
@@ -45,6 +59,12 @@ public class Store implements java.io.Serializable {
         return true;
     }
 
+    /**
+     * Attempts to buy a mule for a player
+     * @param p the player trying to buy the mule
+     * @param type the type of mule attempting to be bought
+     * @return whether or not the transaction was successful
+     */
     public final boolean buyMule(Player p, Resource type) {
         Mule toAdd = new Mule(type);
         if (p.getMoney() < (toAdd.getCost())) {
@@ -56,6 +76,10 @@ public class Store implements java.io.Serializable {
         return true;
     }
 
+    /**
+     * @param r the type of resource being inquired into
+     * @return the amount of the resource left in the inventory
+     */
     public final int getResource(Resource r) {
         return inventory.get(r);
     }

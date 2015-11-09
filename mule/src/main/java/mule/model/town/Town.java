@@ -8,8 +8,6 @@ public class Town implements java.io.Serializable {
 
     private static final long serialVersionUID = 42L;
 
-    private transient Canvas parent;
-
     private Store[][] stores;
 
     private static final int TOWN_WIDTH = 2;
@@ -18,7 +16,7 @@ public class Town implements java.io.Serializable {
     public static final double STORE_HEIGHT = 125;
 
     public Town(Canvas canvas) {
-        this.parent = canvas;
+        Canvas parent = canvas;
 
         Image image = new Image("mule/view/townmap.jpg", false);
         stores = new Store[TOWN_WIDTH][TOWN_HEIGHT];

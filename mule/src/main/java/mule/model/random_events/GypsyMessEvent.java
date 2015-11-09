@@ -11,7 +11,7 @@ public class GypsyMessEvent extends RandomEvent {
     }
 
     public final void commit() {
-		player.removeMoney(6 * Main.getTurn().getM());
+		super.getPlayer().removeMoney(6 * Main.getTurn().getM());
     }
 
 }

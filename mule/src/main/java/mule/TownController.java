@@ -42,7 +42,9 @@ public class TownController implements Initializable, ControlledScreen {
 
     private void processClick(int x, int y) {
             if (x >= Town.STORE_WIDTH && y >= Town.STORE_HEIGHT * 2) {
-                Main.getTown().getPub().cashOut(Main.getCurrentPlayer());
+                int amount = Main.getTown().getPub().cashOut(Main.getCurrentPlayer());
+                updateDisplayText(Main.getCurrentPlayer().getName() + " cashed out " +
+                        "for " + amount);
                 incrementTurn();
             } else if (x < Town.STORE_WIDTH && y < Town.STORE_HEIGHT * 2) {
                 goToStoreScreen();
@@ -60,10 +62,11 @@ public class TownController implements Initializable, ControlledScreen {
 
     private void goToMapScreen() {
         controller.setScreen(Main.MAP_ID);
-
+        Main.setMenuBar(MapController.getMenuBar());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             MapController.updatePlayerMenu(i);
         }
+        MapController.getDisplayText().setText(displayText.getText());
     }
 
     private void goToStoreScreen() {
