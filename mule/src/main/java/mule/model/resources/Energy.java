@@ -5,7 +5,7 @@ public class Energy extends Resource {
     private static final int VALUE = 25;
 
 	public Energy() {
-		super(VALUE);
+		super();
 	}
 
     public final boolean equals(Object o) {
@@ -17,6 +17,15 @@ public class Energy extends Resource {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public final int getCost() {
+        return VALUE;
+    }
+
+    public final int hashCode() {
+        return 31 * VALUE;
     }
 
     public final String toString() {

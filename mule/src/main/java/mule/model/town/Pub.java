@@ -1,9 +1,5 @@
 package mule.model.town;
 
-import javafx.scene.shape.Rectangle;
-import javafx.scene.paint.Color;
-
-import mule.model.*;
 import mule.model.player.*;
 
 public class Pub extends Store {
@@ -12,9 +8,10 @@ public class Pub extends Store {
         super();
     }
 
-    public final void cashOut(Player player) {
-        player.addMoney(player.getTimer().getTime());
+    public final int cashOut(Player player) {
+        int result = player.addMoney(player.getTimer().getTime());
         player.updateScore();
+        return result;
     }
 
 }

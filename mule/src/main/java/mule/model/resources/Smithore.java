@@ -5,7 +5,7 @@ public class Smithore extends Resource {
     private static final int VALUE = 50;
 
     public Smithore() {
-        super(VALUE);
+        super();
     }
 
     public final boolean equals(Object o) {
@@ -17,6 +17,14 @@ public class Smithore extends Resource {
             return true;
         }
         return false;
+    }
+
+    public final int getCost() {
+        return VALUE;
+    }
+
+    public final int hashCode() {
+        return 31 * VALUE;
     }
 
     public final String toString() {

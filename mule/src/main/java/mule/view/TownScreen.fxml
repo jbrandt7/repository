@@ -59,5 +59,6 @@
             </Menu>
          </menus>
       </MenuBar>
+      <TextArea fx:id="displayText" maxHeight="100.0" maxWidth="675.0" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="BOTTOM_CENTER" />
    </children>
 </StackPane>

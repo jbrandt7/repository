@@ -1,5 +1,5 @@
 package mule;
 
-public interface ControlledScreen {
-    public void setScreenParent(ScreensController screenPage);
+interface ControlledScreen {
+    void setScreenParent(ScreensController screenPage);
 }

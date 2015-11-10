@@ -9,20 +9,35 @@ public class Mule extends Resource{
 
     private Resource type;
 
+	/**
+	 * Constructs a general purpose mule.
+	 * Will need a type specified later
+	 */
 	public Mule() {
-		super(COST);
+		super();
 	}
 
+	/**
+	 * Constructs a mule of a particular type
+	 * @param t The type of mule to construct
+	 */
     public Mule(Resource t) {
-		super(COST);
+		super();
         this.type = t;
     }
 
+	/**
+	 * Draws a mules representation on a canvas
+	 * @param rep The canvas to be drawn upon
+	 * @param x The x coordinate of the plot we are drawing on
+	 * @param y The y coordinate of the plot we are drawing on
+	 */
     public final void draw(Canvas rep, int x, int y) {
         rep.getGraphicsContext2D().setFill(Color.BLACK);
 		rep.getGraphicsContext2D().fillRect(x, y, 15, 15);
     }
 
+	@Override
 	public final int getCost() {
 		if (type != null) {
 			return COST + type.getCost();
@@ -30,6 +45,9 @@ public class Mule extends Resource{
 		return COST;
 	}
 
+	/**
+	 * @return the type of mule
+	 */
     public final Resource getType() {
         return type;
     }

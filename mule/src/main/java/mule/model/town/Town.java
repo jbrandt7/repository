@@ -1,8 +1,5 @@
 package mule.model.town;
 
-import javafx.scene.Group;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.paint.Color;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 
@@ -10,8 +7,6 @@ import javafx.scene.image.Image;
 public class Town implements java.io.Serializable {
 
     private static final long serialVersionUID = 42L;
-
-    private transient Canvas parent;
 
     private Store[][] stores;
 
@@ -21,7 +16,7 @@ public class Town implements java.io.Serializable {
     public static final double STORE_HEIGHT = 125;
 
     public Town(Canvas canvas) {
-        this.parent = canvas;
+        Canvas parent = canvas;
 
         Image image = new Image("mule/view/townmap.jpg", false);
         stores = new Store[TOWN_WIDTH][TOWN_HEIGHT];

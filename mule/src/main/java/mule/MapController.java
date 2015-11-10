@@ -2,33 +2,34 @@ package mule;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.text.*;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
 import javafx.animation.*;
 import javafx.event.*;
 import javafx.util.Duration;
-import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
 import mule.model.*;
 import mule.model.map.*;
-import mule.model.town.*;
 import mule.model.resources.*;
-import mule.model.player.*;
 
+/**
+ * Controlls the map screen, handling plot purchases, mule placement, etc
+ */
 public class MapController implements Initializable, ControlledScreen {
 
-    ScreensController controller;
+    private ScreensController controller;
 
     @FXML private Canvas mapParent;
 
     @FXML private MenuBar menuBar;
     private static MenuBar menuBarInstance;
+
+    @FXML private TextArea displayText;
+    private static TextArea displayTextInstance;
 
     @Override public final void initialize(URL url, ResourceBundle rb) {
         if (Main.getMap() == null) {
@@ -37,6 +38,7 @@ public class MapController implements Initializable, ControlledScreen {
             Main.getMap().redraw(mapParent);
         }
         setupInfoBar();
+        setupDisplayText();
         startTimer();
 
         mapParent.addEventHandler(MouseEvent.MOUSE_CLICKED,
@@ -44,9 +46,13 @@ public class MapController implements Initializable, ControlledScreen {
 
     }
 
-    public final void goToTownScreen() {
+    /**
+     * Shows the town to the user
+     */
+    private void goToTownScreen() {
         Main.loadScene(Main.TOWN_ID, Main.TOWN_FILE);
         Main.setMenuBar(TownController.getMenuBar());
+        TownController.getDisplayText().setText(displayText.getText());
         controller.setScreen(Main.TOWN_ID);
 
         for (int i = 0; i < Main.getPlayerCount(); i++) {
@@ -54,10 +60,17 @@ public class MapController implements Initializable, ControlledScreen {
         }
     }
 
+    /**
+     * Sets the main screen controller
+     * @param screenParent the screen controller
+     */
     public final void setScreenParent(ScreensController screenParent) {
         controller = screenParent;
     }
 
+    /**
+     * Attempts to save the game using the Database Controller
+     */
     @FXML public final void saveGame() {
         Main.getDBController().saveGame();
     }
@@ -82,17 +95,22 @@ public class MapController implements Initializable, ControlledScreen {
 
     }
 
+    private void setupDisplayText() {
+        displayText.setEditable(false);
+        displayText.setText("Welcome to M.U.L.E! Select a plot " +
+                "of land to continue.\n");
+        displayTextInstance = displayText;
+    }
+
     private void startTimer() {
         EventHandler onFinished = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
                 if (Main.getCurrentPlayer().getTimer().outOfTime()) {
                     Main.getCurrentPlayer().getTimer().reset();
-                    //Main.getHelperLabel().setText(Main.getCurrentPlayer().getName()
-                    //        + " ran out of time, " + "skipping to next player");
+                    updateDisplayText(Main.getCurrentPlayer().getName() +
+                            " ran out of time, skipping to next player");
                     incrementTurn();
                 } else {
-                    //Main.getTimerLabel().setText("Time: "
-                    //        + Main.getCurrentPlayer().getTimer().getTime());
                     Main.getMenuBar().getMenus().get(4).setText("Time: "
                             + Main.getCurrentPlayer().getTimer().getTime());
                     Main.getCurrentPlayer().getTimer().tick();
@@ -104,6 +122,10 @@ public class MapController implements Initializable, ControlledScreen {
         Main.getTimeline().play();
     }
 
+    /**
+     * Updates the players information in the menubar
+     * @param i The rank of the player to update
+     */
     public static void updatePlayerMenu(int i) {
         menuBarInstance.getMenus().get(i).setText(Main.getPlayer(i).getName());
         menuBarInstance.getMenus().get(i).getItems().get(0).setText(
@@ -144,12 +166,14 @@ public class MapController implements Initializable, ControlledScreen {
 
     private void processTownClick() {
         if (Main.getTurn().getCurrentStage() == Turn.LAND) {
-            //mapText.setText(Main.getCurrentPlayer().getName()
-            //        + "passes, " + "no land bought");
+            updateDisplayText(Main.getCurrentPlayer().getName() +
+                    " passes, no land purchased.");
             incrementTurn();
         } else if (Main.getTurn().getCurrentStage() == Turn.TOWN) {
             Main.getCurrentPlayer().removeMule();
-            //mapText.setText("Mule lost, silly");
+            updateDisplayText("Mule's can't go on the town, " +
+                    Main.getCurrentPlayer().getName() +
+                    ". Your mule was lost.");
             goToTownScreen();
         }
     }
@@ -157,17 +181,18 @@ public class MapController implements Initializable, ControlledScreen {
     private void processLandOwnedClick(Plot selected) {
         if (Main.getTurn().getCurrentStage() == Turn.TOWN) {
             if (selected.getOwner().equals(Main.getCurrentPlayer())
-                    && selected.notOutfitted()) {
+                    && !selected.outfitted()) {
                 Mule temp = Main.getCurrentPlayer().removeMule();
                 selected.outfit(temp);
                 goToTownScreen();
             } else {
                 Main.getCurrentPlayer().removeMule();
-                //mapText.setText("Mule lost, silly");
+                updateDisplayText("You do not own that piece of land. " +
+                        "Your mule was lost.");
                 goToTownScreen();
             }
         } else {
-            //mapText.setText("Can't buy, already bought!");
+            updateDisplayText("That land was already purchased!");
             goToTownScreen();
         }
     }
@@ -175,24 +200,39 @@ public class MapController implements Initializable, ControlledScreen {
     private void processLandNotOwnedClick(Plot selected) {
         if (Main.getTurn().getCurrentStage() == Turn.TOWN) {
             Main.getCurrentPlayer().removeMule();
-            //mapText.setText("Mule lost, silly");
+            updateDisplayText("You can't place a mule on land " +
+                    "you don't own. Your mule was lost.");
             goToTownScreen();
         } else if (Main.getTurn().getCurrentTurn() > 1) {
             if (selected.buy(Main.getCurrentPlayer())) {
-                //mapText.setText(Main.getCurrentPlayer().getName()
-                 //       + " bought land");
+                updateDisplayText(Main.getCurrentPlayer().getName() +
+                        " bought a plot of land.");
                 incrementTurn();
             } else {
-                //mapText.setText("Could not buy land");
+                updateDisplayText("You do not have enough funds to " +
+                        "buy this plot of land.");
             }
         } else {
             Main.getCurrentPlayer().addPlot(selected);
-            //mapText.setText(Main.getCurrentPlayer().getName()
-            //      + " granted land");
+            updateDisplayText(Main.getCurrentPlayer().getName() +
+                    " granted a plot of land");
             incrementTurn();
         }
     }
 
+    /**
+     * Updates the text displayed to the user
+     * @param text the string to add to the display
+     */
+    public static void updateDisplayText(String text) {
+        displayTextInstance.setText(displayTextInstance.getText() + text + "\n");
+        if (Main.getTurn().getCurrentTurn() > 0) {
+            displayTextInstance.setScrollTop(displayTextInstance.getScrollTop() + 10);
+        }
+    }
 
     public static MenuBar getMenuBar() { return menuBarInstance; }
+
+    public static TextArea getDisplayText() { return displayTextInstance; }
+
 }
