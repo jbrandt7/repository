@@ -35,19 +35,6 @@ public class BuyMuleTest {
     }
 
     @Test
-    public void testBuyMule() {
-        int expectedPlayerMule = 1;
-        int expectedPlayerMoney = 600;
-        int expectedStoreMule = 10;
-
-        store.buyMule(player, new Mule());
-
-        Assert.assertEquals("Player's mule should be 1", expectedPlayerMule, player.getResource(new Mule()));
-        Assert.assertEquals("Player's money should be 600", expectedPlayerMoney, player.getMoney());
-        Assert.assertEquals("Store's mule should be 15", expectedStoreMule, store.getResource(new Mule()));
-    }
-
-    @Test
     public void testBuyWithInsufficentFunds() {
         int expectedPlayerMoney = 10;
         int expectedPlayerMule = 1;
