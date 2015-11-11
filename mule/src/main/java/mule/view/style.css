@@ -3,6 +3,11 @@
     -fx-background-position: center center;
 }
 
+#game-config-pane {
+    -fx-background-image: url("game_config.jpg");
+    -fx-background-position: center center;
+}
+
 .button {
     -fx-background-color: #FFEB99;
     -fx-background-radius: 0;

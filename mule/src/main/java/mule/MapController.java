@@ -51,12 +51,13 @@ public class MapController implements Initializable, ControlledScreen {
      */
     private void goToTownScreen() {
         Main.loadScene(Main.TOWN_ID, Main.TOWN_FILE);
-        Main.setMenuBar(TownController.getMenuBar());
-        TownController.getDisplayText().setText(displayText.getText());
         controller.setScreen(Main.TOWN_ID);
+        Main.setMenuBar(TownController.getMenuBar());
+        TownController.getDisplayText().setText( "Welcome to the Town. Go to the store to buy resources " +
+                "or go to the Pub to end your turn\n" + displayText.getText());
 
         for (int i = 0; i < Main.getPlayerCount(); i++) {
-            MapController.updatePlayerMenu(i);
+            TownController.updatePlayerMenu(i);
         }
     }
 
@@ -98,7 +99,7 @@ public class MapController implements Initializable, ControlledScreen {
     private void setupDisplayText() {
         displayText.setEditable(false);
         displayText.setText("Welcome to M.U.L.E! Select a plot " +
-                "of land to continue.\n");
+                "of land to continue or select the town to pass.\n");
         displayTextInstance = displayText;
     }
 
@@ -225,10 +226,7 @@ public class MapController implements Initializable, ControlledScreen {
      * @param text the string to add to the display
      */
     public static void updateDisplayText(String text) {
-        displayTextInstance.setText(displayTextInstance.getText() + text + "\n");
-        if (Main.getTurn().getCurrentTurn() > 0) {
-            displayTextInstance.setScrollTop(displayTextInstance.getScrollTop() + 10);
-        }
+        displayTextInstance.setText(text + "\n" + displayTextInstance.getText());
     }
 
     public static MenuBar getMenuBar() { return menuBarInstance; }

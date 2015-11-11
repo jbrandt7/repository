@@ -46,7 +46,7 @@ public class TownController implements Initializable, ControlledScreen {
                 updateDisplayText(Main.getCurrentPlayer().getName() + " cashed out " +
                         "for " + amount);
                 incrementTurn();
-            } else if (x < Town.STORE_WIDTH && y < Town.STORE_HEIGHT * 2) {
+            } else if (x > Town.STORE_WIDTH && y < Town.STORE_HEIGHT * 2) {
                 goToStoreScreen();
             }
     }
@@ -63,16 +63,17 @@ public class TownController implements Initializable, ControlledScreen {
     private void goToMapScreen() {
         controller.setScreen(Main.MAP_ID);
         Main.setMenuBar(MapController.getMenuBar());
+        MapController.getDisplayText().setText(displayText.getText());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             MapController.updatePlayerMenu(i);
         }
-        MapController.getDisplayText().setText(displayText.getText());
     }
 
     private void goToStoreScreen() {
         Main.loadScene(Main.STORE_ID, Main.STORE_FILE);
         controller.setScreen(Main.STORE_ID);
-
+        Main.setMenuBar(StoreController.getMenuBar());
+        StoreController.getDisplayText().setText(displayText.getText());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             MapController.updatePlayerMenu(i);
         }
@@ -120,7 +121,7 @@ public class TownController implements Initializable, ControlledScreen {
     }
 
     private void updateDisplayText(String text) {
-        displayText.setText(displayText.getText() + text + "\n");
+        displayText.setText(text + "\n" + displayText.getText());
     }
 
 

@@ -12,6 +12,7 @@
         </fileset>
         <fileset dir="${src.dir}/main/java/mule/view">
             <include name="*.fxml"/>
+            <include name="*.css"/>
         </fileset>
     </path>
 
