@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
@@ -60,6 +61,10 @@
         </menus>
       </MenuBar>
       <TextArea fx:id="displayText" maxHeight="100.0" maxWidth="675.0" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="BOTTOM_CENTER" />
+      <Rectangle fx:id="selectionRect" fill="#ffffff80" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" StackPane.alignment="TOP_LEFT">
+         <StackPane.margin>
+            <Insets top="30.0" />
+         </StackPane.margin></Rectangle>
    </children>
    <opaqueInsets>
       <Insets bottom="25.0" />

@@ -13,14 +13,14 @@ public class ConfigurationController implements Initializable, ControlledScreen 
 
     @FXML private Slider playersSlider;
 
-    @FXML private ChoiceBox mapChoiceBox, difficultyChoiceBox;
+    @FXML private ChoiceBox<String> mapChoiceBox, difficultyChoiceBox;
 
     @FXML private TextField saveTextField;
 
     @Override
     public final void initialize(URL url, ResourceBundle rb) {
         mapChoiceBox.setItems(FXCollections.observableArrayList(
-                    "Mars", "Venus", "Mercury"));
+                    "Default", "River", "Random"));
         mapChoiceBox.getSelectionModel().select(0);
         difficultyChoiceBox.setItems(FXCollections.observableArrayList(
                     "Easy", "Medium", "Hard"));
@@ -39,6 +39,7 @@ public class ConfigurationController implements Initializable, ControlledScreen 
     public final void goToPlayerScreen() {
         //if (Main.getDBController().checkName(saveTextField.getCharacters().toString())) {
             Main.setSaveName(saveTextField.getCharacters().toString());
+            Main.setMapType(mapChoiceBox.getValue());
             Main.setPlayerCount((int) playersSlider.getValue());
             Main.loadScene(Main.PLAYER_CONFIG_ID, Main.PLAYER_CONFIG_FILE);
             controller.setScreen(Main.PLAYER_CONFIG_ID);

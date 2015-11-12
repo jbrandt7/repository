@@ -27,6 +27,8 @@ public class Main extends Application {
 
     private static Map map;
 
+    private static String mapType;
+
     private static Town town;
 
     private static ScreensController mainContainer;
@@ -138,6 +140,14 @@ public class Main extends Application {
      */
     public static Map getMap() {
         return map;
+    }
+
+    public static String getMapType() {
+        return mapType;
+    }
+
+    public static void setMapType(String s) {
+        mapType = s;
     }
 
     /**

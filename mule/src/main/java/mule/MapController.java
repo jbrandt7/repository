@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
+import javafx.scene.shape.Rectangle;
 import javafx.animation.*;
 import javafx.event.*;
 import javafx.util.Duration;
@@ -31,9 +32,22 @@ public class MapController implements Initializable, ControlledScreen {
     @FXML private TextArea displayText;
     private static TextArea displayTextInstance;
 
+    @FXML private Rectangle selectionRect;
+
     @Override public final void initialize(URL url, ResourceBundle rb) {
         if (Main.getMap() == null) {
-            Main.setMap(new Map(mapParent));
+            String type = Main.getMapType();
+            switch (type) {
+                case "Default":
+                    Main.setMap(new DefaultMap(mapParent));
+                    break;
+                case "River":
+                    Main.setMap(new RiverMap(mapParent));
+                    break;
+                case "Random":
+                    Main.setMap(new RandomMap(mapParent));
+                    break;
+            }
         } else {
             Main.getMap().redraw(mapParent);
         }
@@ -41,9 +55,14 @@ public class MapController implements Initializable, ControlledScreen {
         setupDisplayText();
         startTimer();
 
-        mapParent.addEventHandler(MouseEvent.MOUSE_CLICKED,
-                createLandSelectionHandler());
+        selectionRect.setWidth(75);
+        selectionRect.setHeight(75);
 
+        selectionRect.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                e -> createLandSelectionHandler(e));
+
+        mapParent.addEventHandler(MouseEvent.MOUSE_MOVED,
+                e -> createLandOutlineHandler(e));
     }
 
     /**
@@ -141,24 +160,29 @@ public class MapController implements Initializable, ControlledScreen {
                 "Score: " + Main.getPlayer(i).getScore());
     }
 
-    private EventHandler<MouseEvent> createLandSelectionHandler() {
-        return new EventHandler<MouseEvent>() {
-            @Override public void handle(MouseEvent event) {
-                int x = (int) ((event.getSceneX()) / 75);
-                int y = (int) ((event.getSceneY() - 30) / 75);
+    private void createLandSelectionHandler(MouseEvent event) {
+        System.out.println("MOUSE CLICKED");
+        int x = (int) ((event.getSceneX()) / 75);
+        int y = (int) ((event.getSceneY() - 30) / 75);
 
-                if (isTown(x, y)) {
-                    processTownClick();
-                } else {
-                    Plot selected = Main.getMap().getPlot(x, y);
-                    if (selected.hasOwner()) {
-                        processLandOwnedClick(selected);
-                    } else {
-                        processLandNotOwnedClick(selected);
-                    }
-                }
+        if (isTown(x, y)) {
+            processTownClick();
+        } else {
+            Plot selected = Main.getMap().getPlot(x, y);
+            if (selected.hasOwner()) {
+                processLandOwnedClick(selected);
+            } else {
+                processLandNotOwnedClick(selected);
             }
-        };
+        }
+    }
+
+    private void createLandOutlineHandler(MouseEvent event) {
+        int x = (int) ((event.getX()) / 75);
+        int y = (int) ((event.getY()) / 75);
+
+        selectionRect.setTranslateX(x * 75);
+        selectionRect.setTranslateY(y * 75);
     }
 
     private boolean isTown(int x, int y) {

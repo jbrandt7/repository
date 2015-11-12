@@ -10,12 +10,12 @@ public class Map implements java.io.Serializable {
 
     private static final long serialVersionUID = 42L;
 
-    private transient Canvas parent;
-    private Plot[][] plots;
+    transient Canvas parent;
+    Plot[][] plots;
     public static final int MAP_WIDTH = 9;
     public static final int MAP_HEIGHT = 5;
     @SuppressWarnings("WeakerAccess")
-    private static final int PLOT_SIZE = 75;
+    static final int PLOT_SIZE = 75;
 
     /**
      * Sets up an initial map of 9 X 5 with rivers, plains, mountains, and a town
@@ -24,28 +24,6 @@ public class Map implements java.io.Serializable {
     public Map(Canvas canvas) {
         this.parent = canvas;
         plots = new Plot[MAP_WIDTH][MAP_HEIGHT];
-
-        for (int i = 0; i < plots.length; i++) {
-            for (int j = 0; j < plots[0].length; j++) {
-                Image image;
-
-                if (isCenter(i, j)) {
-                    plots[i][j] = new TownPlot(parent, i * PLOT_SIZE, j * PLOT_SIZE);
-                    image = new Image("mule/view/town.jpg", false);
-                } else if (isMiddle(i)) {
-                    plots[i][j] = new RiverPlot(parent, i * PLOT_SIZE, j * PLOT_SIZE);
-                    image = new Image("mule/view/river.jpg", false);
-                } else if (isCorner(i, j)) {
-                    plots[i][j] = new MountainPlot(parent, i * PLOT_SIZE, j * PLOT_SIZE);
-                    image = new Image("mule/view/mountain.jpg", false);
-                } else {
-                    plots[i][j] = new PlainPlot(parent, i * PLOT_SIZE, j * PLOT_SIZE);
-                    image = new Image("mule/view/plain.jpg", false);
-                }
-                parent.getGraphicsContext2D().drawImage(image, PLOT_SIZE * i, PLOT_SIZE * j);
-            }
-        }
-        parent.getGraphicsContext2D().setGlobalAlpha(1.0 / 2);
     }
 
     /**
@@ -75,31 +53,31 @@ public class Map implements java.io.Serializable {
 
     }
 
-    private boolean isCorner(int x, int y) {
+    boolean isCorner(int x, int y) {
         return isUpperLeft(x, y) || isUpperRight(x, y) || isLowerRight(x, y) || isLowerLeft(x, y);
     }
 
-    private boolean isUpperLeft(int x, int y) {
+    boolean isUpperLeft(int x, int y) {
         return x % MAP_WIDTH == MAP_WIDTH / 4 && y % MAP_HEIGHT == MAP_HEIGHT / 4;
     }
 
-    private boolean isUpperRight(int x, int y) {
+    boolean isUpperRight(int x, int y) {
         return x % MAP_WIDTH == MAP_WIDTH * 3 / 4 && y % MAP_HEIGHT == MAP_HEIGHT / 4;
     }
 
-    private boolean isLowerRight(int x, int y) {
+    boolean isLowerRight(int x, int y) {
         return x % MAP_WIDTH == MAP_WIDTH * 3 / 4 && y % MAP_HEIGHT == MAP_HEIGHT * 3 / 4;
     }
 
-    private boolean isLowerLeft(int x, int y) {
+    boolean isLowerLeft(int x, int y) {
         return x % MAP_WIDTH == MAP_WIDTH / 4 && y % MAP_HEIGHT == MAP_HEIGHT * 3 / 4;
     }
 
-    private boolean isCenter(int x, int y) {
+    boolean isCenter(int x, int y) {
         return (x == MAP_WIDTH / 2) && (y == MAP_HEIGHT / 2);
     }
 
-    private boolean isMiddle(int x) {
+    boolean isMiddle(int x) {
         return x % MAP_WIDTH == MAP_WIDTH / 2;
     }
 
