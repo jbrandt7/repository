@@ -6,9 +6,9 @@ public class Pikachu extends Player {
 
     private static final int PIKACHU_MONEY = 400;
 
-    public Human(String name, Color color) {
+    public Pikachu(String name, Color color) {
         super(name, color);
-        removeMoney(HUMAN_MONEY);
+        removeMoney(PIKACHU_MONEY);
         super.bag.addResource(new Energy(), 1);
     }
 
