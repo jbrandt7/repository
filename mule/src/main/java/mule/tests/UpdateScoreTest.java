@@ -74,7 +74,7 @@ public class UpdateScoreTest {
     public void testPlotScoreCount() {
         p = new Human("Jay", Color.BLUE);
         p.updateScore();
-        p.addPlot(new RiverPlot(new Canvas(), 0, 0));
+        p.addPlot(new RiverPlot(new Canvas(), 0, 0)) ;
         int expectedScore = 300 + p.getScore();
         p.updateScore();
         Assert.assertEquals(p.getScore(), expectedScore);
