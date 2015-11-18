@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.PlayersController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="760.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.PlayersController">
    <children>
-      <VBox fx:id="playersBox" layoutX="5.0" layoutY="100.0" prefHeight="300.0" prefWidth="600.0">
+      <VBox fx:id="playersBox" prefHeight="300.0" prefWidth="600.0" StackPane.alignment="TOP_CENTER">
          <children>
             <HBox fx:id="p1Box" alignment="CENTER" prefHeight="50.0" prefWidth="550.0" spacing="40.0">
                <children>
@@ -38,15 +39,37 @@
                </children>
             </HBox>
          </children>
+         <StackPane.margin>
+            <Insets top="75.0" />
+         </StackPane.margin>
       </VBox>
-      <Button fx:id="toMapButton" alignment="CENTER" cancelButton="true" layoutX="264.0" layoutY="321.0" mnemonicParsing="false" onAction="#goToMapScreen" text="Continue" />
-      <Label layoutX="209.0" layoutY="32.0" text="Player Selection Screen">
+      <Button fx:id="toMapButton" alignment="CENTER" cancelButton="true" mnemonicParsing="false" onAction="#goToMapScreen" text="Continue" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets bottom="75.0" />
+         </StackPane.margin>
+      </Button>
+      <Label text="Player Selection Screen" StackPane.alignment="TOP_CENTER">
          <font>
             <Font size="17.0" />
          </font>
+         <StackPane.margin>
+            <Insets top="25.0" />
+         </StackPane.margin>
       </Label>
-      <Label layoutX="73.0" layoutY="71.0" text="Player Name" />
-      <Label layoutX="284.0" layoutY="71.0" text="Race" />
-      <Label layoutX="492.0" layoutY="71.0" text="Color" />
+      <Label text="Player Name" StackPane.alignment="TOP_CENTER">
+         <StackPane.margin>
+            <Insets right="370.0" top="60.0" />
+         </StackPane.margin>
+      </Label>
+      <Label text="Race" StackPane.alignment="TOP_CENTER">
+         <StackPane.margin>
+            <Insets left="20.0" top="60.0" />
+         </StackPane.margin>
+      </Label>
+      <Label text="Color" StackPane.alignment="TOP_CENTER">
+         <StackPane.margin>
+            <Insets left="400.0" top="60.0" />
+         </StackPane.margin>
+      </Label>
    </children>
-</AnchorPane>
+</StackPane>

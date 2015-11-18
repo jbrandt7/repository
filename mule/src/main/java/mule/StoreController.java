@@ -17,14 +17,16 @@ public class StoreController implements Initializable, ControlledScreen {
 
     @FXML private ChoiceBox<Integer> quantityChoiceBox;
 
-    @FXML private MenuBar menuBar;
-    private static MenuBar menuBarInstance;
+    @FXML private ToolBar toolBar;
+    private static ToolBar toolBarInstance;
+
+    @FXML private Label timerLabel;
+    private static Label timerLabelInstance;
 
     @FXML private TextArea displayText;
     private static TextArea displayTextInstance;
 
     @Override public final void initialize(URL location, ResourceBundle resources) {
-        //setupInfoBar();
         resourceChoiceBox.setItems(FXCollections.observableArrayList(new Energy(),
                     new Food(), new Smithore()));
         resourceChoiceBox.getSelectionModel().select(0);
@@ -33,9 +35,7 @@ public class StoreController implements Initializable, ControlledScreen {
         quantityChoiceBox.getSelectionModel().select(0);
 
         setupInfoBar();
-
-        displayTextInstance = displayText;
-
+        setupDisplayText();
     }
 
     public final void buyResource() {
@@ -90,7 +90,8 @@ public class StoreController implements Initializable, ControlledScreen {
 
     public void goToTownScreen() {
         controller.setScreen(Main.TOWN_ID);
-        Main.setMenuBar(TownController.getMenuBar());
+        Main.setToolBar(TownController.getToolBar());
+        Main.setTimerLabel(TownController.getTimerLabel());
         TownController.getDisplayText().setText(displayText.getText());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             TownController.updatePlayerMenu(i);
@@ -99,7 +100,9 @@ public class StoreController implements Initializable, ControlledScreen {
 
     public final void goToMapScreen() {
         controller.setScreen(Main.MAP_ID);
-        Main.setMenuBar(MapController.getMenuBar());
+        /*Main.setMenuBar(MapController.getMenuBar());*/
+        Main.setToolBar(MapController.getToolBar());
+        Main.setTimerLabel(MapController.getTimerLabel());
         MapController.getDisplayText().setText(displayText.getText());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             MapController.updatePlayerMenu(i);
@@ -107,17 +110,12 @@ public class StoreController implements Initializable, ControlledScreen {
     }
 
     public static void updatePlayerMenu(int i) {
-        menuBarInstance.getMenus().get(i).setText(Main.getPlayer(i).getName());
-        menuBarInstance.getMenus().get(i).getItems().get(0).setText(
-                "Money: " + Main.getPlayer(i).getMoney());
-        menuBarInstance.getMenus().get(i).getItems().get(1).setText(
-                "Energy: " + Main.getPlayer(i).getResource(new Energy()));
-        menuBarInstance.getMenus().get(i).getItems().get(2).setText(
-                "Food: " + Main.getPlayer(i).getResource(new Food()));
-        menuBarInstance.getMenus().get(i).getItems().get(3).setText(
-                "Smithore: " + Main.getPlayer(i).getResource(new Smithore()));
-        menuBarInstance.getMenus().get(i).getItems().get(4).setText(
-                "Score: " + Main.getPlayer(i).getScore());
+        ((Label) (toolBarInstance.getItems().get(i * 2))).setText(
+                Main.getPlayer(i).getName() + "\n" +
+                "M: " + Main.getPlayer(i).getMoney() + "\n" +
+                "E: " + Main.getPlayer(i).getResource(new Energy()) + "\n" +
+                "F: " + Main.getPlayer(i).getResource(new Food()) + "\n" +
+                "S: " + Main.getPlayer(i).getResource(new Smithore()));
     }
 
     public static void updateDisplayText(String text) {
@@ -125,16 +123,29 @@ public class StoreController implements Initializable, ControlledScreen {
     }
 
     private void setupInfoBar() {
-        menuBarInstance = menuBar;
+        toolBarInstance = toolBar;
+        Main.setToolBar(toolBarInstance);
+        timerLabelInstance = timerLabel;
+        Main.setTimerLabel(timerLabelInstance);
+
         for (int i = 0; i < Main.getPlayerCount(); i++) {
-            updatePlayerMenu(i);
-        }
+            updatePlayerMenu(i);        }
         for (int i = Main.getPlayerCount(); i < 4; i++) {
-            menuBar.getMenus().get(i).setVisible(false);
+            toolBarInstance.getItems().get(i * 2).setVisible(false);
+            toolBarInstance.getItems().get(i * 2 + 1).setVisible(false);
         }
     }
 
-    public static MenuBar getMenuBar() { return menuBarInstance; }
+    private void setupDisplayText() {
+        displayText.setEditable(false);
+        displayText.setText("Welcome to M.U.L.E! Select a plot " +
+                "of land to continue or select the town to pass.\n");
+        displayTextInstance = displayText;
+    }
+
+    public static ToolBar getToolBar() { return toolBarInstance; }
+
+    public static Label getTimerLabel() { return timerLabelInstance; }
 
     public static TextArea getDisplayText() { return displayTextInstance; }
 

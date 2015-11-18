@@ -6,9 +6,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane id="startingpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="675.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.StartingController">
+<StackPane id="startingpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="760.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.StartingController">
    <children>
-      <Button fx:id="toConfigButton" mnemonicParsing="false" onAction="#toConfigScreen" stylesheets="@style.css" text="New Game">
+      <Button fx:id="toConfigButton" mnemonicParsing="false" onAction="#toConfigScreen" prefHeight="50.0" prefWidth="150.0" styleClass="start-button" stylesheets="@style.css" text="New Game">
          <font>
             <Font size="20.0" />
          </font>
@@ -16,7 +16,7 @@
             <Insets right="250.0" top="300.0" />
          </StackPane.margin>
       </Button>
-      <Button fx:id="loadGameButton" mnemonicParsing="false" onAction="#toLoadGameScreen" stylesheets="@style.css" text="Load Game">
+      <Button fx:id="loadGameButton" mnemonicParsing="false" onAction="#toLoadGameScreen" prefHeight="50.0" prefWidth="150.0" styleClass="start-button" stylesheets="@style.css" text="Load Game">
          <StackPane.margin>
             <Insets left="250.0" top="300.0" />
          </StackPane.margin>

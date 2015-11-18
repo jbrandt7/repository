@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.LoadGameController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="760.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.LoadGameController">
    <children>
       <Label text="Select Game" StackPane.alignment="TOP_CENTER">
          <StackPane.margin>
@@ -20,7 +22,7 @@
          <StackPane.margin>
             <Insets />
          </StackPane.margin></ListView>
-      <Button maxWidth="88.0" mnemonicParsing="false" onAction="#loadGame" text="Load Game" StackPane.alignment="BOTTOM_CENTER">
+      <Button maxWidth="88.0" mnemonicParsing="false" onAction="#loadGame" text="Load" StackPane.alignment="BOTTOM_CENTER">
          <StackPane.margin>
             <Insets bottom="50.0" left="150.0" />
          </StackPane.margin>

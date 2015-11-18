@@ -26,8 +26,11 @@ public class MapController implements Initializable, ControlledScreen {
 
     @FXML private Canvas mapParent;
 
-    @FXML private MenuBar menuBar;
-    private static MenuBar menuBarInstance;
+    @FXML private ToolBar toolBar;
+    private static ToolBar toolBarInstance;
+
+    @FXML private Label timerLabel;
+    private static Label timerLabelInstance;
 
     @FXML private TextArea displayText;
     private static TextArea displayTextInstance;
@@ -71,9 +74,8 @@ public class MapController implements Initializable, ControlledScreen {
     private void goToTownScreen() {
         Main.loadScene(Main.TOWN_ID, Main.TOWN_FILE);
         controller.setScreen(Main.TOWN_ID);
-        Main.setMenuBar(TownController.getMenuBar());
-        TownController.getDisplayText().setText( "Welcome to the Town. Go to the store to buy resources " +
-                "or go to the Pub to end your turn\n" + displayText.getText());
+        Main.setToolBar(TownController.getToolBar());
+        Main.setTimerLabel(TownController.getTimerLabel());
 
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             TownController.updatePlayerMenu(i);
@@ -105,12 +107,16 @@ public class MapController implements Initializable, ControlledScreen {
     }
 
     private void setupInfoBar() {
-        menuBarInstance = menuBar;
-        Main.setMenuBar(menuBarInstance);
+        toolBarInstance = toolBar;
+        Main.setToolBar(toolBarInstance);
+        timerLabelInstance = timerLabel;
+        Main.setTimerLabel(timerLabelInstance);
+
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             updatePlayerMenu(i);        }
         for (int i = Main.getPlayerCount(); i < 4; i++) {
-            menuBar.getMenus().get(i).setVisible(false);
+            toolBarInstance.getItems().get(i * 2).setVisible(false);
+            toolBarInstance.getItems().get(i * 2 + 1).setVisible(false);
         }
 
     }
@@ -131,8 +137,8 @@ public class MapController implements Initializable, ControlledScreen {
                             " ran out of time, skipping to next player");
                     incrementTurn();
                 } else {
-                    Main.getMenuBar().getMenus().get(4).setText("Time: "
-                            + Main.getCurrentPlayer().getTimer().getTime());
+                    Main.getTimerLabel().setText(
+                            String.valueOf(Main.getCurrentPlayer().getTimer().getTime()));
                     Main.getCurrentPlayer().getTimer().tick();
                 }
             }
@@ -147,23 +153,17 @@ public class MapController implements Initializable, ControlledScreen {
      * @param i The rank of the player to update
      */
     public static void updatePlayerMenu(int i) {
-        menuBarInstance.getMenus().get(i).setText(Main.getPlayer(i).getName());
-        menuBarInstance.getMenus().get(i).getItems().get(0).setText(
-                "Money: " + Main.getPlayer(i).getMoney());
-        menuBarInstance.getMenus().get(i).getItems().get(1).setText(
-                "Energy: " + Main.getPlayer(i).getResource(new Energy()));
-        menuBarInstance.getMenus().get(i).getItems().get(2).setText(
-                "Food: " + Main.getPlayer(i).getResource(new Food()));
-        menuBarInstance.getMenus().get(i).getItems().get(3).setText(
-                "Smithore: " + Main.getPlayer(i).getResource(new Smithore()));
-        menuBarInstance.getMenus().get(i).getItems().get(4).setText(
-                "Score: " + Main.getPlayer(i).getScore());
+        ((Label) (toolBarInstance.getItems().get(i * 2))).setText(
+                Main.getPlayer(i).getName() + "\n" +
+                "M: " + Main.getPlayer(i).getMoney() + "\n" +
+                "E: " + Main.getPlayer(i).getResource(new Energy()) + "\n" +
+                "F: " + Main.getPlayer(i).getResource(new Food()) + "\n" +
+                "S: " + Main.getPlayer(i).getResource(new Smithore()));
     }
 
     private void createLandSelectionHandler(MouseEvent event) {
-        System.out.println("MOUSE CLICKED");
         int x = (int) ((event.getSceneX()) / 75);
-        int y = (int) ((event.getSceneY() - 30) / 75);
+        int y = (int) ((event.getSceneY()) / 75);
 
         if (isTown(x, y)) {
             processTownClick();
@@ -253,8 +253,10 @@ public class MapController implements Initializable, ControlledScreen {
         displayTextInstance.setText(text + "\n" + displayTextInstance.getText());
     }
 
-    public static MenuBar getMenuBar() { return menuBarInstance; }
-
     public static TextArea getDisplayText() { return displayTextInstance; }
+
+    public static Label getTimerLabel() { return timerLabelInstance; }
+
+    public static ToolBar getToolBar() { return toolBarInstance; }
 
 }

@@ -3,13 +3,6 @@
     -fx-background-color: #48AA51;
 }
 
-.button {
-    -fx-background-color: #2A6A31;
-    -fx-background-radius: 0;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-}
-
 #startingpane {
     -fx-background-image: url("starting.jpg");
     -fx-background-position: center center;
@@ -23,7 +16,11 @@
 .start-button {
     -fx-background-color: #FFEB99;
     -fx-background-radius: 0;
-    -fx-text-fill: black;
-    -fx-font: normal bold 20 System;
 }
 
+.button {
+    -fx-background-color: #2A6A31;
+    -fx-background-radius: 0;
+    -fx-text-fill: white;
+    -fx-text-weight: bold;
+}

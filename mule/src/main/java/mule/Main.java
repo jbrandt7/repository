@@ -37,6 +37,10 @@ public class Main extends Application {
 
     private static MenuBar menuBar;
 
+    private static ToolBar toolBar;
+
+    private static Label timerLabel;
+
     private static DatabaseController dbController;
 
     private static String saveGame;
@@ -256,6 +260,22 @@ public class Main extends Application {
         menuBar = m;
     }
 
+    public static ToolBar getToolBar() {
+        return toolBar;
+    }
+
+    public static void setToolBar(ToolBar t) {
+        toolBar = t;
+    }
+
+    public static Label getTimerLabel() {
+        return timerLabel;
+    }
+
+    public static void setTimerLabel(Label l) {
+        timerLabel = l;
+    }
+
     /**
      * Loads a screen to show to the user
      * @param name The id of the screen in SceneController
@@ -263,7 +283,8 @@ public class Main extends Application {
      * @return Returns whether or not the scene was successfully loaded
      */
     public static boolean loadScene(String name, String resource) {
-        return mainContainer.loadScreen(name, resource);
+        boolean result =  mainContainer.loadScreen(name, resource);
+        return result;
     }
 
     public static void main(String[] args) {

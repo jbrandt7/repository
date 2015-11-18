@@ -19,8 +19,16 @@ public class TownController implements Initializable, ControlledScreen {
 
     @FXML private Canvas townParent;
 
+    /*
     @FXML private MenuBar menuBar;
     private static MenuBar menuBarInstance;
+    */
+
+    @FXML private ToolBar toolBar;
+    private static ToolBar toolBarInstance;
+
+    @FXML private Label timerLabel;
+    private static Label timerLabelInstance;
 
     @FXML private TextArea displayText;
     private static TextArea displayTextInstance;
@@ -41,14 +49,14 @@ public class TownController implements Initializable, ControlledScreen {
     }
 
     private void processClick(int x, int y) {
-            if (x >= Town.STORE_WIDTH && y >= Town.STORE_HEIGHT * 2) {
-                int amount = Main.getTown().getPub().cashOut(Main.getCurrentPlayer());
-                updateDisplayText(Main.getCurrentPlayer().getName() + " cashed out " +
-                        "for " + amount);
-                incrementTurn();
-            } else if (x > Town.STORE_WIDTH && y < Town.STORE_HEIGHT * 2) {
-                goToStoreScreen();
-            }
+        if (x >= Town.STORE_WIDTH && y >= Town.STORE_HEIGHT * 2) {
+            int amount = Main.getTown().getPub().cashOut(Main.getCurrentPlayer());
+            updateDisplayText(Main.getCurrentPlayer().getName() + " cashed out " +
+                    "for " + amount);
+            incrementTurn();
+        } else if (x > Town.STORE_WIDTH && y < Town.STORE_HEIGHT * 2) {
+            goToStoreScreen();
+        }
     }
 
     private void incrementTurn() {
@@ -62,7 +70,8 @@ public class TownController implements Initializable, ControlledScreen {
 
     private void goToMapScreen() {
         controller.setScreen(Main.MAP_ID);
-        Main.setMenuBar(MapController.getMenuBar());
+        Main.setToolBar(MapController.getToolBar());
+        Main.setTimerLabel(MapController.getTimerLabel());
         MapController.getDisplayText().setText(displayText.getText());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             MapController.updatePlayerMenu(i);
@@ -72,7 +81,8 @@ public class TownController implements Initializable, ControlledScreen {
     private void goToStoreScreen() {
         Main.loadScene(Main.STORE_ID, Main.STORE_FILE);
         controller.setScreen(Main.STORE_ID);
-        Main.setMenuBar(StoreController.getMenuBar());
+        Main.setToolBar(StoreController.getToolBar());
+        Main.setTimerLabel(StoreController.getTimerLabel());
         StoreController.getDisplayText().setText(displayText.getText());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             MapController.updatePlayerMenu(i);
@@ -88,12 +98,17 @@ public class TownController implements Initializable, ControlledScreen {
     }
 
     private void setupInfoBar() {
-        menuBarInstance = menuBar;
+        toolBarInstance = toolBar;
+        Main.setToolBar(toolBarInstance);
+        timerLabelInstance = timerLabel;
+        Main.setTimerLabel(timerLabelInstance);
+
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             updatePlayerMenu(i);
         }
         for (int i = Main.getPlayerCount(); i < 4; i++) {
-            menuBar.getMenus().get(i).setVisible(false);
+            toolBarInstance.getItems().get(i * 2).setVisible(false);
+            toolBarInstance.getItems().get(i * 2 + 1).setVisible(false);
         }
     }
 
@@ -102,35 +117,30 @@ public class TownController implements Initializable, ControlledScreen {
      * @param i The rank of the player to update
      */
     public static void updatePlayerMenu(int i) {
-        menuBarInstance.getMenus().get(i).setText(Main.getPlayer(i).getName());
-        menuBarInstance.getMenus().get(i).getItems().get(0).setText(
-                "Money: " + Main.getPlayer(i).getMoney());
-        menuBarInstance.getMenus().get(i).getItems().get(1).setText(
-                "Energy: " + Main.getPlayer(i).getResource(new Energy()));
-        menuBarInstance.getMenus().get(i).getItems().get(2).setText(
-                "Food: " + Main.getPlayer(i).getResource(new Food()));
-        menuBarInstance.getMenus().get(i).getItems().get(3).setText(
-                "Smithore: " + Main.getPlayer(i).getResource(new Smithore()));
-        menuBarInstance.getMenus().get(i).getItems().get(4).setText(
-                "Score: " + Main.getPlayer(i).getScore());
+        ((Label) (toolBarInstance.getItems().get(i * 2))).setText(
+                Main.getPlayer(i).getName() + "\n" +
+                "M: " + Main.getPlayer(i).getMoney() + "\n" +
+                "E: " + Main.getPlayer(i).getResource(new Energy()) + "\n" +
+                "F: " + Main.getPlayer(i).getResource(new Food()) + "\n" +
+                "S: " + Main.getPlayer(i).getResource(new Smithore()));
     }
 
     private void setupDisplayText() {
+        System.out.println("Hello");
         displayText.setEditable(false);
         displayTextInstance = displayText;
+        displayTextInstance.setText("Welcome to the Town. Go to the store to buy resources " +
+                "or go to the Pub to end your turn\n" + MapController.getDisplayText().getText());
     }
 
-    private void updateDisplayText(String text) {
-        displayText.setText(text + "\n" + displayText.getText());
+    public static void updateDisplayText(String text) {
+        displayTextInstance.setText(text + "\n" + displayTextInstance.getText());
     }
 
-
-    /**
-     * Gets the menubar located in this screen
-     * @return this screen's menubar
-     */
-    public static MenuBar getMenuBar() { return menuBarInstance; }
 
     public static TextArea getDisplayText() { return displayTextInstance; }
 
+    public static Label getTimerLabel() { return timerLabelInstance; }
+
+    public static ToolBar getToolBar() { return toolBarInstance; }
 }

@@ -26,7 +26,7 @@ public class Turn implements java.io.Serializable {
         currentPlayer = 0;
         currentStage = 0;
         currentTurn = 0;
-	    m = STARTING_M;
+        m = STARTING_M;
     }
 
     public final boolean hasNextPlayer() {
@@ -58,26 +58,26 @@ public class Turn implements java.io.Serializable {
     }
 
     public final void updateM() {
-    	if (currentTurn == 12) {
-		    m = FINAL_M;
-	    } else if (currentTurn > 7) {
+        if (currentTurn == 12) {
+            m = FINAL_M;
+        } else if (currentTurn > 7) {
             m = PHASE2_M;
-	    } else if (currentTurn > 3) {
-		    m = PHASE1_M;
-	    } else {
-		    m = STARTING_M;
-	    }
+        } else if (currentTurn > 3) {
+            m = PHASE1_M;
+        } else {
+            m = STARTING_M;
+        }
     }
     public final boolean hasRandomEvent() {
-	    int randomNum = (int)((Math.random()*100) + 1);
-	    return randomNum < 28;
+        int randomNum = (int)((Math.random()*100) + 1);
+        return true;
     }
     public final void nextTurn() {
         if (hasNextTurn()) {
 			currentTurn++;
 		}
 
-	    updateM();
+        updateM();
         currentPlayer = 0;
         currentStage = 0;
 
@@ -87,19 +87,19 @@ public class Turn implements java.io.Serializable {
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             Main.getPlayer(i).getTimer().reset();
             Main.getPlayer(i).produce();
-	        if (hasRandomEvent()) {
+            if (hasRandomEvent()) {
                 RandomEventGenerator eventGenerator;
-		        if (i != Main.getPlayerCount() - 1) {
+                if (i != Main.getPlayerCount() - 1) {
                     eventGenerator = new RandomEventGenerator(EventTypes.BAD, Main.getPlayer(i));
                     eventGenerator.generateAction();
 
-		        } else {
+                } else {
                     eventGenerator = new RandomEventGenerator(EventTypes.GOOD, Main.getPlayer(i));
                     eventGenerator.generateAction();
-            	}		
-                MapController.updateDisplayText(eventGenerator.getEvent().getMessage());
-	        }
-        }	
+                }
+                TownController.updateDisplayText(eventGenerator.getEvent().getMessage());
+            }
+        }
     }
 
     public final int getCurrentPlayer() {

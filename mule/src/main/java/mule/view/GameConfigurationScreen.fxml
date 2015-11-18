@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane id="game-config-pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="675.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.ConfigurationController">
+<StackPane id="game-config-pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="760.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.ConfigurationController">
    <children>
       <Label text="Players">
          <StackPane.margin>
@@ -24,25 +24,25 @@
             <Insets top="12.0" />
          </StackPane.margin>
       </Label>
-      <Label text="Map" StackPane.alignment="CENTER_LEFT">
+      <Label text="Map" StackPane.alignment="CENTER">
          <StackPane.margin>
-            <Insets bottom="10.0" left="175.0" />
+            <Insets bottom="10.0" right="300.0" />
          </StackPane.margin>
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label text="Difficulty" StackPane.alignment="CENTER_RIGHT">
+      <Label text="Difficulty" StackPane.alignment="CENTER">
          <StackPane.margin>
-            <Insets bottom="10.0" right="160.0" />
+            <Insets bottom="10.0" left="300.0" />
          </StackPane.margin>
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="mapChoiceBox" prefWidth="150.0" StackPane.alignment="CENTER_LEFT">
+      <ChoiceBox fx:id="mapChoiceBox" prefWidth="150.0" StackPane.alignment="CENTER">
          <StackPane.margin>
-            <Insets left="115.0" top="40.0" />
+            <Insets right="300.0" top="40.0" />
          </StackPane.margin>
       </ChoiceBox>
       <Button fx:id="toPlayerSetUpButton" mnemonicParsing="false" onAction="#goToPlayerScreen" text="Continue" StackPane.alignment="BOTTOM_CENTER">
@@ -58,9 +58,9 @@
             <Insets bottom="110.0" left="100.0" right="100.0" />
          </StackPane.margin>
       </Slider>
-      <ChoiceBox fx:id="difficultyChoiceBox" prefWidth="150.0" StackPane.alignment="CENTER_RIGHT">
+      <ChoiceBox fx:id="difficultyChoiceBox" prefWidth="150.0" StackPane.alignment="CENTER">
          <StackPane.margin>
-            <Insets right="115.0" top="40.0" />
+            <Insets left="300.0" top="40.0" />
          </StackPane.margin>
       </ChoiceBox>
       <TextField fx:id="saveTextField" alignment="CENTER" maxWidth="200.0" prefWidth="200.0" StackPane.alignment="CENTER">
