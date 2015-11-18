@@ -126,7 +126,6 @@ public class TownController implements Initializable, ControlledScreen {
     }
 
     private void setupDisplayText() {
-        System.out.println("Hello");
         displayText.setEditable(false);
         displayTextInstance = displayText;
         displayTextInstance.setText("Welcome to the Town. Go to the store to buy resources " +
