@@ -207,7 +207,7 @@ public class DatabaseController {
         }
     }
 
-    private boolean checkName(String toCheck) {
+    public boolean checkName(String toCheck) {
         PreparedStatement selectSaves = null;
         ResultSet saves = null;
         try {

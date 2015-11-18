@@ -4,9 +4,60 @@
 }
 
 .button {
-    -fx-background-color: #2A6A31;
+    -fx-background-color: white;
+    -fx-background-radius: 2px;
+    -fx-border-color: black;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font: normal bold 15 System;
+}
+
+.text-field {
     -fx-background-radius: 0;
-    -fx-text-fill: white;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 2px;
+}
+
+.disabled {
+    -fx-background-color: #DDDDDD;
+}
+
+.error {
+    -fx-background-color: red;
+}
+
+.choice-box {
+    -fx-background-radius: 0;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 2px;
+}
+
+.check-box {
+    -fx-font-weight: bold;
+}
+
+.check-box *.box {
+    -fx-background-radius: 0;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 2px;
+}
+
+.slider .track {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 2px;
+}
+
+.slider .thumb {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 2px;
+}
+
+.slider {
     -fx-font-weight: bold;
 }
 
@@ -16,7 +67,12 @@
 }
 
 #game-config-pane {
-    -fx-background-image: url("game_config.jpg");
+    -fx-background-image: url("config.jpg");
+    -fx-background-position: center center;
+}
+
+#player-config-pane {
+    -fx-background-image: url("config.jpg");
     -fx-background-position: center center;
 }
 
@@ -25,5 +81,10 @@
     -fx-background-radius: 0;
     -fx-text-fill: black;
     -fx-font: normal bold 20 System;
+}
+
+.player-image {
+    -fx-background-image: url("pplayer.png");
+    -fx-background-radius: 3px;
 }
 

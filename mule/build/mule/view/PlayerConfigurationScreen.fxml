@@ -1,41 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="760.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.PlayersController">
+<StackPane id="player-config-pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="760.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.PlayersController">
    <children>
-      <VBox fx:id="playersBox" prefHeight="300.0" prefWidth="600.0" StackPane.alignment="TOP_CENTER">
+      <VBox fx:id="playersBox" maxHeight="200.0" maxWidth="425.0" prefHeight="300.0" prefWidth="300.0" StackPane.alignment="TOP_CENTER">
          <children>
             <HBox fx:id="p1Box" alignment="CENTER" prefHeight="50.0" prefWidth="550.0" spacing="40.0">
                <children>
-                  <TextField promptText="Name" />
+                  <TextField promptText="Name" stylesheets="@style.css" />
                   <ChoiceBox fx:id="p1RaceChoiceBox" prefWidth="150.0" />
-                  <ColorPicker />
+                  <ChoiceBox fx:id="p1RaceChoiceBox1" prefWidth="150.0" />
                </children>
             </HBox>
             <HBox fx:id="p2Box" alignment="CENTER" prefHeight="50.0" prefWidth="550.0" spacing="40.0">
                <children>
                   <TextField promptText="Name" />
                   <ChoiceBox fx:id="p2RaceChoiceBox" prefWidth="150.0" />
-                  <ColorPicker />
+                  <ChoiceBox fx:id="p2RaceChoiceBox1" prefWidth="150.0" />
                </children>
             </HBox>
             <HBox fx:id="p3Box" alignment="CENTER" prefHeight="50.0" prefWidth="550.0" spacing="40.0">
                <children>
                   <TextField promptText="Name" />
                   <ChoiceBox fx:id="p3RaceChoiceBox" prefWidth="150.0" />
-                  <ColorPicker />
+                  <ChoiceBox fx:id="p3RaceChoiceBox1" prefWidth="150.0" />
                </children>
             </HBox>
             <HBox fx:id="p4Box" alignment="CENTER" prefHeight="50.0" prefWidth="550.0" spacing="40.0">
                <children>
                   <TextField promptText="Name" />
                   <ChoiceBox fx:id="p4RaceChoiceBox" prefWidth="150.0" />
-                  <ColorPicker />
+                  <ChoiceBox fx:id="p4RaceChoiceBox1" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox fx:id="p4Box1" alignment="CENTER" prefHeight="50.0" prefWidth="550.0" spacing="40.0">
+               <children>
+                  <Button fx:id="toMapButton" alignment="CENTER" cancelButton="true" mnemonicParsing="false" onAction="#continueGame" prefWidth="110.0" text="Continue">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
          </children>
@@ -43,33 +54,64 @@
             <Insets top="75.0" />
          </StackPane.margin>
       </VBox>
-      <Button fx:id="toMapButton" alignment="CENTER" cancelButton="true" mnemonicParsing="false" onAction="#goToMapScreen" text="Continue" StackPane.alignment="BOTTOM_CENTER">
-         <StackPane.margin>
-            <Insets bottom="75.0" />
-         </StackPane.margin>
-      </Button>
-      <Label text="Player Selection Screen" StackPane.alignment="TOP_CENTER">
+      <Label text="Player Configuration" StackPane.alignment="TOP_CENTER">
          <font>
-            <Font size="17.0" />
+            <Font name="System Bold" size="17.0" />
          </font>
          <StackPane.margin>
             <Insets top="25.0" />
          </StackPane.margin>
       </Label>
-      <Label text="Player Name" StackPane.alignment="TOP_CENTER">
+      <Label text="Name" StackPane.alignment="TOP_CENTER">
          <StackPane.margin>
-            <Insets right="370.0" top="60.0" />
+            <Insets right="300.0" top="60.0" />
          </StackPane.margin>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
       </Label>
       <Label text="Race" StackPane.alignment="TOP_CENTER">
          <StackPane.margin>
             <Insets left="20.0" top="60.0" />
          </StackPane.margin>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
       </Label>
       <Label text="Color" StackPane.alignment="TOP_CENTER">
          <StackPane.margin>
-            <Insets left="400.0" top="60.0" />
+            <Insets left="325.0" top="60.0" />
          </StackPane.margin>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
       </Label>
+      <HBox fx:id="players" maxHeight="75.0" maxWidth="300.0" prefHeight="75.0" prefWidth="200.0" translateX="-300.0" StackPane.alignment="CENTER_LEFT">
+         <StackPane.margin>
+            <Insets top="200.0" />
+         </StackPane.margin>
+         <children>
+            <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@person_blue.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@person_red.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@person_yellow.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@person_pink.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
    </children>
 </StackPane>
