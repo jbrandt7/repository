@@ -53,6 +53,8 @@ public class Main extends Application {
     private static final String CONFIGURE_FILE = "view/GameConfigurationScreen.fxml";
     public static final String PLAYER_CONFIG_ID = "playerCon";
     public static final String PLAYER_CONFIG_FILE = "view/PlayerConfigurationScreen.fxml";
+    public static final String INSTRUCTIONS_ID = "insructions";
+    public static final String INSTRUCTIONS_FILE = "view/InstructionsScreen.fxml";
     public static final String MAP_ID = "map";
     public static final String MAP_FILE = "view/MapScreen.fxml";
     public static final String STORE_ID = "store";

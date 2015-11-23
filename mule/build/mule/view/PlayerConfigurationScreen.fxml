@@ -90,28 +90,6 @@
          <StackPane.margin>
             <Insets top="200.0" />
          </StackPane.margin>
-         <children>
-            <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@person_blue.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@person_red.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@person_yellow.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@person_pink.png" />
-               </image>
-            </ImageView>
-         </children>
       </HBox>
    </children>
 </StackPane>

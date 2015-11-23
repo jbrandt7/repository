@@ -1,4 +1,24 @@
 
+#startingpane {
+    -fx-background-image: url("starting.jpg");
+    -fx-background-position: center center;
+}
+
+#game-config-pane {
+    -fx-background-image: url("config.jpg");
+    -fx-background-position: center center;
+}
+
+#player-config-pane {
+    -fx-background-image: url("config.jpg");
+    -fx-background-position: center center;
+}
+
+#instruction-pane {
+    -fx-background-image: url("instructions.jpg");
+    -fx-background-position: center center;
+}
+
 .pane {
     -fx-background-color: #48AA51;
 }
@@ -17,6 +37,10 @@
     -fx-background-color: white;
     -fx-border-color: black;
     -fx-border-radius: 2px;
+}
+
+.text-area .scroll-bar:vertical:disabled {
+    -fx-opacity: 0;
 }
 
 .disabled {
@@ -59,21 +83,6 @@
 
 .slider {
     -fx-font-weight: bold;
-}
-
-#startingpane {
-    -fx-background-image: url("starting.jpg");
-    -fx-background-position: center center;
-}
-
-#game-config-pane {
-    -fx-background-image: url("config.jpg");
-    -fx-background-position: center center;
-}
-
-#player-config-pane {
-    -fx-background-image: url("config.jpg");
-    -fx-background-position: center center;
 }
 
 .start-button {

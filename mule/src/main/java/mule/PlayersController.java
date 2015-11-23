@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+import javafx.scene.image.ImageView;
 import javafx.collections.FXCollections;
 import javafx.animation.*;
 import javafx.event.*;
@@ -49,15 +50,22 @@ public class PlayersController implements Initializable, ControlledScreen {
 
     @FXML public final void continueGame() {
         if (processPlayers()) {
+            setUpPlayers();
             initializeTurn();
             showPlayerAnimation();
         }
     }
 
     public final void goToMapScreen() {
-        Main.loadScene(Main.MAP_ID, Main.MAP_FILE);
+        Main.loadScene(Main.INSTRUCTIONS_ID, Main.INSTRUCTIONS_FILE);
+        controller.setScreen(Main.INSTRUCTIONS_ID);
+    }
 
-        controller.setScreen(Main.MAP_ID);
+    private void setUpPlayers() {
+        for (int i = 0; i < Main.getPlayerCount(); i++) {
+            ImageView toAdd = new ImageView(PlayerImageNames.getFileName(Main.getPlayer(i)));
+            players.getChildren().add(toAdd);
+        }
     }
 
     private boolean processPlayers() {

@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.animation.*;
 import javafx.event.*;
 import javafx.util.Duration;
@@ -60,6 +62,7 @@ public class MapController implements Initializable, ControlledScreen {
 
         selectionRect.setWidth(75);
         selectionRect.setHeight(75);
+        selectionRect.setFill(Main.getCurrentPlayer().getColor());
 
         selectionRect.addEventHandler(MouseEvent.MOUSE_PRESSED,
                 e -> createLandSelectionHandler(e));
@@ -80,6 +83,8 @@ public class MapController implements Initializable, ControlledScreen {
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             TownController.updatePlayerMenu(i);
         }
+
+        TownController.boldPlayerFont(Main.getTurn().getCurrentPlayer());
     }
 
     /**
@@ -99,11 +104,25 @@ public class MapController implements Initializable, ControlledScreen {
 
     private void incrementTurn() {
         if (Main.getTurn().hasNextPlayer()) {
+            unboldPlayerFont(Main.getTurn().getCurrentPlayer());
             Main.getTurn().nextPlayer();
+            boldPlayerFont(Main.getTurn().getCurrentPlayer());
+            selectionRect.setFill(Main.getCurrentPlayer().getColor());
         } else {
+            unboldPlayerFont(Main.getTurn().getCurrentPlayer());
             Main.getTurn().nextStage();
             goToTownScreen();
         }
+    }
+
+    public static void unboldPlayerFont(int i) {
+        ((Label) toolBarInstance.getItems().get(i * 2))
+                .setFont(Font.font("System", FontWeight.NORMAL, 12));
+    }
+
+    public static void boldPlayerFont(int i) {
+        ((Label) toolBarInstance.getItems().get(i * 2))
+                .setFont(Font.font("System", FontWeight.BOLD, 12));
     }
 
     private void setupInfoBar() {
@@ -118,6 +137,8 @@ public class MapController implements Initializable, ControlledScreen {
             toolBarInstance.getItems().get(i * 2).setVisible(false);
             toolBarInstance.getItems().get(i * 2 + 1).setVisible(false);
         }
+
+        boldPlayerFont(Main.getTurn().getCurrentPlayer());
 
     }
 

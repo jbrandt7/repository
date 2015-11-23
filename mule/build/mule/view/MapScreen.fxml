@@ -15,7 +15,7 @@
          <StackPane.margin>
             <Insets bottom="75.0" />
          </StackPane.margin></Canvas>
-      <TextArea fx:id="displayText" maxHeight="100.0" maxWidth="675.0" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="BOTTOM_LEFT" />
+      <TextArea fx:id="displayText" maxHeight="100.0" maxWidth="675.0" prefHeight="200.0" prefWidth="200.0" wrapText="true" StackPane.alignment="BOTTOM_LEFT" />
       <Rectangle fx:id="selectionRect" fill="#ffffff80" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" StackPane.alignment="TOP_LEFT">
          <StackPane.margin>
             <Insets />
