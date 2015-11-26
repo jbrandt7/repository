@@ -57,8 +57,8 @@ public class PlayersController implements Initializable, ControlledScreen {
     }
 
     public final void goToMapScreen() {
-        Main.loadScene(Main.INSTRUCTIONS_ID, Main.INSTRUCTIONS_FILE);
-        controller.setScreen(Main.INSTRUCTIONS_ID);
+        Main.loadScene(Main.MAP_ID, Main.MAP_FILE);
+        controller.setScreen(Main.MAP_ID);
     }
 
     private void setUpPlayers() {

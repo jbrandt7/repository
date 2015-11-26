@@ -19,6 +19,11 @@
     -fx-background-position: center center;
 }
 
+#store-pane {
+    -fx-background-image: url("store.jpg");
+    -fx-background-position: center center;
+}
+
 .pane {
     -fx-background-color: #48AA51;
 }

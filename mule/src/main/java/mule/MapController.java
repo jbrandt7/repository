@@ -14,6 +14,8 @@ import javafx.animation.*;
 import javafx.event.*;
 import javafx.util.Duration;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import mule.model.*;
 import mule.model.map.*;
@@ -38,6 +40,8 @@ public class MapController implements Initializable, ControlledScreen {
     private static TextArea displayTextInstance;
 
     @FXML private Rectangle selectionRect;
+
+    @FXML private ImageView muleImage;
 
     @Override public final void initialize(URL url, ResourceBundle rb) {
         if (Main.getMap() == null) {
@@ -65,6 +69,9 @@ public class MapController implements Initializable, ControlledScreen {
         selectionRect.setFill(Main.getCurrentPlayer().getColor());
 
         selectionRect.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                e -> createLandSelectionHandler(e));
+
+        muleImage.addEventHandler(MouseEvent.MOUSE_PRESSED,
                 e -> createLandSelectionHandler(e));
 
         mapParent.addEventHandler(MouseEvent.MOUSE_MOVED,
@@ -186,6 +193,12 @@ public class MapController implements Initializable, ControlledScreen {
         int x = (int) ((event.getSceneX()) / 75);
         int y = (int) ((event.getSceneY()) / 75);
 
+        selectionRect.setTranslateX(-75);
+        selectionRect.setTranslateY(-75);
+
+        muleImage.setTranslateX(-75);
+        muleImage.setTranslateY(-75);
+
         if (isTown(x, y)) {
             processTownClick();
         } else {
@@ -202,8 +215,14 @@ public class MapController implements Initializable, ControlledScreen {
         int x = (int) ((event.getX()) / 75);
         int y = (int) ((event.getY()) / 75);
 
-        selectionRect.setTranslateX(x * 75);
-        selectionRect.setTranslateY(y * 75);
+        if (Main.getTurn().getCurrentStage() == Turn.LAND) {
+            selectionRect.setTranslateX(x * 75);
+            selectionRect.setTranslateY(y * 75);
+        } else {
+            muleImage.setImage(new Image("mule/view/mule_energy.png"));
+            muleImage.setTranslateX(x * 75);
+            muleImage.setTranslateY(y * 75);
+        }
     }
 
     private boolean isTown(int x, int y) {
