@@ -23,7 +23,7 @@ public class PlayersController implements Initializable, ControlledScreen {
             ((ChoiceBox)((HBox) playersBox.getChildren().get(i))
                     .getChildren().get(1)).setItems(FXCollections
                     .observableArrayList("Human", "Flapper","Bonzoid",
-                    "Ugaite", "Buzzite"));
+                    "Ugaite", "Buzzite", "Pikachu", "Snorlax"));
             ((ChoiceBox)((HBox) playersBox.getChildren().get(i))
                     .getChildren().get(1)).getSelectionModel().select(0);
         }
@@ -74,6 +74,12 @@ public class PlayersController implements Initializable, ControlledScreen {
                     break;
                 case ("Buzzite"):
                     p = new Buzzite(name, color);
+                    break;
+                case ("Pikachu"):
+                    p = new Pikachu(name, color);
+                    break;
+                case ("Snorlax"):
+                    p = new Snorlax(name, color);
                     break;
                 default:
                     p = new Flapper(name, color);
