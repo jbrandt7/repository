@@ -21,11 +21,6 @@ public class TownController implements Initializable, ControlledScreen {
 
     @FXML private Canvas townParent;
 
-    /*
-    @FXML private MenuBar menuBar;
-    private static MenuBar menuBarInstance;
-    */
-
     @FXML private ToolBar toolBar;
     private static ToolBar toolBarInstance;
 
@@ -99,6 +94,7 @@ public class TownController implements Initializable, ControlledScreen {
         Main.setToolBar(StoreController.getToolBar());
         Main.setTimerLabel(StoreController.getTimerLabel());
         StoreController.getDisplayText().setText(displayText.getText());
+        StoreController.boldPlayerFont(Main.getTurn().getCurrentPlayer());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             MapController.updatePlayerMenu(i);
         }

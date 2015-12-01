@@ -39,13 +39,13 @@ public class DefaultMap extends Map {
                     plots[i][j] = new RiverPlot(parent, i * PLOT_SIZE, j * PLOT_SIZE);
                     image = new Image("mule/view/river.jpg", false);
                 } else if (mountainList1.contains(new Location(i,j))) {
-                    plots[i][j] = new MountainPlot(parent, i * PLOT_SIZE, j * PLOT_SIZE);
+                    plots[i][j] = new SmallMountainPlot(parent, i * PLOT_SIZE, j * PLOT_SIZE);
                     image = new Image("mule/view/mountain1.jpg", false);
                 } else if (mountainList2.contains(new Location(i,j))) {
-                    plots[i][j] = new MountainPlot(parent, i * PLOT_SIZE, j * PLOT_SIZE);
+                    plots[i][j] = new MediumMountainPlot(parent, i * PLOT_SIZE, j * PLOT_SIZE);
                     image = new Image("mule/view/mountain2.jpg", false);
                 } else if (mountainList3.contains(new Location(i,j))) {
-                    plots[i][j] = new MountainPlot(parent, i * PLOT_SIZE, j * PLOT_SIZE);
+                    plots[i][j] = new LargeMountainPlot(parent, i * PLOT_SIZE, j * PLOT_SIZE);
                     image = new Image("mule/view/mountain3.jpg", false);
                 } else {
                     plots[i][j] = new PlainPlot(parent, i * PLOT_SIZE, j * PLOT_SIZE);

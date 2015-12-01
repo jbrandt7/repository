@@ -21,7 +21,7 @@
 
 #store-pane {
     -fx-background-image: url("store.jpg");
-    -fx-background-position: center center;
+    -fx-background-position: top left;
 }
 
 .pane {
@@ -95,6 +95,12 @@
     -fx-background-radius: 0;
     -fx-text-fill: black;
     -fx-font: normal bold 20 System;
+}
+
+.tool-bar {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 2px;
 }
 
 .player-image {

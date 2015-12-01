@@ -34,7 +34,7 @@ public class Store implements java.io.Serializable {
      * @return whether or not the transaction was successful
      */
     public final boolean buyResource(Player p, Resource r) {
-   	    if (p.getMoney() < r.getCost() || getResource(r) == 0) {
+        if (p.getMoney() < r.getCost() || getResource(r) == 0) {
             return false;
         }
         inventory.put(r, inventory.get(r) - 1);
@@ -42,6 +42,29 @@ public class Store implements java.io.Serializable {
         p.removeMoney(r.getCost());
         return true;
     }
+
+    public final boolean buyResource(Player p, ResourceBag bag) {
+        int totalCost = 0;
+
+        for (Resource type : bag.getResources()) {
+            totalCost += bag.get(type) * type.getCost();
+
+            if (getResource(type) < bag.get(type))
+                return false;
+        }
+
+        if (p.getMoney() < totalCost)
+            return false;
+
+        for (Resource type : bag.getResources()) {
+            inventory.put(type, getResource(type) - bag.get(type));
+            p.addResource(type, bag.get(type));
+            p.removeMoney(bag.get(type) * type.getCost());
+        }
+
+        return true;
+    }
+
 
     /**
      * Attempts to sell a resource from a player
@@ -59,6 +82,22 @@ public class Store implements java.io.Serializable {
         return true;
     }
 
+    public final boolean sellResource(Player p, ResourceBag bag) {
+        int totalCost = 0;
+
+        for (Resource type : bag.getResources()) {
+            if (p.getBag().get(type) < bag.get(type))
+                return false;
+        }
+
+        for (Resource type : bag.getResources()) {
+            inventory.put(type, getResource(type) + bag.get(type));
+            p.removeResource(type, bag.get(type));
+            p.addMoney(bag.get(type) * type.getCost());
+        }
+
+        return true;
+    }
     /**
      * Attempts to buy a mule for a player
      * @param p the player trying to buy the mule

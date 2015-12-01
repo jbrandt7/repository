@@ -43,7 +43,7 @@ public class ResourceBag implements java.io.Serializable {
         return result;
     }
 
-    public final Set getResources() {
+    public final Set<Resource> getResources() {
         return bag.keySet();
     }
 
