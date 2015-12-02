@@ -30,16 +30,6 @@ public class Card extends Parent {
 		this.suit = suit;
 		this.rank = rank;
 		this.value = rank.value;
-
-//	 	Rectangle bg = new Rectangle(80, 100);
-//     	bg.setArcWidth(20);
-//     	bg.setArcHeight(20);
-//     	bg.setFill(Color.WHITE);
-//
-//     	Text text = new Text(toString());
-//     	text.setWrappingWidth(70);
-//
-//     	getChildren().add(new StackPane(bg, text));
 	}
 
 	@Override

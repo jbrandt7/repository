@@ -26,12 +26,8 @@ public class Hand {
 	public void takeCard(Card card) {
 		cards.add(card);
 
-		if (card.rank == Rank.ACE) {
-			aces++;
-		}
-		if (value + card.value > 21 && aces > 0) {
+        if (card.rank.equals(Rank.ACE)) {
             value = value + card.value - 10;    //then count ace as '1' not '11'
-            aces--;
         }
         else {
             value = value + card.value;

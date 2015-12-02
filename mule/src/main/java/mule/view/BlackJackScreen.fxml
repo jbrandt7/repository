@@ -9,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane id="blackjack-pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="760.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.BlackJackController">
+<StackPane id="blackjack-pane" fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="760.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.BlackJackController">
    <children>
       <Button mnemonicParsing="false" onAction="#hit" text="Hit" StackPane.alignment="BOTTOM_LEFT">
          <StackPane.margin>
@@ -42,26 +42,6 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" StackPane.alignment="TOP_CENTER">
-         <StackPane.margin>
-            <Insets left="100.0" top="75.0" />
-         </StackPane.margin>
-      </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" StackPane.alignment="TOP_CENTER">
-         <StackPane.margin>
-            <Insets right="100.0" top="75.0" />
-         </StackPane.margin>
-      </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" StackPane.alignment="BOTTOM_CENTER">
-         <StackPane.margin>
-            <Insets bottom="150.0" left="100.0" />
-         </StackPane.margin>
-      </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" StackPane.alignment="BOTTOM_CENTER">
-         <StackPane.margin>
-            <Insets bottom="150.0" right="100.0" />
-         </StackPane.margin>
-      </Rectangle>
       <Label fx:id="winningLabel" opacity="0.0" text="Label" textFill="#f7ff8c" StackPane.alignment="TOP_CENTER">
          <padding>
             <Insets bottom="75.0" />
@@ -73,44 +53,24 @@
             <Insets right="100.0" top="75.0" />
          </StackPane.margin>
       </Label>
-      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+      <ImageView fx:id="d1" fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
          <StackPane.margin>
             <Insets right="100.0" top="75.0" />
          </StackPane.margin>
       </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
+      <ImageView fx:id="p1" fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
          <StackPane.margin>
             <Insets bottom="150.0" right="100.0" />
          </StackPane.margin>
       </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+      <ImageView fx:id="d2" fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
          <StackPane.margin>
             <Insets left="100.0" top="75.0" />
          </StackPane.margin>
       </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
+      <ImageView fx:id="p2" fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
          <StackPane.margin>
             <Insets bottom="150.0" left="100.0" />
-         </StackPane.margin>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-         <StackPane.margin>
-            <Insets left="300.0" top="75.0" />
-         </StackPane.margin>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
-         <StackPane.margin>
-            <Insets bottom="150.0" left="300.0" />
-         </StackPane.margin>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-         <StackPane.margin>
-            <Insets left="500.0" top="75.0" />
-         </StackPane.margin>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
-         <StackPane.margin>
-            <Insets bottom="150.0" left="500.0" />
          </StackPane.margin>
       </ImageView>
    </children>
