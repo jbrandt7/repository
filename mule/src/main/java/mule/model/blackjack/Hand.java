@@ -36,7 +36,6 @@ public class Hand {
         else {
             value = value + card.value;
         }
-
 	}
 
 	public void reset() {
@@ -49,5 +48,12 @@ public class Hand {
 		return value;
 	}
 
+    public Set<Card> getCards() {
+        return cards;
+    }
+
+    public int getNumberOfCards() {
+        return cards.size();
+    }
 
 }

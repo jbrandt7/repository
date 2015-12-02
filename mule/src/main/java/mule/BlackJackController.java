@@ -16,12 +16,27 @@ public class BlackJackController implements Initializable, ControlledScreen {
 
     @FXML private Label winningLabel;
 
+    @FXML private StackPane parent;
+
+    @FXML private ImageView d1, d2, p1, p2;
+
+    private List<ImageView> dealerViews, playerViews;
+
     private Hand dealer, player;
     private Deck deck;
 
     @Override public void initialize(URL url, ResourceBundle rb) {
         deck = new Deck();
+
+        dealerViews.add(d1);
+        dealerViews.add(d2);
         dealer = deck.createHand();
+
+        for (Card c : dealer.getCards()) {
+            ImageView current = dealerViews.remove(0);
+            current.setImage(new Image(CardToFile.getFileName(c)));
+        }
+
         player = deck.createHand();
         winningLabel.setOpacity(0.0);
 

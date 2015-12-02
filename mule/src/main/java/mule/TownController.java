@@ -46,15 +46,8 @@ public class TownController implements Initializable, ControlledScreen {
     }
 
     private void processClick(int x, int y) {
-
         if (x >= 360 && y >= 210) {
             goToBlackJackScreen();
-            /*
-            int amount = Main.getTown().getPub().cashOut(Main.getCurrentPlayer());
-            updateDisplayText(Main.getCurrentPlayer().getName() + " cashed out " +
-                    "for " + amount);
-            incrementTurn();
-            */
         } else if (x > 360 && y < 150) {
             goToStoreScreen();
         }

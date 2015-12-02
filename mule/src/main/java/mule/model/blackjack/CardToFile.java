@@ -1,5 +1,7 @@
 package mule.model.blackjack;
 
+import mule.model.blackjack.Card.Rank;
+import mule.model.blackjack.Card.Suit;
 
 public class CardToFile {
 
@@ -7,9 +9,9 @@ public class CardToFile {
 
     static {
         map = new HashMap<>();
-        map.add(new Card(), "mule/view/cards/A_C.png");
-        map.add(new Card(), "mule/view/cards/2_C.png");
-        map.add(new Card(), "mule/view/cards/3_C.png");
+        map.add(new Card(Suit.CLUBS, Rank.ACE), "mule/view/cards/A_C.png");
+        map.add(new Card(Suit.CLUBS, RANK.TWO), "mule/view/cards/2_C.png");
+        map.add(new Card(Suits.CLUSB, RANK.THREE), "mule/view/cards/3_C.png");
         map.add(new Card(), "mule/view/cards/4_C.png");
         map.add(new Card(), "mule/view/cards/5_C.png");
         map.add(new Card(), "mule/view/cards/6_C.png");
@@ -61,7 +63,7 @@ public class CardToFile {
         map.add(new Card(), "mule/view/cards/K_D.png");
     }
 
-    public static getFileName(Card c) {
+    public static String getFileName(Card c) {
         return map.get(c);
     }
 }
