@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.canvas.Canvas;
@@ -18,11 +20,6 @@ public class TownController implements Initializable, ControlledScreen {
 
 
     @FXML private Canvas townParent;
-
-    /*
-    @FXML private MenuBar menuBar;
-    private static MenuBar menuBarInstance;
-    */
 
     @FXML private ToolBar toolBar;
     private static ToolBar toolBarInstance;
@@ -62,11 +59,23 @@ public class TownController implements Initializable, ControlledScreen {
 
     private void incrementTurn() {
         if (Main.getTurn().hasNextPlayer()) {
+            unboldPlayerFont(Main.getTurn().getCurrentPlayer());
             Main.getTurn().nextPlayer();
+            boldPlayerFont(Main.getTurn().getCurrentPlayer());
         } else if (Main.getTurn().hasNextTurn()) {
             Main.getTurn().nextTurn();
             goToMapScreen();
         }
+    }
+
+    public static void unboldPlayerFont(int i) {
+        ((Label) toolBarInstance.getItems().get(i * 2))
+                .setFont(Font.font("System", FontWeight.NORMAL, 12));
+    }
+
+    public static void boldPlayerFont(int i) {
+        ((Label) toolBarInstance.getItems().get(i * 2))
+                .setFont(Font.font("System", FontWeight.BOLD, 12));
     }
 
     private void goToMapScreen() {
@@ -74,6 +83,7 @@ public class TownController implements Initializable, ControlledScreen {
         Main.setToolBar(MapController.getToolBar());
         Main.setTimerLabel(MapController.getTimerLabel());
         MapController.getDisplayText().setText(displayText.getText());
+        MapController.boldPlayerFont(Main.getTurn().getCurrentPlayer());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             MapController.updatePlayerMenu(i);
         }
@@ -85,6 +95,7 @@ public class TownController implements Initializable, ControlledScreen {
         Main.setToolBar(StoreController.getToolBar());
         Main.setTimerLabel(StoreController.getTimerLabel());
         StoreController.getDisplayText().setText(displayText.getText());
+        StoreController.boldPlayerFont(Main.getTurn().getCurrentPlayer());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             MapController.updatePlayerMenu(i);
         }
@@ -111,6 +122,9 @@ public class TownController implements Initializable, ControlledScreen {
             toolBarInstance.getItems().get(i * 2).setVisible(false);
             toolBarInstance.getItems().get(i * 2 + 1).setVisible(false);
         }
+
+        boldPlayerFont(Main.getTurn().getCurrentPlayer());
+
     }
 
     /**

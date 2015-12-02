@@ -6,62 +6,34 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane prefHeight="475.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.StoreController">
+<StackPane id="store-pane" prefHeight="475.0" prefWidth="760.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.StoreController">
    <children>
-      <ChoiceBox fx:id="resourceChoiceBox" prefHeight="15.0" prefWidth="109.0" StackPane.alignment="CENTER_LEFT">
+      <Button fx:id="buyButton" mnemonicParsing="false" onAction="#buyResource" text="Buy" StackPane.alignment="BOTTOM_CENTER">
          <StackPane.margin>
-            <Insets bottom="100.0" left="50.0" />
-         </StackPane.margin></ChoiceBox>
-      <ChoiceBox fx:id="quantityChoiceBox" prefHeight="15.0" prefWidth="109.0" StackPane.alignment="CENTER">
-         <StackPane.margin>
-            <Insets bottom="100.0" />
-         </StackPane.margin></ChoiceBox>
-      <Label prefHeight="19.0" prefWidth="60.0" text="Resource" StackPane.alignment="CENTER_LEFT">
-         <StackPane.margin>
-            <Insets bottom="150.0" left="50.0" />
-         </StackPane.margin></Label>
-      <Label text="Quantity" StackPane.alignment="CENTER">
-         <StackPane.margin>
-            <Insets bottom="150.0" />
-         </StackPane.margin></Label>
-      <Button fx:id="buyButton" mnemonicParsing="false" onAction="#buyResource" text="Buy" StackPane.alignment="CENTER_RIGHT">
-         <StackPane.margin>
-            <Insets bottom="150.0" right="125.0" />
+            <Insets bottom="140.0" right="200.0" />
          </StackPane.margin></Button>
-      <Button fx:id="sellButton" mnemonicParsing="false" onAction="#sellResource" text="Sell" StackPane.alignment="CENTER_RIGHT">
+      <Button fx:id="sellButton" mnemonicParsing="false" onAction="#sellResource" text="Sell" StackPane.alignment="BOTTOM_CENTER">
          <StackPane.margin>
-            <Insets bottom="100.0" right="125.0" top="50.0" />
+            <Insets bottom="140.0" right="50.0" />
          </StackPane.margin></Button>
-      <Label text="M.U.L.E">
+      <Button fx:id="foodMule" mnemonicParsing="false" onAction="#buyFoodMule" prefWidth="138.0" text="Food M.U.L.E." StackPane.alignment="CENTER_RIGHT">
          <StackPane.margin>
-            <Insets bottom="100.0" top="100.0" />
-         </StackPane.margin></Label>
-      <Button fx:id="foodMule" mnemonicParsing="false" onAction="#buyFoodMule" text="Food M.U.L.E.">
-         <StackPane.margin>
-            <Insets bottom="100.0" right="300.0" top="200.0" />
+            <Insets bottom="415.0" right="125.0" />
          </StackPane.margin></Button>
-      <Button fx:id="energyMule" mnemonicParsing="false" onAction="#buyEnergyMule" text="Energy M.U.L.E">
+      <Button fx:id="energyMule" mnemonicParsing="false" onAction="#buyEnergyMule" text="Energy M.U.L.E" StackPane.alignment="CENTER_RIGHT">
          <StackPane.margin>
-            <Insets bottom="100.0" top="200.0" />
+            <Insets bottom="315.0" right="125.0" />
          </StackPane.margin></Button>
-      <Button fx:id="oreMule" mnemonicParsing="false" onAction="#buyOreMule" text="Ore M.U.L.E">
+      <Button fx:id="oreMule" mnemonicParsing="false" onAction="#buyOreMule" prefWidth="138.0" text="Ore M.U.L.E" StackPane.alignment="CENTER_RIGHT">
          <StackPane.margin>
-            <Insets bottom="100.0" left="300.0" top="200.0" />
+            <Insets bottom="215.0" right="125.0" />
          </StackPane.margin></Button>
-      <Label prefHeight="34.0" text="Store" StackPane.alignment="TOP_CENTER">
-         <font>
-            <Font size="24.0" />
-         </font>
+      <Button mnemonicParsing="false" onAction="#goToTownScreen" text="Leave" StackPane.alignment="BOTTOM_CENTER">
          <StackPane.margin>
-            <Insets top="50.0" />
-         </StackPane.margin>
-      </Label>
-      <Button mnemonicParsing="false" onAction="#goToTownScreen" text="Leave" StackPane.alignment="TOP_RIGHT">
-         <StackPane.margin>
-            <Insets right="125.0" top="50.0" />
+            <Insets bottom="140.0" left="150.0" right="50.0" />
          </StackPane.margin>
       </Button>
-      <TextArea fx:id="displayText" maxHeight="100.0" maxWidth="675.0" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="BOTTOM_LEFT" />
+      <TextArea fx:id="displayText" maxHeight="100.0" maxWidth="675.0" prefHeight="200.0" prefWidth="200.0" wrapText="true" StackPane.alignment="BOTTOM_LEFT" />
       <ToolBar fx:id="toolBar" maxWidth="75.0" orientation="VERTICAL" prefHeight="40.0" prefWidth="75.0" StackPane.alignment="TOP_RIGHT">
          <items>
             <Label alignment="TOP_LEFT" prefHeight="75.0" prefWidth="75.0" text="Label">
@@ -95,5 +67,25 @@
             </Label>
          </items>
       </ToolBar>
+      <ChoiceBox prefHeight="15.0" prefWidth="75.0" StackPane.alignment="CENTER">
+         <StackPane.margin>
+            <Insets bottom="215.0" right="610.0" />
+         </StackPane.margin>
+      </ChoiceBox>
+      <ChoiceBox fx:id="oreQuantity" prefHeight="15.0" prefWidth="75.0">
+         <StackPane.margin>
+            <Insets bottom="215.0" right="385.0" />
+         </StackPane.margin>
+      </ChoiceBox>
+      <ChoiceBox fx:id="foodQuantity" prefHeight="15.0" prefWidth="75.0">
+         <StackPane.margin>
+            <Insets bottom="215.0" right="160.0" />
+         </StackPane.margin>
+      </ChoiceBox>
+      <ChoiceBox fx:id="energyQuantity" prefHeight="15.0" prefWidth="75.0">
+         <StackPane.margin>
+            <Insets bottom="215.0" left="65.0" />
+         </StackPane.margin>
+      </ChoiceBox>
    </children>
 </StackPane>

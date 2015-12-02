@@ -2,6 +2,7 @@ package mule.model.resources;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
 
 public class Mule extends Resource{
 
@@ -33,8 +34,9 @@ public class Mule extends Resource{
 	 * @param y The y coordinate of the plot we are drawing on
 	 */
     public final void draw(Canvas rep, int x, int y) {
-        rep.getGraphicsContext2D().setFill(Color.BLACK);
-		rep.getGraphicsContext2D().fillRect(x, y, 15, 15);
+        String name = type.getClass().getName().substring(21).toLowerCase();
+        Image mule = new Image("mule/view/mule_" + name + ".png");
+        rep.getGraphicsContext2D().drawImage(mule,  x, y);
     }
 
 	@Override

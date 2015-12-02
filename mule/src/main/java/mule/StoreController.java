@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.collections.FXCollections;
 
 import mule.model.resources.*;
@@ -13,9 +15,7 @@ public class StoreController implements Initializable, ControlledScreen {
 
     private ScreensController controller;
 
-    @FXML private ChoiceBox<Resource> resourceChoiceBox;
-
-    @FXML private ChoiceBox<Integer> quantityChoiceBox;
+    @FXML private ChoiceBox<Integer> oreQuantity, foodQuantity, energyQuantity;
 
     @FXML private ToolBar toolBar;
     private static ToolBar toolBarInstance;
@@ -27,37 +27,48 @@ public class StoreController implements Initializable, ControlledScreen {
     private static TextArea displayTextInstance;
 
     @Override public final void initialize(URL location, ResourceBundle resources) {
-        resourceChoiceBox.setItems(FXCollections.observableArrayList(new Energy(),
-                    new Food(), new Smithore()));
-        resourceChoiceBox.getSelectionModel().select(0);
 
-        quantityChoiceBox.setItems(FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10));
-        quantityChoiceBox.getSelectionModel().select(0);
+        oreQuantity.setItems(FXCollections.observableArrayList(0,1,2,3,4,5,6,7,8,9,10));
+        foodQuantity.setItems(FXCollections.observableArrayList(0,1,2,3,4,5,6,7,8,9,10));
+        energyQuantity.setItems(FXCollections.observableArrayList(0,1,2,3,4,5,6,7,8,9,10));
+
+        oreQuantity.getSelectionModel().select(0);
+        foodQuantity.getSelectionModel().select(0);
+        energyQuantity.getSelectionModel().select(0);
 
         setupInfoBar();
         setupDisplayText();
     }
 
     public final void buyResource() {
-        for (int i = 0; i < quantityChoiceBox.getValue(); i++) {
-            if (Main.getTown().getStore().buyResource(Main.getCurrentPlayer(),
-                    resourceChoiceBox.getValue())) {
-                updateDisplayText(resourceChoiceBox.getValue() + " bought");
-            } else {
-                updateDisplayText("Not enough money");
-            }
+        ResourceBag cart = new ResourceBag();
+
+        cart.add(new Smithore(), oreQuantity.getValue());
+        cart.add(new Food(), foodQuantity.getValue());
+        cart.add(new Energy(), energyQuantity.getValue());
+
+        if (Main.getTown().getStore().buyResource(Main.getCurrentPlayer(),
+                cart)) {
+            updateDisplayText("Resources bought");
+        } else {
+            updateDisplayText("Not enough money");
         }
+
         goToTownScreen();
     }
 
     public final void sellResource() {
-        for (int i = 0; i < quantityChoiceBox.getValue(); i++) {
-            if (Main.getTown().getStore().sellResource(Main.getCurrentPlayer(),
-                    resourceChoiceBox.getValue())) {
-                updateDisplayText(resourceChoiceBox.getValue() + " sold");
-            } else {
-                updateDisplayText("Not enough resources");
-            }
+        ResourceBag cart = new ResourceBag();
+
+        cart.add(new Smithore(), oreQuantity.getValue());
+        cart.add(new Food(), foodQuantity.getValue());
+        cart.add(new Energy(), energyQuantity.getValue());
+
+        if (Main.getTown().getStore().sellResource(Main.getCurrentPlayer(),
+                cart)) {
+            updateDisplayText("Resources sold");
+        } else {
+            updateDisplayText("Not enough in inventory");
         }
         goToTownScreen();
     }
@@ -88,11 +99,12 @@ public class StoreController implements Initializable, ControlledScreen {
         controller = screenParent;
     }
 
-    public void goToTownScreen() {
+    @FXML public void goToTownScreen() {
         controller.setScreen(Main.TOWN_ID);
         Main.setToolBar(TownController.getToolBar());
         Main.setTimerLabel(TownController.getTimerLabel());
         TownController.getDisplayText().setText(displayText.getText());
+        unboldPlayerFont(Main.getTurn().getCurrentPlayer());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             TownController.updatePlayerMenu(i);
         }
@@ -100,10 +112,10 @@ public class StoreController implements Initializable, ControlledScreen {
 
     public final void goToMapScreen() {
         controller.setScreen(Main.MAP_ID);
-        /*Main.setMenuBar(MapController.getMenuBar());*/
         Main.setToolBar(MapController.getToolBar());
         Main.setTimerLabel(MapController.getTimerLabel());
         MapController.getDisplayText().setText(displayText.getText());
+        unboldPlayerFont(Main.getTurn().getCurrentPlayer());
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             MapController.updatePlayerMenu(i);
         }
@@ -141,6 +153,16 @@ public class StoreController implements Initializable, ControlledScreen {
         displayText.setText("Welcome to M.U.L.E! Select a plot " +
                 "of land to continue or select the town to pass.\n");
         displayTextInstance = displayText;
+    }
+
+    public static void unboldPlayerFont(int i) {
+        ((Label) toolBarInstance.getItems().get(i * 2))
+                .setFont(Font.font("System", FontWeight.NORMAL, 12));
+    }
+
+    public static void boldPlayerFont(int i) {
+        ((Label) toolBarInstance.getItems().get(i * 2))
+                .setFont(Font.font("System", FontWeight.BOLD, 12));
     }
 
     public static ToolBar getToolBar() { return toolBarInstance; }

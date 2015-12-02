@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.text.*?>
@@ -15,11 +16,12 @@
          <StackPane.margin>
             <Insets bottom="75.0" />
          </StackPane.margin></Canvas>
-      <TextArea fx:id="displayText" maxHeight="100.0" maxWidth="675.0" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="BOTTOM_LEFT" />
+      <TextArea fx:id="displayText" maxHeight="100.0" maxWidth="675.0" prefHeight="200.0" prefWidth="200.0" wrapText="true" StackPane.alignment="BOTTOM_LEFT" />
       <Rectangle fx:id="selectionRect" fill="#ffffff80" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" StackPane.alignment="TOP_LEFT">
          <StackPane.margin>
             <Insets />
          </StackPane.margin></Rectangle>
+      <ImageView fx:id="muleImage" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_LEFT" />
       <ToolBar fx:id="toolBar" maxWidth="75.0" orientation="VERTICAL" prefHeight="40.0" prefWidth="75.0" StackPane.alignment="CENTER_RIGHT">
         <items>
             <Label alignment="TOP_LEFT" prefHeight="75.0" prefWidth="75.0" text="Label">

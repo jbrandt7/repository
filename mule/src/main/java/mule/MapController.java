@@ -8,10 +8,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.animation.*;
 import javafx.event.*;
 import javafx.util.Duration;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import mule.model.*;
 import mule.model.map.*;
@@ -37,6 +41,8 @@ public class MapController implements Initializable, ControlledScreen {
 
     @FXML private Rectangle selectionRect;
 
+    @FXML private ImageView muleImage;
+
     @Override public final void initialize(URL url, ResourceBundle rb) {
         if (Main.getMap() == null) {
             String type = Main.getMapType();
@@ -60,8 +66,12 @@ public class MapController implements Initializable, ControlledScreen {
 
         selectionRect.setWidth(75);
         selectionRect.setHeight(75);
+        selectionRect.setFill(Main.getCurrentPlayer().getColor());
 
         selectionRect.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                e -> createLandSelectionHandler(e));
+
+        muleImage.addEventHandler(MouseEvent.MOUSE_PRESSED,
                 e -> createLandSelectionHandler(e));
 
         mapParent.addEventHandler(MouseEvent.MOUSE_MOVED,
@@ -80,6 +90,8 @@ public class MapController implements Initializable, ControlledScreen {
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             TownController.updatePlayerMenu(i);
         }
+
+        TownController.boldPlayerFont(Main.getTurn().getCurrentPlayer());
     }
 
     /**
@@ -99,11 +111,25 @@ public class MapController implements Initializable, ControlledScreen {
 
     private void incrementTurn() {
         if (Main.getTurn().hasNextPlayer()) {
+            unboldPlayerFont(Main.getTurn().getCurrentPlayer());
             Main.getTurn().nextPlayer();
+            boldPlayerFont(Main.getTurn().getCurrentPlayer());
+            selectionRect.setFill(Main.getCurrentPlayer().getColor());
         } else {
+            unboldPlayerFont(Main.getTurn().getCurrentPlayer());
             Main.getTurn().nextStage();
             goToTownScreen();
         }
+    }
+
+    public static void unboldPlayerFont(int i) {
+        ((Label) toolBarInstance.getItems().get(i * 2))
+                .setFont(Font.font("System", FontWeight.NORMAL, 12));
+    }
+
+    public static void boldPlayerFont(int i) {
+        ((Label) toolBarInstance.getItems().get(i * 2))
+                .setFont(Font.font("System", FontWeight.BOLD, 12));
     }
 
     private void setupInfoBar() {
@@ -118,6 +144,8 @@ public class MapController implements Initializable, ControlledScreen {
             toolBarInstance.getItems().get(i * 2).setVisible(false);
             toolBarInstance.getItems().get(i * 2 + 1).setVisible(false);
         }
+
+        boldPlayerFont(Main.getTurn().getCurrentPlayer());
 
     }
 
@@ -165,6 +193,12 @@ public class MapController implements Initializable, ControlledScreen {
         int x = (int) ((event.getSceneX()) / 75);
         int y = (int) ((event.getSceneY()) / 75);
 
+        selectionRect.setTranslateX(-75);
+        selectionRect.setTranslateY(-75);
+
+        muleImage.setTranslateX(-75);
+        muleImage.setTranslateY(-75);
+
         if (isTown(x, y)) {
             processTownClick();
         } else {
@@ -181,8 +215,14 @@ public class MapController implements Initializable, ControlledScreen {
         int x = (int) ((event.getX()) / 75);
         int y = (int) ((event.getY()) / 75);
 
-        selectionRect.setTranslateX(x * 75);
-        selectionRect.setTranslateY(y * 75);
+        if (Main.getTurn().getCurrentStage() == Turn.LAND) {
+            selectionRect.setTranslateX(x * 75);
+            selectionRect.setTranslateY(y * 75);
+        } else {
+            muleImage.setImage(new Image("mule/view/mule_energy.png"));
+            muleImage.setTranslateX(x * 75);
+            muleImage.setTranslateY(y * 75);
+        }
     }
 
     private boolean isTown(int x, int y) {
