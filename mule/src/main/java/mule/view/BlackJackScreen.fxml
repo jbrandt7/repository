@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.net.*?>
 <?import javafx.scene.shape.*?>
@@ -61,13 +62,56 @@
             <Insets bottom="150.0" right="100.0" />
          </StackPane.margin>
       </Rectangle>
-      <Label fx:id="winningLabel" opacity="0.0" text="Label" textFill="#f7ff8c" StackPane.alignment="CENTER">
+      <Label fx:id="winningLabel" opacity="0.0" text="Label" textFill="#f7ff8c" StackPane.alignment="TOP_CENTER">
          <padding>
             <Insets bottom="75.0" />
          </padding>
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
+         <StackPane.margin>
+            <Insets right="100.0" top="75.0" />
+         </StackPane.margin>
       </Label>
+      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+         <StackPane.margin>
+            <Insets right="100.0" top="75.0" />
+         </StackPane.margin>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets bottom="150.0" right="100.0" />
+         </StackPane.margin>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+         <StackPane.margin>
+            <Insets left="100.0" top="75.0" />
+         </StackPane.margin>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets bottom="150.0" left="100.0" />
+         </StackPane.margin>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+         <StackPane.margin>
+            <Insets left="300.0" top="75.0" />
+         </StackPane.margin>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets bottom="150.0" left="300.0" />
+         </StackPane.margin>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+         <StackPane.margin>
+            <Insets left="500.0" top="75.0" />
+         </StackPane.margin>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets bottom="150.0" left="500.0" />
+         </StackPane.margin>
+      </ImageView>
    </children>
 </StackPane>
