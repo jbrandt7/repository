@@ -2,6 +2,8 @@ package mule.model.blackjack;
 
 import mule.model.blackjack.Card.Rank;
 import mule.model.blackjack.Card.Suit;
+import java.util.Map;
+import java.util.HashMap;
 
 public class CardToFile {
 

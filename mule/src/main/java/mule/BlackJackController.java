@@ -3,6 +3,11 @@ package mule;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import java.util.List;
+import java.util.ArrayList;
 import java.net.URL;
 import java.util.ResourceBundle;
 import mule.model.blackjack.*;
@@ -27,6 +32,8 @@ public class BlackJackController implements Initializable, ControlledScreen {
 
     @Override public void initialize(URL url, ResourceBundle rb) {
         deck = new Deck();
+        dealerViews = new ArrayList<>();
+        playerViews = new ArrayList<>();
 
         dealerViews.add(d1);
         dealerViews.add(d2);
