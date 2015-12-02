@@ -13,7 +13,7 @@ public class DesertPlot extends Plot {
 
     private static final long serialVersionUID = 42L;
 
-    public PlainPlot(Canvas rep, int x, int y) {
+    public DesertPlot(Canvas rep, int x, int y) {
         super(rep, x, y);
     }
 
@@ -40,5 +40,4 @@ public class DesertPlot extends Plot {
         }
         return false;
     }
-}
 }

@@ -24,6 +24,11 @@
     -fx-background-position: top left;
 }
 
+#blackjack-pane {
+    -fx-background-image: url("blackjack.jpg");
+    -fx-background-position: center center;
+}
+
 .pane {
     -fx-background-color: #48AA51;
 }
@@ -88,6 +93,21 @@
 
 .slider {
     -fx-font-weight: bold;
+}
+
+#startingpane {
+    -fx-background-image: url("starting.jpg");
+    -fx-background-position: center center;
+}
+
+#game-config-pane {
+    -fx-background-image: url("config.jpg");
+    -fx-background-position: center center;
+}
+
+#player-config-pane {
+    -fx-background-image: url("config.jpg");
+    -fx-background-position: center center;
 }
 
 .start-button {

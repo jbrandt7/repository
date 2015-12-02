@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.net.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane id="blackjack-pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="760.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mule.BlackJackController">
+   <children>
+      <Button mnemonicParsing="false" onAction="#hit" text="Hit" StackPane.alignment="BOTTOM_LEFT">
+         <StackPane.margin>
+            <Insets bottom="25.0" left="125.0" />
+         </StackPane.margin>
+      </Button>
+      <Button mnemonicParsing="false" onAction="#stay" text="Stay" StackPane.alignment="BOTTOM_RIGHT">
+         <StackPane.margin>
+            <Insets bottom="25.0" right="125.0" />
+         </StackPane.margin>
+      </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" StackPane.alignment="BOTTOM_LEFT">
+         <StackPane.margin>
+            <Insets bottom="25.0" left="25.0" />
+         </StackPane.margin>
+      </Rectangle>
+      <Label fx:id="playerText" text="Player" textFill="WHITE" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets bottom="100.0" />
+         </StackPane.margin>
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="dealerText" text="Dealer" textFill="WHITE" StackPane.alignment="TOP_CENTER">
+         <StackPane.margin>
+            <Insets top="25.0" />
+         </StackPane.margin>
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" StackPane.alignment="TOP_CENTER">
+         <StackPane.margin>
+            <Insets left="100.0" top="75.0" />
+         </StackPane.margin>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" StackPane.alignment="TOP_CENTER">
+         <StackPane.margin>
+            <Insets right="100.0" top="75.0" />
+         </StackPane.margin>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets bottom="150.0" left="100.0" />
+         </StackPane.margin>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets bottom="150.0" right="100.0" />
+         </StackPane.margin>
+      </Rectangle>
+      <Label fx:id="winningLabel" opacity="0.0" text="Label" textFill="#f7ff8c" StackPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="75.0" />
+         </padding>
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+   </children>
+</StackPane>

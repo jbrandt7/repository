@@ -24,6 +24,11 @@
     -fx-background-position: top left;
 }
 
+#blackjack-pane {
+    -fx-background-image: url("blackjack.jpg");
+    -fx-background-position: center center;
+}
+
 .pane {
     -fx-background-color: #48AA51;
 }

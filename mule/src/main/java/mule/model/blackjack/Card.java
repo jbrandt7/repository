@@ -1,4 +1,4 @@
-package Blackjack;
+package mule.model.blackjack;
 
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
@@ -46,4 +46,21 @@ public class Card extends Parent {
 	public String toString() {
 		return rank.toString() + " of " + suit.toString();
 	}
-} 
+
+    @Override public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        } else if (o == this) {
+            return true;
+        } else if (o instanceof Card) {
+            Card that = (Card) o;
+            return that.suit.ordinal() == this.suit.ordinal() &&
+                    that.rank.ordinal() == this.rank.ordinal();
+        }
+        return false;
+    }
+
+    @Override public int hashCode() {
+        return this.rank.ordinal() * 31 + this.suit.ordinal() * 19;
+    }
+}

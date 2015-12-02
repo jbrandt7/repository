@@ -38,8 +38,8 @@ public class TownController implements Initializable, ControlledScreen {
         townParent.addEventHandler(MouseEvent.MOUSE_CLICKED,
             new EventHandler<MouseEvent>() {
                 @Override public void handle(MouseEvent event) {
-                    int x = (int) (event.getSceneX());
-                    int y = (int) (event.getSceneY());
+                    int x = (int) (event.getX());
+                    int y = (int) (event.getY());
                     processClick(x, y);
                 }
             });
@@ -47,12 +47,15 @@ public class TownController implements Initializable, ControlledScreen {
 
     private void processClick(int x, int y) {
 
-        if (x >= Town.STORE_WIDTH && y >= Town.STORE_HEIGHT * 2) {
+        if (x >= 360 && y >= 210) {
+            goToBlackJackScreen();
+            /*
             int amount = Main.getTown().getPub().cashOut(Main.getCurrentPlayer());
             updateDisplayText(Main.getCurrentPlayer().getName() + " cashed out " +
                     "for " + amount);
             incrementTurn();
-        } else if (x > Town.STORE_WIDTH && y < Town.STORE_HEIGHT * 2) {
+            */
+        } else if (x > 360 && y < 150) {
             goToStoreScreen();
         }
     }
@@ -99,6 +102,11 @@ public class TownController implements Initializable, ControlledScreen {
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             MapController.updatePlayerMenu(i);
         }
+    }
+
+    private void goToBlackJackScreen() {
+        Main.loadScene(Main.BLACKJACK_ID, Main.BLACKJACK_FILE);
+        controller.setScreen(Main.BLACKJACK_ID);
     }
 
     /**

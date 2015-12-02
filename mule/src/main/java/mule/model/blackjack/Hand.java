@@ -1,10 +1,12 @@
-package Blackjack;
+package mule.model.blackjack;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import java.util.HashSet;
+import java.util.Set;
 
-import Blackjack.Card.Rank;
+import mule.model.blackjack.Card.Rank;
 
 /**
  * A hand of cards
@@ -12,13 +14,13 @@ import Blackjack.Card.Rank;
 
 public class Hand {
 
-	private ObservableList<Node> cards;
-	private SimpleIntegerProperty value = new SimpleIntegerProperty(0);
+    private Set<Card> cards;
+    private int value;
 
 	private int aces = 0;
 
-	public Hand(ObservableList<Node> cards) {
-		this.cards = cards;
+	public Hand() {
+        cards = new HashSet<Card>();
 	}
 
 	public void takeCard(Card card) {
@@ -27,23 +29,23 @@ public class Hand {
 		if (card.rank == Rank.ACE) {
 			aces++;
 		}
-		if (value.get() + card.value > 21 && aces > 0) {
-            value.set(value.get() + card.value - 10);    //then count ace as '1' not '11'
+		if (value + card.value > 21 && aces > 0) {
+            value = value + card.value - 10;    //then count ace as '1' not '11'
             aces--;
         }
         else {
-            value.set(value.get() + card.value);
+            value = value + card.value;
         }
 
 	}
 
 	public void reset() {
 		cards.clear();
-		value.set(0);
+		value = 0;
 		aces = 0;
 	}
 
-	public SimpleIntegerProperty valueProperty() {
+	public int getValue() {
 		return value;
 	}
 

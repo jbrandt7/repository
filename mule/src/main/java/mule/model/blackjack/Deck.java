@@ -1,7 +1,7 @@
-package Blackjack;
+package mule.model.blackjack;
 
-import Blackjack.Card.Rank;
-import Blackjack.Card.Suit;
+import mule.model.blackjack.Card.Rank;
+import mule.model.blackjack.Card.Suit;
 /**
  * 52 cards in a deck
  *
@@ -36,4 +36,11 @@ public class Deck {
 
 		return card;
 	}
+
+    public Hand createHand() {
+        Hand result = new Hand();
+        result.takeCard(drawCard());
+        result.takeCard(drawCard());
+        return result;
+    }
 }

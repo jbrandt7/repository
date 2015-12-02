@@ -61,6 +61,8 @@ public class Main extends Application {
     public static final String STORE_FILE = "view/StoreScreen.fxml";
     public static final String TOWN_ID = "town";
     public static final String TOWN_FILE = "view/TownScreen.fxml";
+    public static final String BLACKJACK_ID = "blackjack";
+    public static final String BLACKJACK_FILE = "view/BlackJackScreen.fxml";
 
     public static final int MAX_PLAYERS = 4;
     public static final int FONT_SIZE = 13;
