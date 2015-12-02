@@ -46,7 +46,7 @@ public class InstructionsController implements Initializable, ControlledScreen {
         PauseTransition pause = new PauseTransition(Duration.millis(1000));
 
         for (int i = 0; i < instructionsCount; i++) {
-            FadeTransition fade = new FadeTransition(Duration.millis(1000), getInstruction(i));
+            FadeTransition fade = new FadeTransition(Duration.millis(2000), getInstruction(i));
             fade.setFromValue(0.0);
             fade.setToValue(1.0);
             seqTransition.getChildren().addAll(fade, new PauseTransition(Duration.millis(3000)));

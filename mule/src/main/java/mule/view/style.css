@@ -37,6 +37,7 @@
     -fx-background-color: white;
     -fx-background-radius: 2px;
     -fx-border-color: black;
+    -fx-border-radius: 2px;
     -fx-text-fill: black;
     -fx-font-weight: bold;
     -fx-font: normal bold 15 System;

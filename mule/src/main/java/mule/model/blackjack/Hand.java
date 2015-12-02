@@ -23,15 +23,17 @@ public class Hand {
         cards = new HashSet<Card>();
 	}
 
-	public void takeCard(Card card) {
+	public Card takeCard(Card card) {
 		cards.add(card);
 
-        if (card.rank.equals(Rank.ACE)) {
+        if (card.rank.equals(Rank.ACE) && value + 11 > 21) {
             value = value + card.value - 10;    //then count ace as '1' not '11'
         }
         else {
             value = value + card.value;
         }
+
+        return card;
 	}
 
 	public void reset() {

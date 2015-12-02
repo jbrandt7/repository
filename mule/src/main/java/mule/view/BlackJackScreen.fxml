@@ -21,11 +21,6 @@
             <Insets bottom="25.0" right="125.0" />
          </StackPane.margin>
       </Button>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" StackPane.alignment="BOTTOM_LEFT">
-         <StackPane.margin>
-            <Insets bottom="25.0" left="25.0" />
-         </StackPane.margin>
-      </Rectangle>
       <Label fx:id="playerText" text="Player" textFill="WHITE" StackPane.alignment="BOTTOM_CENTER">
          <StackPane.margin>
             <Insets bottom="100.0" />
@@ -41,17 +36,6 @@
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
-      </Label>
-      <Label fx:id="winningLabel" opacity="0.0" text="Label" textFill="#f7ff8c" StackPane.alignment="TOP_CENTER">
-         <padding>
-            <Insets bottom="75.0" />
-         </padding>
-         <font>
-            <Font name="System Bold" size="30.0" />
-         </font>
-         <StackPane.margin>
-            <Insets right="100.0" top="75.0" />
-         </StackPane.margin>
       </Label>
       <ImageView fx:id="d1" fitHeight="100.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
          <StackPane.margin>
@@ -73,5 +57,13 @@
             <Insets bottom="150.0" left="100.0" />
          </StackPane.margin>
       </ImageView>
+      <Label fx:id="winningLabel" opacity="0.0" text="Player" textFill="#eeff69">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+         <StackPane.margin>
+            <Insets bottom="75.0" />
+         </StackPane.margin>
+      </Label>
    </children>
 </StackPane>

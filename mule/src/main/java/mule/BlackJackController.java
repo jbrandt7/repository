@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.*;
+import javafx.util.Duration;
+
 import mule.model.blackjack.*;
 
 /**
@@ -75,13 +78,27 @@ public class BlackJackController implements Initializable, ControlledScreen {
 
     @FXML
     public void hit() {
-        player.takeCard(deck.drawCard());
+        Card c = player.takeCard(deck.drawCard());
+
+        ImageView toAdd = new ImageView(
+                new Image(CardToFile.getFileName(c)));
+        playerViews.add(toAdd);
+        toAdd.setTranslateX(playerViews.size() * 50 + 100);
+        toAdd.setTranslateY(40);
+        parent.getChildren().addAll(toAdd);
     }
 
     @FXML
     public void stay() {
-        while (dealer.getValue() < 17)
-            dealer.takeCard(deck.drawCard());
+        while (dealer.getValue() < 17) {
+            Card c = dealer.takeCard(deck.drawCard());
+            ImageView toAdd = new ImageView(
+                    new Image(CardToFile.getFileName(c)));
+            dealerViews.add(toAdd);
+            toAdd.setTranslateX(dealerViews.size() * 50 + 100);
+            toAdd.setTranslateY(-120);
+            parent.getChildren().addAll(toAdd);
+        }
 
         endGame();
     }
@@ -89,22 +106,21 @@ public class BlackJackController implements Initializable, ControlledScreen {
     private void endGame() {
         int dealerValue = dealer.getValue();
         int playerValue = player.getValue();
-        String winner = "Exceptional case: d: " + dealerValue + " p: " + playerValue;
 
-        // the order of checking is important
         int amount = Main.getTown().getPub().cashOut(Main.getCurrentPlayer());
+
         if (dealerValue == 21 || playerValue > 21 || dealerValue == playerValue
                 || (dealerValue < 21 && dealerValue > playerValue)) {
-            winner = "DEALER";
             updateWinningLabel("You lost, but got " + amount);
-        }
-        else if (playerValue == 21 || dealerValue > 21 || playerValue > dealerValue) {
-            winner = "PLAYER";
+        } else if (playerValue == 21 || dealerValue > 21 || playerValue > dealerValue) {
             amount *= 2;
             updateWinningLabel("You won, and got " + amount);
         }
-        //If player is last one in game then it should go to Map screen.  If there's a player after it should go to Town Screen
-        incrementTurn();
+
+        SequentialTransition seqTransition = new SequentialTransition();
+        seqTransition.getChildren().addAll(new PauseTransition(Duration.millis(2000)));
+        seqTransition.setOnFinished(e -> incrementTurn());
+        seqTransition.play();
 
     }
 
