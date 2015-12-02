@@ -49,6 +49,7 @@ public class TownController implements Initializable, ControlledScreen {
     }
 
     private void processClick(int x, int y) {
+
         if (x >= Town.STORE_WIDTH && y >= Town.STORE_HEIGHT * 2) {
             int amount = Main.getTown().getPub().cashOut(Main.getCurrentPlayer());
             updateDisplayText(Main.getCurrentPlayer().getName() + " cashed out " +

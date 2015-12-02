@@ -76,6 +76,11 @@
     -fx-background-position: center center;
 }
 
+#blackjack-pane {
+    -fx-background-image: url("blackjack.jpg");
+    -fx-background-position: center center;
+}
+
 .start-button {
     -fx-background-color: #FFEB99;
     -fx-background-radius: 0;
