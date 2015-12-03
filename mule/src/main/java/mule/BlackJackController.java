@@ -117,6 +117,9 @@ public class BlackJackController implements Initializable, ControlledScreen {
             updateWinningLabel("You won, and got " + amount);
         }
 
+        Main.getCurrentPlayer().addMoney(amount);
+        Main.getCurrentPlayer().updateScore();
+
         SequentialTransition seqTransition = new SequentialTransition();
         seqTransition.getChildren().addAll(new PauseTransition(Duration.millis(2000)));
         seqTransition.setOnFinished(e -> incrementTurn());
@@ -148,6 +151,9 @@ public class BlackJackController implements Initializable, ControlledScreen {
 
     public final void goToTownScreen() {
         controller.setScreen(Main.TOWN_ID);
+        for (int i = 0; i < Main.getPlayerCount(); i++) {
+            TownController.updatePlayerMenu(i);
+        }
     }
 
     private final void goToMapScreen() {

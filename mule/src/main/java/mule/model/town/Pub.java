@@ -9,8 +9,7 @@ public class Pub extends Store {
     }
 
     public final int cashOut(Player player) {
-        int result = player.addMoney(player.getTimer().getTime());
-        player.updateScore();
+        int result = player.getTimer().getTime();
         return result;
     }
 
