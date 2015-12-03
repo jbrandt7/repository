@@ -85,7 +85,6 @@ public class PlayersController implements Initializable, ControlledScreen {
             Color color = convertColor(colorChoice);
 
             Player p = createPlayer(name, race, color);
-            Player p;
 
             switch (race) {
                 case ("Human"):

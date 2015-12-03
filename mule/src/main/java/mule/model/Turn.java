@@ -3,6 +3,7 @@ package mule.model;
 import mule.*;
 import mule.model.random_events.RandomEventGenerator;
 import mule.model.random_events.EventTypes;
+import mule.model.random_events.EffectType;
 
 public class Turn implements java.io.Serializable {
 
@@ -85,10 +86,13 @@ public class Turn implements java.io.Serializable {
         Main.getDBController().saveGame();
         //gloal random event
         if (hasRandomEvent()) {
+            RandomEventGenerator eventGenerator = new RandomEventGenerator(EventTypes.BAD, Main.getPlayer(0), EffectType.GLOBAL);
             for (int i = 0; i < Main.getPlayerCount(); i++) {
-                RandomEventGenerator eventGenerator = (EventTypes.BAD, Main.getPlayer(i), EffectType.GLOBAL);
+                eventGenerator.updatePlayer(Main.getPlayer(i));
                 eventGenerator.generateAction();
             }
+            if (eventGenerator != null)
+                TownController.updateDisplayText(eventGenerator.getEvent().getMessage());
         }
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             Main.getPlayer(i).getTimer().reset();

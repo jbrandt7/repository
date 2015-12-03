@@ -1,6 +1,7 @@
 package mule.model.player;
 
 import javafx.scene.paint.Color;
+import mule.model.resources.Energy;
 
 public class Pikachu extends Player {
 
@@ -9,7 +10,7 @@ public class Pikachu extends Player {
     public Pikachu(String name, Color color) {
         super(name, color);
         removeMoney(PIKACHU_MONEY);
-        super.bag.addResource(new Energy(), 1);
+        super.bag.add(new Energy(), 1);
     }
 
 }

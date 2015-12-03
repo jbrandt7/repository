@@ -10,14 +10,13 @@ public class RandomEventGenerator {
     private final RandomEvent event;
 
     public RandomEventGenerator(EventTypes type, Player p, EffectType effect) {
-        if (EffectType.effect == LOCAL) {
-            ArrayList<RandomEvent> events = new ArrayList<>();
+        ArrayList<RandomEvent> events = new ArrayList<>();
+        if (effect == EffectType.LOCAL) {
 
             events.add(new AntiqueBoughtEvent(p));
             events.add(new GTAlumniEvent(p));
             events.add(new RepaidHospitalityEvent(p));
             events.add(new SoldHideEvent(p));
-            events.add(new DroughtEvent(p));
 
 
             if (type == EventTypes.BAD) {
@@ -29,7 +28,6 @@ public class RandomEventGenerator {
             int randIndex = new Random().nextInt(events.size());
             event = events.get(randIndex);
         } else {
-            ArrayList<RandomEvent> events = new ArrayList<>();
             events.add(new DroughtEvent(p));
             events.add(new SupplyDropEvent(p));
             int randIndex = new Random().nextInt(events.size());
@@ -43,6 +41,10 @@ public class RandomEventGenerator {
 
     public final RandomEvent getEvent() {
         return event;
+    }
+
+    public final void updatePlayer(Player p) {
+        event.updatePlayer(p);
     }
 
 }

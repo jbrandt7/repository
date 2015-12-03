@@ -4,7 +4,7 @@ import mule.model.player.Player;
 
 @SuppressWarnings("CanBeFinal")
 public abstract class RandomEvent {
-    protected static String message;
+    protected String message;
     protected Player player;
     protected boolean isGlobal;
 
@@ -21,4 +21,8 @@ public abstract class RandomEvent {
     public boolean isGlobal() { return isGlobal; }
 
     public final Player getPlayer() { return player; }
+
+    public final void updatePlayer(Player p) {
+        player = p;
+    }
 }
