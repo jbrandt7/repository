@@ -46,7 +46,6 @@ public class BlackJackController implements Initializable, ControlledScreen {
         for (Card c : dealer.getCards()) {
             ImageView current = dealerViews.remove(0);
             current.setImage(new Image(CardToFile.getFileName(c)));
-            System.out.println(c);
         }
 
         player = deck.createHand();
