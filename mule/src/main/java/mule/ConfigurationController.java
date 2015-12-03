@@ -25,7 +25,7 @@ public class ConfigurationController implements Initializable, ControlledScreen 
     @Override
     public final void initialize(URL url, ResourceBundle rb) {
         mapChoiceBox.setItems(FXCollections.observableArrayList(
-                    "Default", "River", "Random"));
+                    "Default", "River", "Desert","Random"));
         mapChoiceBox.getSelectionModel().select(0);
 
         difficultyChoiceBox.setItems(FXCollections.observableArrayList(

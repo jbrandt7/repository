@@ -53,6 +53,9 @@ public class MapController implements Initializable, ControlledScreen {
                 case "River":
                     Main.setMap(new RiverMap(mapParent));
                     break;
+                case "Desert":
+                    Main.setMap(new DesertMap(mapParent));
+                    break;
                 case "Random":
                     Main.setMap(new RandomMap(mapParent));
                     break;
