@@ -25,6 +25,7 @@ public class Store implements java.io.Serializable {
         inventory.put(new Smithore(), 0);
         inventory.put(new Crystite(), 0);
         inventory.put(new Mule(), STARTINGMULES);
+        inventory.put(new SuperMule(), 4);
     }
 
     /**
@@ -106,12 +107,25 @@ public class Store implements java.io.Serializable {
      */
     public final boolean buyMule(Player p, Resource type) {
         Mule toAdd = new Mule(type);
+        if (p.getMoney() < (toAdd.getCost()) ||
+                inventory.get(new SuperMule()) == 0) {
+            return false;
+        }
+        inventory.put(new Mule(), inventory.get(new Mule()) - 1);
+        p.addMule(toAdd);
+        p.removeMoney(toAdd.getCost());
+        return true;
+    }
+
+    public final boolean buySuperMule(Player p) {
+        SuperMule toAdd = new SuperMule();
         if (p.getMoney() < (toAdd.getCost())) {
             return false;
         }
-        inventory.put(type, inventory.get(new Mule()) - 1);
+        inventory.put(new SuperMule(), inventory.get(new SuperMule()) - 1);
         p.addMule(toAdd);
         p.removeMoney(toAdd.getCost());
+        System.out.println(toAdd);
         return true;
     }
 

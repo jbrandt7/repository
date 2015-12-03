@@ -33,7 +33,7 @@ public class Mule extends Resource{
 	 * @param x The x coordinate of the plot we are drawing on
 	 * @param y The y coordinate of the plot we are drawing on
 	 */
-    public final void draw(Canvas rep, int x, int y) {
+    public void draw(Canvas rep, int x, int y) {
         String name = type.getClass().getName().substring(21).toLowerCase();
         Image mule = new Image("mule/view/mule_" + name + ".png");
         rep.getGraphicsContext2D().drawImage(mule,  x, y);

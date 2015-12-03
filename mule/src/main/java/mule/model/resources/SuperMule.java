@@ -1,6 +1,9 @@
 package mule.model.resources;
 
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 /**
@@ -19,12 +22,10 @@ public class SuperMule extends Mule {
         super();
     }
 
-    /**
-     * Constructs a mule of a particular type
-     * @param t The type of mule to construct
-     */
-    public SuperMule(Resource t) {
-        super();
-        this.type = t;
+    @Override
+    public void draw(Canvas rep, int x, int y) {
+        String name = getClass().getName().substring(21, 26).toLowerCase();
+        Image mule = new Image("mule/view/mule_" + name + ".png");
+        rep.getGraphicsContext2D().drawImage(mule,  x, y);
     }
 }

@@ -26,7 +26,11 @@ public class PlainPlot extends Plot {
     public final boolean produce() {
         if (outfitted() && hasOwner()
                 && super.getOwner().getBag().get(new Energy()) > 0) {
-            if (super.getMule().getType().equals(new Food())) {
+            if (super.getMule().getType() == null) {
+                super.getOwner().addResource(new Food(), 1);
+                super.getOwner().addResource(new Energy(), 1);
+                super.getOwner().addResource(new Smithore(), 1);
+            } else if (super.getMule().getType().equals(new Food())) {
                 super.getOwner().addResource(new Food(), 2);
             } else if (super.getMule().getType().equals(new Energy())) {
                 super.getOwner().addResource(new Energy(), 3);

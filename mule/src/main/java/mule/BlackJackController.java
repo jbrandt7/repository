@@ -161,6 +161,7 @@ public class BlackJackController implements Initializable, ControlledScreen {
         Main.setTimerLabel(MapController.getTimerLabel());
         MapController.getDisplayText().setText(TownController.getDisplayText().getText());
         MapController.boldPlayerFont(Main.getTurn().getCurrentPlayer());
+        MapController.updateMuleImagePos(-75, -75);
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             MapController.updatePlayerMenu(i);
         }

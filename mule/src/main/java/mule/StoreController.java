@@ -92,7 +92,7 @@ public class StoreController implements Initializable, ControlledScreen {
     }
 
     public final void buySuperMule() {
-        if (Main.getTown().getStore().buyMule(Main.getCurrentPlayer(), new Energy())) {
+        if (Main.getTown().getStore().buySuperMule(Main.getCurrentPlayer())) {
             goToMapScreen();
         }
     }

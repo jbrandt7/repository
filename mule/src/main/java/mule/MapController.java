@@ -42,6 +42,7 @@ public class MapController implements Initializable, ControlledScreen {
     @FXML private Rectangle selectionRect;
 
     @FXML private ImageView muleImage;
+    private static ImageView muleImageInstance;
 
     @Override public final void initialize(URL url, ResourceBundle rb) {
         if (Main.getMap() == null) {
@@ -79,6 +80,8 @@ public class MapController implements Initializable, ControlledScreen {
 
         mapParent.addEventHandler(MouseEvent.MOUSE_MOVED,
                 e -> createLandOutlineHandler(e));
+
+        muleImageInstance = muleImage;
     }
 
     /**
@@ -294,6 +297,11 @@ public class MapController implements Initializable, ControlledScreen {
      */
     public static void updateDisplayText(String text) {
         displayTextInstance.setText(text + "\n" + displayTextInstance.getText());
+    }
+
+    public static void updateMuleImagePos(int x, int y) {
+        muleImageInstance.setTranslateX(x);
+        muleImageInstance.setTranslateY(y);
     }
 
     public static TextArea getDisplayText() { return displayTextInstance; }

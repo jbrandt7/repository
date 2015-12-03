@@ -28,6 +28,11 @@
          <StackPane.margin>
             <Insets bottom="215.0" right="125.0" />
          </StackPane.margin></Button>
+      <Button fx:id="superMule" mnemonicParsing="false" onAction="#buySuperMule" prefWidth="138.0" text="Super M.U.L.E" StackPane.alignment="CENTER_RIGHT">
+         <StackPane.margin>
+            <Insets right="125.0" top="30.0" />
+         </StackPane.margin>
+      </Button>
       <Button mnemonicParsing="false" onAction="#goToTownScreen" text="Leave" StackPane.alignment="BOTTOM_CENTER">
          <StackPane.margin>
             <Insets bottom="140.0" left="150.0" right="50.0" />
