@@ -8,6 +8,7 @@ public class RoofEatenEvent extends RandomEvent {
     public RoofEatenEvent(Player p) {
 		super(p, p.getName() + ", FLYING CAT-BUGS ATE THE ROOF OF YOUR HOUSE. REPAIRS COST $" +
                 (4 * Main.getTurn().getM()) + ".");
+        super.isGlobal = false;
     }
 
     public final void commit() {

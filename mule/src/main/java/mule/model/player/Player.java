@@ -15,13 +15,13 @@ public abstract class Player implements Comparable, java.io.Serializable {
 
     private static final long serialVersionUID = 42L;
 
-	private final String name;
-	private final double[] color;
-	private int money, score;
-	private final Timer timer;
-	private final ResourceBag bag;
-	private Mule mule;
-	private final List<Plot> land;
+	protected final String name;
+	protected final double[] color;
+	protected int money, score;
+	protected final Timer timer;
+	protected final ResourceBag bag;
+	protected Mule mule;
+	protected final List<Plot> land;
 
     Player(String n, Color c) {
 		this.name = n;

@@ -7,6 +7,8 @@ public class ShedBrokenEvent extends RandomEvent {
 
     public ShedBrokenEvent(Player p) {
 		super(p, p.getName() + ", MISCHIEVOUS UGA STUDENTS BROKE INTO YOUR STORAGE SHED AND STOLE HALF YOUR FOOD.");
+        
+        super.isGlobal = false;
     }
 
     public final void commit() {

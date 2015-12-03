@@ -83,18 +83,24 @@ public class Turn implements java.io.Serializable {
 
         Main.sortPlayers();
         Main.getDBController().saveGame();
-
+        //gloal random event
+        if (hasRandomEvent()) {
+            for (int i = 0; i < Main.getPlayerCount(); i++) {
+                RandomEventGenerator eventGenerator = (EventTypes.BAD, Main.getPlayer(i), EffectType.GLOBAL);
+                eventGenerator.generateAction();
+            }
+        }
         for (int i = 0; i < Main.getPlayerCount(); i++) {
             Main.getPlayer(i).getTimer().reset();
             Main.getPlayer(i).produce();
             if (hasRandomEvent()) {
                 RandomEventGenerator eventGenerator;
                 if (i != Main.getPlayerCount() - 1) {
-                    eventGenerator = new RandomEventGenerator(EventTypes.BAD, Main.getPlayer(i));
+                    eventGenerator = new RandomEventGenerator(EventTypes.BAD, Main.getPlayer(i), EffectType.LOCAL);
                     eventGenerator.generateAction();
 
                 } else {
-                    eventGenerator = new RandomEventGenerator(EventTypes.GOOD, Main.getPlayer(i));
+                    eventGenerator = new RandomEventGenerator(EventTypes.GOOD, Main.getPlayer(i), EffectType.LOCAL);
                     eventGenerator.generateAction();
                 }
                 TownController.updateDisplayText(eventGenerator.getEvent().getMessage());

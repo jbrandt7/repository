@@ -8,6 +8,7 @@ public class RepaidHospitalityEvent extends RandomEvent {
     public RepaidHospitalityEvent(Player p) {
 		super(p, p.getName() + ", A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING " +
                 "TWO BARS OF ORE.");
+        super.isGlobal = false;
     }
 
     public final void commit() {

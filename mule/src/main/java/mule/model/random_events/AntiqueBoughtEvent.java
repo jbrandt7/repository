@@ -4,9 +4,10 @@ import mule.Main;
 import mule.model.player.Player;
 
 public class AntiqueBoughtEvent extends RandomEvent {
-
+    
     public AntiqueBoughtEvent(Player p) {
         super(p, "THE MUSEUM BOUGHT " + p.getName() + " ANTIQUE PERSONAL COMPUTER FOR $");
+        super.isGlobal = false;
     }
 
     public final void commit() {

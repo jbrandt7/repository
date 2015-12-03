@@ -8,6 +8,7 @@ public class SoldHideEvent extends RandomEvent {
     public SoldHideEvent(Player p) {
 		super(p, p.getName() + ", YOU FOUND A DEAD MOOSE RAT AN SOLD THE HIDE FOR $" +
                 (2 * Main.getTurn().getM()) + ".");
+        super.isGlobal = false;
     }
 
     public final void commit() {
